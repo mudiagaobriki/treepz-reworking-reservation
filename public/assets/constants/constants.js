@@ -1,0 +1,1 @@
+export const BASE_URL = "https://treepz-gateway.iqubesolutions.com.ng/api/v1";

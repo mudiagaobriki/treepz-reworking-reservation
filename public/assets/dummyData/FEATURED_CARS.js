@@ -1,0 +1,63 @@
+export const FEATURED_CARS = [
+  {
+    carName: "Mercedes Maybach",
+    isChauffeured: true,
+    isPromoted: false,
+    isSelfDrive: false,
+    isRareFind: false,
+    rating: 4.9,
+    trips: 30,
+    hasDisabledSeat: true,
+    hasAC: true,
+    hasWifi: true,
+    seats: 4,
+    price: 2000,
+    image: require("../images/featuredCars/car1.png"),
+    location: "Asanti kotoko, Ikejah"
+  },
+  {
+    carName: "Chevrolet Equinox",
+    isChauffeured: true,
+    isPromoted: false,
+    isSelfDrive: false,
+    isRareFind: false,
+    rating: 4.9,
+    trips: 30,
+    hasDisabledSeat: true,
+    hasAC: true,
+    hasWifi: true,
+    seats: 4,
+    price: 2000,
+    image: require("../images/featuredCars/car5.png"),
+    location: "Asanti kotoko, Ikejah"
+  },
+  {
+    carName: "Ferrari Mustang Mach 1",
+    isChauffeured: false,
+    isPromoted: false,
+    isSelfDrive: true,
+    isRareFind: false,
+    rating: 4.9,
+    trips: 30,
+    hasDisabledSeat: true,
+    hasAC: true,
+    hasWifi: true,
+    seats: 4,
+    price: 2000,
+    image: require("../images/featuredCars/car6.png"),
+    location: "Asanti kotoko, Ikejah"
+  },
+  {
+    carName: "Honda Accord Mach 1",
+    isChauffeured: true,
+    rating: 4.9,
+    trips: 30,
+    hasDisabledSeat: true,
+    hasAC: true,
+    hasWifi: true,
+    seats: 4,
+    price: 2000,
+    image: require("../images/featuredCars/car4.png"),
+    location: "Asanti kotoko, Ikejah"
+  }
+]
