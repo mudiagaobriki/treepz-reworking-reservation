@@ -3,17 +3,34 @@
 @tailwind utilities;
 
 :root {
+  --font-family: "Switzer";
+  --button-large-font-family: "Switzer-Semibold", Helvetica;
+  --button-large-font-size: 16px;
+  --button-large-font-style: normal;
+  --button-large-font-weight: 400;
+  --button-large-letter-spacing: 0.5px;
+  --button-large-line-height: 24px;
+}
+
+/*:root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
-
+*/
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("../public/assets/fonts/Switzer-Variable.ttf");
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
@@ -29,6 +46,9 @@ body {
 .tz-text-dark-2{
   color: var(--text-emphasis-medium, #4D5154);
 }
+.tz-text-dark-3 {
+  color: var(--black-black, #16171D); 
+}
 .tz-text-gray {
   color: #6F7174;
 }
@@ -40,6 +60,12 @@ body {
 }
 .tz-text-gray-3 {
   color: var(--text-emphasis-medium, #4D5154);
+}
+.tz-text-gray-4 {
+  color: #9DA3AE; 
+}
+.tz-text-gray-5 {
+  color: var(--neutral-tints-70, #C8CCD0);
 }
 .tz-text-green {
   color: #00AC11;
@@ -59,8 +85,20 @@ body {
 .tz-border-light {
   border: 1px solid #E8E8E8;
 }
+.tz-border-light-1 {
+  border: 1px solid var(--neutral-tints-99, #F7F7F7);
+}
 .tz-border-dark-1 {
   border: 1px solid var(--text-emphasis-bold, #212529);
+}
+.tz-border-dark {
+  border: 0.8px solid var(--primary-main-60, #101010);
+}
+.tz-border-light-2 {
+  border: 1px solid var(--neutral-tints-95, #E9EBEC);
+}
+.tz-border-light-3 {
+  border: 0.8px solid var(--neutral-main-60, #A0A3A6);
 }
 .tz-bg-green {
   background: rgba(0, 172, 17, 0.10);
@@ -80,15 +118,12 @@ body {
 .tz-bg-dark-1 {
   background: #101010;
 }
+.tz-bg-light-1 {
+  background: var(--neutral-main-60, #A0A3A6);
+}
 .tz-px-30 {
   padding-left: 7.5rem;
   padding-right: 7.5rem;
-}
-.tz-border-dark {
-  border: 0.8px solid var(--primary-main-60, #101010);
-}
-.tz-border-light-1 {
-  border: 1px solid var(--neutral-tints-95, #E9EBEC);
 }
 .tz-h-17{
   height: 17.25rem;
@@ -111,14 +146,34 @@ body {
 .tz-ewl {
   background: linear-gradient(top, #101010 60.94%, rgba(255, 255, 255, 0.00) 100%);
 }
+.tz-bg-gradient {
+  background: linear-gradient(134deg, rgba(254, 191, 67, 0.05) 18.14%, rgba(255, 255, 255, 0.00) 54.69%);
+}
 .tz-review-gradient {
     -webkit-mask-image: linear-gradient(to left right, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5));
+}
+.tz-line-gradient-right {
+/*    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));*/
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(16, 16, 16, 0.55));
+}
+.tz-line-gradient-left {
+/*    background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));*/
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(16, 16, 16, 0.55));
 }
 .tz-border-top {
   border-top: 1px solid var(--text-emphasis-bold, #212529);
 }
+.tz-border-top-1 {
+  border-top: 1px solid var(--neutral-tints-90, #DEE0E3);
+}
 .tz-border-bottom {
   border-bottom: 1px solid var(--neutral-tints-80, #D3D6D9);
+}
+.tz-border-bottom-1 {
+  border-bottom: 1px solid var(--neutral-tints-95, #E9EBEC);
+}
+.tz-border-gray-1 {
+  border: 1px solid var(--neutral-tints-80, #D3D6D9);
 }
 .tz-border-bottom-1 {
   border-bottom: 0.6px solid var(--neutral-tints-70, #C8CCD0);
@@ -150,3 +205,82 @@ body {
 .tz-bg-host {
   background: rgba(255, 255, 255, 0.00);
 }
+.tz-searchbox-buttons {
+  background: rgba(22, 23, 29, 0.50);
+  backdrop-filter: blur(2px);
+}
+
+
+
+
+
+
+
+
+
+
+/* CUSTOM NUMBER INPUT */
+.seat {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.seat::-webkit-inner-spin-button,
+.seat::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.numberInput {
+  border: 2px solid #ddd;
+  border-radius: 2rem;
+  display: inline-flex;
+}
+
+.numberInput,
+.numberInput * {
+  box-sizing: border-box;
+}
+
+.numberInput button {
+  outline:none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 1.5rem;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+}
+
+.numberInput button:before,
+.numberInput button:after {
+  display: inline-block;
+  position: absolute;
+  content: '';
+  width: .6rem;
+  height: 2px;
+  background-color: #ccc;
+  transform: translate(-50%, -50%);
+}
+.numberInput button.plus:after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.numberInput .seat {
+/*  font-family: sans-serif;*/
+  max-width: 2rem;
+  padding: .5rem;
+  border: none;
+  font-size: 1rem;
+  height: 1.5rem;
+  text-align: center;
+}
+
+.numberInput .seat:focus {
+  outline: none;
+}
+/* CUSTOM NUMBER INPUT END */

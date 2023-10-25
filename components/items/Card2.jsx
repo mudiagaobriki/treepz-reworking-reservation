@@ -19,7 +19,7 @@ const Card2 = ({image, title, description}) => {
                 <Image src={image} alt="logo icon" width={105} height={75} />
             </div>
             <div className="flex flex-col items-start gap-8 self-stretch">
-                <h4 className="text-3xl font-semibold tz-text-dark">{title}</h4>
+                <h4 className="text-2xl font-semibold tz-text-dark">{title}</h4>
                 <p className="text-base font-normal tz-text-gray self-stretch">{description}</p>
             </div>
         </div>

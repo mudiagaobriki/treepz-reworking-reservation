@@ -4,27 +4,27 @@ import React from 'react';
 // import Image from "next/image";
 // import Link from "next/link";
 
-import NavBar from '@/components/groups/NavBar';
-import HomeBanner from '@/components/groups/HomeBanner';
-import CardRow1 from '@/components/groups/CardRow1';
-import FeaturedCars from '@/components/groups/FeaturedCars';
-import DiscountOffer from '@/components/groups/DiscountOffer';
-import Community from '@/components/groups/Community';
-import CityRow from '@/components/groups/CityRow';
-import BlogRow from '@/components/groups/BlogRow';
-import ReviewRow from '@/components/groups/ReviewRow';
-import ClientRow1 from '@/components/groups/ClientRow1';
-import StatsRow from '@/components/groups/StatsRow';
-import GetStartedRow from '@/components/groups/GetStartedRow';
-import CommonQuestions from '@/components/groups/CommonQuestions';
-import Footer from '@/components/groups/Footer';
+import NavBar from '@/components/sections/NavBar';
+import HeroBanner from '@/components/sections/HeroBanner';
+import CardRow1 from '@/components/sections/CardRow1';
+import FeaturedCars from '@/components/sections/FeaturedCars';
+import DiscountOffer from '@/components/sections/DiscountOffer';
+import Community from '@/components/sections/Community';
+import CityRow from '@/components/sections/CityRow';
+import BlogRow from '@/components/sections/BlogRow';
+import ReviewRow from '@/components/sections/ReviewRow';
+import ClientRow1 from '@/components/sections/ClientRow1';
+import StatsRow from '@/components/sections/StatsRow';
+import GetStartedRow from '@/components/sections/GetStartedRow';
+import CommonQuestions from '@/components/sections/CommonQuestions';
+import Footer from '@/components/sections/Footer';
 
 const Page = () => {
 
     return (
         <div>
             <NavBar bgColor="#FFF" />
-            <HomeBanner />
+            <HeroBanner bgImg={"/assets/images/pictures-on-hero-section.png"} />
             <div className="my-20"></div>
             <CardRow1 />
             <div className="my-20"></div>

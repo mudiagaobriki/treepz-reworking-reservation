@@ -12,13 +12,13 @@ import GuestHost from '@/components/items/GuestHost';
 const DATA = [
     {
         key: 1,
-        image: "/assets/images/article-search-line.png",
+        image: "/assets/images/article-search.png",
         title: "The endless search is over",
         description: "It takes 2 to 5 days to get a vehicle rented from initial search to pickup. We are building Treepz to make vehicle rental as easy as clicking a button.",
     },
     {
         key: 2,
-        image: "/assets/images/so-statistic-board.png",
+        image: "/assets/images/statistic-chart.png",
         title: "Never settle",
         description: "We aggregate vehicles from different partners, giving you access to different range of vehicles So, you never have to settle again for limited options.",
     },

@@ -4,21 +4,21 @@ import React from 'react';
 // import Image from "next/image";
 // import Link from "next/link";
 
-import NavBar from '@/components/groups/NavBar';
-import HomeBanner from '@/components/groups/HomeBanner';
-import NeverSettle from '@/components/groups/NeverSettle';
-import ReferAndEarn from '@/components/groups/ReferAndEarn';
-import FeaturedCars from '@/components/groups/FeaturedCars';
-import CommonQuestions from '@/components/groups/CommonQuestions';
-import Footer from '@/components/groups/Footer';
+import NavBar from '@/components/sections/NavBar';
+import HeroBanner from '@/components/sections/HeroBanner';
+import NeverSettle from '@/components/sections/NeverSettle';
+import ReferAndEarn from '@/components/sections/ReferAndEarn';
+import FeaturedCars from '@/components/sections/FeaturedCars';
+import CommonQuestions from '@/components/sections/CommonQuestions';
+import Footer from '@/components/sections/Footer';
 
 const Page = () => {
 
     return (
         <div>
             <NavBar bgColor="#FFF" />
-            <HomeBanner />
-            <div className="my-20"></div>
+            <HeroBanner bgImg={"/assets/images/airport-hero-section.png"} />
+            <div className="my-20 absolute"></div>
             <NeverSettle />
             <div className="my-20"></div>
             <ReferAndEarn 

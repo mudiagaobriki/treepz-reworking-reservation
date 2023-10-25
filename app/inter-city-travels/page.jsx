@@ -4,20 +4,20 @@ import React from 'react';
 // import Image from "next/image";
 // import Link from "next/link";
 
-import NavBar from '@/components/groups/NavBar';
-import HomeBanner from '@/components/groups/HomeBanner';
-import TravelWherever from '@/components/groups/TravelWherever';
-import ReferAndEarn from '@/components/groups/ReferAndEarn';
-import FeaturedCars from '@/components/groups/FeaturedCars';
-import CommonQuestions from '@/components/groups/CommonQuestions';
-import Footer from '@/components/groups/Footer';
+import NavBar from '@/components/sections/NavBar';
+import HeroBanner from '@/components/sections/HeroBanner';
+import TravelWherever from '@/components/sections/TravelWherever';
+import ReferAndEarn from '@/components/sections/ReferAndEarn';
+import FeaturedCars from '@/components/sections/FeaturedCars';
+import CommonQuestions from '@/components/sections/CommonQuestions';
+import Footer from '@/components/sections/Footer';
 
 const Page = () => {
 
     return (
         <div>
             <NavBar bgColor="#FFF" />
-            <HomeBanner />
+            <HeroBanner />
             <div className="my-20"></div>
             <TravelWherever />
             <div className="my-20"></div>
