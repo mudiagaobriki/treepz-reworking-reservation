@@ -6,16 +6,16 @@ import React from 'react';
 
 import NavBar from '@/components/sections/NavBar';
 import HeroBanner from '@/components/sections/HeroBanner';
-import CardRow1 from '@/components/sections/CardRow1';
+import CardSection1 from '@/components/sections/CardSection1';
 import FeaturedCars from '@/components/sections/FeaturedCars';
 import DiscountOffer from '@/components/sections/DiscountOffer';
 import Community from '@/components/sections/Community';
-import CityRow from '@/components/sections/CityRow';
+import CitySection from '@/components/sections/CitySection';
 import BlogRow from '@/components/sections/BlogRow';
-import ReviewRow from '@/components/sections/ReviewRow';
-import ClientRow1 from '@/components/sections/ClientRow1';
-import StatsRow from '@/components/sections/StatsRow';
-import GetStartedRow from '@/components/sections/GetStartedRow';
+import ReviewSection1 from '@/components/sections/ReviewSection1';
+import ClientSection1 from '@/components/sections/ClientSection1';
+import StatsSection from '@/components/sections/StatsSection';
+import GetStartedSection from '@/components/sections/GetStartedSection';
 import CommonQuestions from '@/components/sections/CommonQuestions';
 import Footer from '@/components/sections/Footer';
 
@@ -26,7 +26,7 @@ const Page = () => {
             <NavBar bgColor="#FFF" />
             <HeroBanner bgImg={"/assets/images/pictures-on-hero-section.png"} />
             <div className="my-20"></div>
-            <CardRow1 />
+            <CardSection1 />
             <div className="my-20"></div>
             <FeaturedCars />
             <div className="my-20"></div>
@@ -34,17 +34,17 @@ const Page = () => {
             <div className="my-20"></div>
             <Community />
             <div className="my-20"></div>
-            <CityRow />
+            <CitySection />
             <div className="my-20"></div>
             <BlogRow />
             <div className="my-20"></div>
-            <ReviewRow />
+            <ReviewSection1 />
             <div className="my-20"></div>
-            <ClientRow1 />
+            <ClientSection1 />
             <div className="my-20"></div>
-            <StatsRow />
+            <StatsSection />
             <div className="my-20"></div>
-            <GetStartedRow />
+            <GetStartedSection />
             <div className="my-20"></div>
             <CommonQuestions />
             <div className="my-20"></div>

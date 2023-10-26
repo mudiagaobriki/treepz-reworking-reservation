@@ -35,7 +35,7 @@ const DATA = [
     },
 ]
 
-const ExploreRow = () => {
+const ExploreSection = () => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
@@ -76,4 +76,4 @@ const ExploreRow = () => {
     );
 };
 
-export default ExploreRow;
+export default ExploreSection;

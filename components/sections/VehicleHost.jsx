@@ -12,7 +12,7 @@ const VehicleImage = () => {
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
     return (
-        <div className="px-32 w-2/3">
+        <div className="w-2/3">
             <div className="flex justify-between items-center mb-8 w-full">
                 <div className="flex flex-col items-start gap-4">
                     <div className="flex items-center gap-3">

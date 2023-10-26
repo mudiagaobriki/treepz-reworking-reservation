@@ -4,7 +4,7 @@ import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
-const ClientRow1 = () => {
+const ClientSection1 = () => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
@@ -25,4 +25,4 @@ const ClientRow1 = () => {
     );
 };
 
-export default ClientRow1;
+export default ClientSection1;

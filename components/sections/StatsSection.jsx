@@ -4,7 +4,7 @@ import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
-const StatsRow = () => {
+const StatsSection = () => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
@@ -39,4 +39,4 @@ const StatsRow = () => {
     );
 };
 
-export default StatsRow;
+export default StatsSection;

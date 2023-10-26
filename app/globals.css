@@ -67,6 +67,9 @@ body {
 .tz-text-gray-4 {
   color: #9DA3AE; 
 }
+.tz-text-gray-50 {
+  color: rgba(0, 0, 0, 0.50);
+}
 .tz-text-gray-5 {
   color: var(--neutral-tints-70, #C8CCD0);
 }
@@ -81,6 +84,9 @@ body {
 }
 .tz-text-brown {
   color: #C8811A;
+}
+.tz-text-red {
+  color: var(--error-primary, #B00020); 
 }
 .tz-text-light {
   color: #E9EBEC;
@@ -216,6 +222,9 @@ body {
 }
 .tz-bg-gray-2 {
   background: #D3D6D9;
+}
+.tz-bg-gray-3 {
+  background: #DEE0E3;
 }
 .tz-w-1 {
   width: 0.0625em;

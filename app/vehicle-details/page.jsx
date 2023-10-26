@@ -7,13 +7,10 @@ import Link from "next/link";
 import NavBar from '@/components/sections/NavBar';
 import VehicleType from '@/components/sections/VehicleType';
 import VehicleImage from '@/components/sections/VehicleImage';
-import VehicleHost from '@/components/sections/VehicleHost';
-import VehicleFeatures from '@/components/sections/VehicleFeatures';
-import ReviewSection2 from '@/components/sections/ReviewSection2';
-// import PlanTrip from '@/components/items/PlanTrip';
-// import ExploreWithoutLimits1 from '@/components/sections/ExploreWithoutLimits1';
-// import HaveQuestion from '@/components/sections/HaveQuestion';
-// import ExploreWithoutLimits2 from '@/components/sections/ExploreWithoutLimits2';
+import BookingDetails from '@/components/sections/BookingDetails';
+import MapSection from '@/components/sections/MapSection';
+import LocationSection from '@/components/sections/LocationSection';
+import BreadCrumb from '@/components/items/BreadCrumb';
 // import CommonQuestions from '@/components/sections/CommonQuestions';
 import Footer from '@/components/sections/Footer';
 
@@ -31,14 +28,15 @@ const Page = () => {
             <div className="my-20"></div>
             <VehicleImage />
             <div className="my-20"></div>
-            <VehicleHost />
+            <BookingDetails />
             <div className="my-20"></div>
-            <VehicleFeatures />
-            <div className="my-20"></div>
-            <ReviewSection2 />
-            <div className="my-20"></div>
+            <MapSection />
+            <div className="mt-24 pt-16 pb-10 tz-bg-light">
+                <BreadCrumb links={["Rent a car", "Ikejah", "Mercedes", "Mercedes Mayback 20233"]} />
+            </div>
+            <LocationSection />
+            <div className="pt-24 tz-bg-light"></div>
             <Footer />
-            <div className="my-20"></div>
         </div>
     );
 };

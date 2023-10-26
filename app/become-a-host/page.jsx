@@ -7,7 +7,7 @@ import Image from "next/image";
 import NavBar from '@/components/sections/NavBar';
 import DriveIncome from '@/components/sections/DriveIncome';
 import TrustTreepz from '@/components/sections/TrustTreepz';
-import ExploreRow from '@/components/sections/ExploreRow';
+import ExploreSection from '@/components/sections/ExploreSection';
 // import DiscountOffer from '@/components/sections/DiscountOffer';
 // import Community from '@/components/sections/Community';
 // import CityRow from '@/components/sections/CityRow';
@@ -29,7 +29,7 @@ const Page = () => {
             <TrustTreepz />
             <div className="my-20"></div>
             <Image src="/assets/images/carOnRoad.png" alt="" width={0} height={0} sizes="100vw" className="flex-shrink-0 w-full h-72" />
-            <ExploreRow />
+            <ExploreSection />
             <div className="my-20"></div>
             <Footer />
             <div className="my-20"></div>

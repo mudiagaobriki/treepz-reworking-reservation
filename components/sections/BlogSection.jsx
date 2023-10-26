@@ -24,7 +24,7 @@ const DATA = [
     },
 ]
 
-const BlogRow = () => {
+const BlogSection = () => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
@@ -46,4 +46,4 @@ const BlogRow = () => {
     );
 };
 
-export default BlogRow;
+export default BlogSection;

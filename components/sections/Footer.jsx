@@ -13,7 +13,7 @@ const Footer = () => {
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
     return (
-        <div className='flex flex-col items-start gap-10 tz-px-30 tz-bg-light'>
+        <div className='flex flex-col items-start gap-10 pb-10 tz-px-30 tz-bg-light'>
             <div className="flex justify-between items-center self-stretch">
                 <div> <Image src="/assets/images/logo.png" alt="need-support" width={120} height={32} /> </div>
                 <div className="flex items-center gap-5">

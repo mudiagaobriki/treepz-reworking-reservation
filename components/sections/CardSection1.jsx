@@ -36,7 +36,7 @@ const DATA = [
     },
 ]
 
-const CardRow1 = () => {
+const CardSection1 = () => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
@@ -53,4 +53,4 @@ const CardRow1 = () => {
     );
 };
 
-export default CardRow1;
+export default CardSection1;

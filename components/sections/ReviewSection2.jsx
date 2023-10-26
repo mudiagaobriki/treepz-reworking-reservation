@@ -57,7 +57,7 @@ const ReviewSection2 = () => {
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
     return (
-        <div className="px-32 w-2/3 pt-8 tz-border-top-3">
+        <div className="w-2/3 pt-8 tz-border-top-3">
             <h3 className="text-2xl font-medium tz-text-dark mb-5">Reviews (56)</h3>
             <div className="grid grid-cols-2 gap-y-8 mb-5">
                 {

@@ -7,7 +7,7 @@ import React from 'react';
 import NavBar from '@/components/sections/NavBar';
 import HowItWorks from '@/components/sections/HowItWorks';
 import JustMove from '@/components/sections/JustMove';
-import ExploreRow from '@/components/sections/ExploreRow';
+import ExploreSection from '@/components/sections/ExploreSection';
 // import DiscountOffer from '@/components/sections/DiscountOffer';
 // import Community from '@/components/sections/Community';
 // import CityRow from '@/components/sections/CityRow';
@@ -26,7 +26,7 @@ const Page = () => {
             <NavBar bgColor="#FFF" />
             <HowItWorks />
             <div className="my-20"></div>
-            <ExploreRow />
+            <ExploreSection />
             <div className="my-20"></div>
             <JustMove />
             <div className="my-20"></div>

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import Button1 from '@/components/items/Button1';
 
-const GetStartedRow = () => {
+const GetStartedSection = () => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
@@ -44,6 +44,4 @@ const GetStartedRow = () => {
     );
 };
 
-export default GetStartedRow;
-
-// 
+export default GetStartedSection;
