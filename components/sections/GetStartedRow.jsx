@@ -19,7 +19,7 @@ const GetStartedRow = () => {
                         <p className="text-base self-stretch tz-text-gray">Far or near, there’s a vehicle for your next trip</p>
                     </div>
                     <div>
-                        <Button1 btnText="Get started" url="#" />
+                        <Button1 text="Get started" url="#" />
                     </div>
                 </div>
                 <div>
@@ -36,7 +36,7 @@ const GetStartedRow = () => {
                         <p className="text-base self-stretch tz-text-gray">Earn extra income with your vehicle on your own terms</p>
                     </div>
                     <div>
-                        <Button1 btnText="Get started" url="#" />
+                        <Button1 text="Get started" url="#" />
                     </div>
                 </div>
             </div>

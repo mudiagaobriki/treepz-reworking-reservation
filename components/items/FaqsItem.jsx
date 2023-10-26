@@ -20,7 +20,7 @@ const FaqsItem = ({question, title, description, faqsPage=false}) => {
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
     return (
-        <div>
+        <div className="w-[38.75rem]">
             {faqsPage ? 
                 <div className={`w-full tz-border-top ${isHover && 'cursor-pointer'}`} onClick={toggleFaq}>
                     {isClick ?
@@ -51,13 +51,12 @@ const FaqsItem = ({question, title, description, faqsPage=false}) => {
                         <p className="text-base font-normal tz-text-gray">{description}</p>
                     </div> :
                     <div 
-                        className={`flex justify-between items-center px-0 py-5 w-3/4 ${isHover && 'px-2'}`}
+                        className={`flex justify-between items-center px-0 py-5 self-stretch w-full ${isHover && 'px-2'}`}
                         onMouseEnter={() => setIsHover(true)}
                         onMouseLeave={() => setIsHover(false)}
                     >
                         <h4 className="text-xl font-normal tz-text-dark self-stretch">{question}</h4>
-                        <p><Image src="/assets/images/chevron-down-line.png" alt="arrow-down" width={32} height={32} /></p>
-                        
+                        <Image src="/assets/images/chevron-down-line.png" alt="arrow-down" width={32} height={32} />
                     </div>
                     }
                 </div>

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import NavBar from '@/components/sections/NavBar';
-// import HomeBanner from '@/components/sections/HomeBanner';
+import SearchBoxArea from '@/components/sections/SearchBoxArea';
 import CarGridShow from '@/components/sections/CarGridShow';
 // import SearchBox2 from '@/components/items/SearchBox2';
 // import FeaturedCars from '@/components/sections/FeaturedCars';
@@ -17,15 +17,13 @@ import CarGridShow from '@/components/sections/CarGridShow';
 // import CommonQuestions from '@/components/sections/CommonQuestions';
 import Footer from '@/components/sections/Footer';
 
-const DATA = [{key: 1, name: "Rent a car"}, {key: 2, name: "By destination"}, {key: 3, name: "Lagos"}];
-
 const Page = () => {
 
     return (
         <div>
             <NavBar bgColor="#FFF" />
+            <SearchBoxArea />
             <div className="my-20"></div>
-
             <CarGridShow />
             <div className="my-20"></div>
             <Footer />

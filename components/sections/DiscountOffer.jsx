@@ -19,7 +19,7 @@ const DiscountOffer = () => {
                         <p className="text-xl tz-text-gray">Rent a vehicle from your hotel to your destination and get a 50% discount.</p>
                     </div>
                     <div>
-                        <Button1 btnText="Claim discount" url="#" arrowRight={true} />
+                        <Button1 text="Claim discount" url="#" icon={true} />
                     </div>
                 </div>
                 <div>

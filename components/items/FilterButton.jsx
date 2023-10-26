@@ -30,11 +30,3 @@ const Button1 = ({text, url, bg="bg-white", icon=false, img=""}) => {
 };
 
 export default Button1;
-/*display: flex;
-padding: 8px 16px;
-align-items: flex-start;
-gap: 4px;
-
-border-radius: 32px;
-border: 1px solid var(--neutral-tints-80, #D3D6D9);
-background: var(--white-00, #FFF);*/

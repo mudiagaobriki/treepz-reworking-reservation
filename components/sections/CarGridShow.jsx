@@ -100,7 +100,7 @@ const CarGridShow = () => {
                             FEATURED_CARS.map((item, index) => {
                                 return <div key={index}>
                                     <CarCard
-                                        /*carName={item.carName}
+                                        carName={item.carName}
                                         carImage={item.image}
                                         location={item.location}
                                         hasAC={item.hasAC}
@@ -113,7 +113,7 @@ const CarGridShow = () => {
                                         rating={item.rating}
                                         numSeats={item.seats}
                                         price={item.price}
-                                        tripsCount={item.trips}*/
+                                        tripsCount={item.trips}
                                     />
                                 </div>
                             })

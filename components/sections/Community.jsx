@@ -22,7 +22,7 @@ const Community = () => {
                                 <Image src="/assets/images/sample-hosts2.png" alt="logo icon" width={440} height={296} className="flex-shrink-0" />
                             </div>
                             <div>
-                                <Image src="/assets/images/heartOfAfrica3.png" alt="logo icon" width={320} height={296} className="flex-shrink-0 rounded-2xl" />
+                                <Image src="/assets/images/heartOfAfrica3.png" alt="logo icon" width={320} height={296} sizes="18.5rem" className="rounded-2xl w-80 h-[18.5rem]" />
                             </div>
                         </div>
                         <p className="max-w-5xl text-center text-xl tz-text-gray">

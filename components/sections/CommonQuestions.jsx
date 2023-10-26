@@ -70,7 +70,7 @@ const CommonQuestions = () => {
                     </button>
                 </div>
             </div>
-            <div className="flex flex-col items-start gap-6 flex-shrink-0 tz-w-39">
+            <div className="flex flex-col items-start gap-6 flex-shrink-0">
                 {
                     DATA.map((item, index) => {
                         return <div key={item?.key}>
@@ -79,7 +79,6 @@ const CommonQuestions = () => {
                     })
                 }
             </div>
-            
         </div>
     );
 };

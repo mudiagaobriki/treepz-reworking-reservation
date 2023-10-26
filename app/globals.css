@@ -49,6 +49,9 @@ body {
 .tz-text-dark-3 {
   color: var(--black-black, #16171D); 
 }
+.tz-text-dark-4 {
+  color: var(--text-emphasis-dark, #2B2C34); 
+}
 .tz-text-gray {
   color: #6F7174;
 }
@@ -69,6 +72,15 @@ body {
 }
 .tz-text-green {
   color: #00AC11;
+}
+.tz-text-blue {
+  color: #3B6FE9;
+}
+.tz-text-blue-1 {
+  color: #1B97DB;
+}
+.tz-text-brown {
+  color: #C8811A;
 }
 .tz-text-light {
   color: #E9EBEC;
@@ -102,6 +114,15 @@ body {
 }
 .tz-bg-green {
   background: rgba(0, 172, 17, 0.10);
+}
+.tz-bg-blue {
+  background: var(--tertiary-tints-99, #D8E2FB);
+}
+.tz-bg-blue-1 {
+  background: rgba(27, 151, 219, 0.15); /*#DDEFFA;*/
+}
+.tz-bg-yellow {
+  background: #FBF2CB; 
 }
 .tz-bg-light {
   background: var(--neutral-tints-99, #F7F7F7);
@@ -166,6 +187,12 @@ body {
 .tz-border-top-1 {
   border-top: 1px solid var(--neutral-tints-90, #DEE0E3);
 }
+.tz-border-top-2 {
+  border-top: 1px solid var(--neutral-tints-95, #E9EBEC);
+}
+.tz-border-top-3 {
+  border-top: 1px solid var(--neutral-tints-80, #D3D6D9);
+}
 .tz-border-bottom {
   border-bottom: 1px solid var(--neutral-tints-80, #D3D6D9);
 }
@@ -209,78 +236,9 @@ body {
   background: rgba(22, 23, 29, 0.50);
   backdrop-filter: blur(2px);
 }
-
-
-
-
-
-
-
-
-
-
-/* CUSTOM NUMBER INPUT */
-.seat {
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  appearance: textfield;
+.tz-checkbox-border {
+  border: 1px solid var(--alpha-black-10, rgba(47, 43, 67, 0.10));
 }
-
-.seat::-webkit-inner-spin-button,
-.seat::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+.tz-text-fadeout {
+  -webkit-mask-image: linear-gradient(to top left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 }
-
-.numberInput {
-  border: 2px solid #ddd;
-  border-radius: 2rem;
-  display: inline-flex;
-}
-
-.numberInput,
-.numberInput * {
-  box-sizing: border-box;
-}
-
-.numberInput button {
-  outline:none;
-  -webkit-appearance: none;
-  background-color: transparent;
-  border: none;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 1.5rem;
-  cursor: pointer;
-  margin: 0;
-  position: relative;
-}
-
-.numberInput button:before,
-.numberInput button:after {
-  display: inline-block;
-  position: absolute;
-  content: '';
-  width: .6rem;
-  height: 2px;
-  background-color: #ccc;
-  transform: translate(-50%, -50%);
-}
-.numberInput button.plus:after {
-  transform: translate(-50%, -50%) rotate(90deg);
-}
-
-.numberInput .seat {
-/*  font-family: sans-serif;*/
-  max-width: 2rem;
-  padding: .5rem;
-  border: none;
-  font-size: 1rem;
-  height: 1.5rem;
-  text-align: center;
-}
-
-.numberInput .seat:focus {
-  outline: none;
-}
-/* CUSTOM NUMBER INPUT END */

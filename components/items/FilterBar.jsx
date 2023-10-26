@@ -37,26 +37,35 @@ const FilterBar = () => {
                 <div className="flex flex-col items-start gap-4 pt-5 w-full tz-border-top-1">
                     <div className="text-sm font-medium tz-text-dark">Popular filters</div>
                     <div className="flex flex-col items-start gap-3">
-                        <label><input type="checkbox" name="" /> <span className="text-sm ml-2 tz-text-gray-3">Self driven</span></label>
-                        <label><input type="checkbox" name="" /> <span className="text-sm ml-2 tz-text-gray-3">Full day</span></label>
-                        <label><input type="checkbox" name="" /> <span className="text-sm ml-2 tz-text-gray-3">Luxurious</span></label>
+                        <label className="flex items-center gap-2" for="selfDriven">
+                            <input type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] rounded tz-checbox-border" id="selfDriven" /> 
+                            <span className="text-sm tz-text-gray-3">Self driven</span>
+                        </label>
+                        <label className="flex items-center gap-2" for="fullDay">
+                            <input type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] rounded tz-checbox-border" id="fullDay" /> 
+                            <span className="text-sm tz-text-gray-3">Full day</span>
+                        </label>
+                        <label className="flex items-center gap-2" for="luxurious">
+                            <input type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] rounded tz-checbox-border" id="luxurious" /> 
+                            <span className="text-sm tz-text-gray-3">Luxurious</span>
+                        </label>
                     </div>
                 </div>
 
                 <div className="flex flex-col items-start gap-4 pt-5 w-full tz-border-top-1">
                     <div className="text-sm font-medium tz-text-dark">Star ratings</div>
                     <div className="flex items-center gap-3">
-                        <Link href="" className="flex justify-center items-center gap-1 px-2 py-1 rounded tz-bg-gh">
-                            <Image src="/assets/images/star.png" alt="" width={14} height={14} /> <span className="text-sm tz-text-dark-3">{'<2'}</span>
+                        <Link href="" className="flex justify-center items-center gap-1 px-2 py-1 rounded  hover:bg-[#101010] hover:text-white text-sm tz-text-dark-3 tz-bg-gh">
+                            <Image src="/assets/images/star.png" alt="" width={14} height={14} /> {'<2'}
                         </Link>
-                        <Link href="" className="flex justify-center items-center gap-1 px-2 py-1 rounded tz-bg-gh">
-                            <Image src="/assets/images/star.png" alt="" width={14} height={14} /> <span className="text-sm tz-text-dark-3">3</span>
+                        <Link href="" className="flex justify-center items-center gap-1 px-2 py-1 rounded  hover:bg-[#101010] hover:text-white text-sm tz-text-dark-3 tz-bg-gh">
+                            <Image src="/assets/images/star.png" alt="" width={14} height={14} /> 3
                         </Link>
-                        <Link href="" className="flex justify-center items-center gap-1 px-2 py-1 rounded tz-bg-gh">
-                            <Image src="/assets/images/star.png" alt="" width={14} height={14} /> <span className="text-sm tz-text-dark-3">4</span>
+                        <Link href="" className="flex justify-center items-center gap-1 px-2 py-1 rounded  hover:bg-[#101010] hover:text-white text-sm tz-text-dark-3 tz-bg-gh">
+                            <Image src="/assets/images/star.png" alt="" width={14} height={14} /> 4
                         </Link>
-                        <Link href="" className="flex justify-center items-center gap-1 px-2 py-1 rounded tz-bg-gh">
-                            <Image src="/assets/images/star.png" alt="" width={14} height={14} /> <span className="text-sm tz-text-dark-3">5</span>
+                        <Link href="" className="flex justify-center items-center gap-1 px-2 py-1 rounded  hover:bg-[#101010] hover:text-white text-sm tz-text-dark-3 tz-bg-gh">
+                            <Image src="/assets/images/star.png" alt="" width={14} height={14} /> 5
                         </Link>
                     </div>
                 </div>
@@ -65,14 +74,14 @@ const FilterBar = () => {
                     <div className="text-sm font-medium tz-text-dark">Hire mode</div>
                     <div className="flex flex-col items-start gap-2">
                         <div className="flex items-center gap-2">
-                            <input type="checkbox" name="" /> 
+                            <input type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] rounded tz-checbox-border" /> 
                             <div className="flex flex-col items-start">
                                 <span className="text-sm tz-text-gray-3">Self driven</span>
                                 <span className="text-[0.625em] tz-text-gray">You will drive yourself</span>
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
-                            <input type="checkbox" name="" /> 
+                            <input type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] rounded tz-checbox-border" /> 
                             <div className="flex flex-col items-start">
                                 <span className="text-sm tz-text-gray-3">Chauffeured</span>
                                 <span className="text-[0.625em] tz-text-gray">A driver takes you around</span>
@@ -160,13 +169,13 @@ const FilterBar = () => {
                     <div className="flex flex-col items-center gap-3">
                         <div className="flex items-start gap-3 justify-start w-full">
                             <FilterButton text={"Air-conditioning"} url="" icon={true} img={"/assets/images/car.png"} />
-                            <FilterButton text={"Wi-fi"} url="" icon={true} img={"/assets/images/wifi.png"} />
                         </div>
                         <div className="flex items-start gap-3 justify-start w-full">
                             <FilterButton text={"Bluetooth"} url="" icon={true} img={"/assets/images/bluetooth.png"} />
                             <FilterButton text={"Baby sit"} url="" icon={true} img={"/assets/images/car.png"} />
                         </div>
                         <div className="flex items-start gap-3 justify-start w-full">
+                            <FilterButton text={"Wi-fi"} url="" icon={true} img={"/assets/images/wifi.png"} />
                             <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} />
                         </div>
                     </div>
@@ -175,7 +184,7 @@ const FilterBar = () => {
                 <div className="flex justify-center w-full mb-5">
                     <Link 
                         href="" 
-                        className={`flex py-2 px-6 justify-center items-center text-sm font-medium w-48 rounded-lg tz-text-dark-1 tz-bg-orange-1`}
+                        className="flex py-2 px-6 justify-center items-center text-sm font-medium w-48 rounded-lg hover:bg-opacity-80 tz-text-dark-1 tz-bg-orange-1"
                     >
                         Reset all filters
                     </Link>
