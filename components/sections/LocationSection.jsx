@@ -14,7 +14,7 @@ const LocationSection = () => {
     return (
         <div className="px-32 tz-bg-light tz-border-top-3 tz-border-bottom py-10">
             <div className="flex flex-col items-start gap-14">
-                <h2 className="text-2xl font-medium tz-text-dark">Host/Vehicle location</h2>
+                <h2 className="text-2xl font-medium tz-text-dark">Check other locations around Ikeja</h2>
                 <div className='flex flex-col items-start gap-10'>
                     <div className="flex justify-center gap-40 items-start self-stretch">
                         <div className="flex flex-col gap-3">

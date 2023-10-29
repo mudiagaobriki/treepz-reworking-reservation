@@ -67,6 +67,9 @@ body {
 .tz-text-gray-4 {
   color: #9DA3AE; 
 }
+.tz-text-gray-30 {
+  color: var(--primary-main-60, rgba(0, 0, 0, 0.30));
+}
 .tz-text-gray-50 {
   color: rgba(0, 0, 0, 0.50);
 }
