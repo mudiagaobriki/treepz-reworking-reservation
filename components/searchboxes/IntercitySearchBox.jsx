@@ -10,7 +10,7 @@ import Button1 from '@/components/items/Button1'
 
 
 
-const SearchBox1 = () => {
+const IntercitySearchBox = () => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
@@ -90,7 +90,7 @@ const SearchBox1 = () => {
     );
 };
 
-export default SearchBox1;
+export default IntercitySearchBox;
 
 /*
 display: flex;

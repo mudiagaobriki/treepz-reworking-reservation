@@ -11,7 +11,7 @@ import FeaturedCars from '@/components/sections/FeaturedCars';
 import DiscountOffer from '@/components/sections/DiscountOffer';
 import Community from '@/components/sections/Community';
 import CitySection from '@/components/sections/CitySection';
-import BlogRow from '@/components/sections/BlogRow';
+import BlogSection from '@/components/sections/BlogSection';
 import ReviewSection1 from '@/components/sections/ReviewSection1';
 import ClientSection1 from '@/components/sections/ClientSection1';
 import StatsSection from '@/components/sections/StatsSection';
@@ -24,7 +24,7 @@ const Page = () => {
     return (
         <div>
             <NavBar bgColor="#FFF" />
-            <HeroBanner bgImg={"/assets/images/pictures-on-hero-section.png"} />
+            <HeroBanner bgImg={"/assets/images/pictures-on-hero-section.png"} page="vehicle-rentals" />
             <div className="my-20"></div>
             <CardSection1 />
             <div className="my-20"></div>
@@ -36,7 +36,7 @@ const Page = () => {
             <div className="my-20"></div>
             <CitySection />
             <div className="my-20"></div>
-            <BlogRow />
+            <BlogSection />
             <div className="my-20"></div>
             <ReviewSection1 />
             <div className="my-20"></div>

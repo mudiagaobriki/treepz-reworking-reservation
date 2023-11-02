@@ -17,7 +17,7 @@ const Page = () => {
     return (
         <div>
             <NavBar bgColor="#FFF" />
-            <HeroBanner />
+            <HeroBanner page="intercity-travels" />
             <div className="my-20"></div>
             <TravelWherever />
             <div className="my-20"></div>

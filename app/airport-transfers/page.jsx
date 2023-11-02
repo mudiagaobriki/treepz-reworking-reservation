@@ -17,7 +17,7 @@ const Page = () => {
     return (
         <div>
             <NavBar bgColor="#FFF" />
-            <HeroBanner bgImg={"/assets/images/airport-hero-section.png"} />
+            <HeroBanner bgImg={"/assets/images/airport-hero-section.png"} page="airport-transfers" />
             <div className="my-20 absolute"></div>
             <NeverSettle />
             <div className="my-20"></div>

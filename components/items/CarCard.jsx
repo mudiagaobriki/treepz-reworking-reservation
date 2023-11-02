@@ -54,14 +54,14 @@ const CarCard = ({carImage, carName, price, location="", rating=4.9, tripsCount=
                         {hasAC && <div><Image src="/assets/images/air-conditioner.png" alt="logo icon" width={12} height={12} /></div>}
                         {hasWifi && <div><Image src="/assets/images/wifi.png" alt="logo icon" width={12} height={12} /></div>}
                     </div>
-                    <div className="flex flex-col justify-end">
+                    <div>
                         <div>
                             <span className="text-xs text-opacity-80 tz-text-gray-1">from </span> 
                             {/*<span className="font-bold text-base tz-text-dark-1">₦{price}</span>*/}
                             <span className="font-bold text-base tz-text-dark-1">&#8358;{price}</span>
                             <span className="text-xs text-opacity-80 tz-text-gray-1">/day</span>
                         </div>
-                        <div className="text-xs  text-opacity-80 underline tz-text-gray">&#8358; {price} total</div>
+                        <div className="text-xs text-right text-opacity-80 underline tz-text-gray">&#8358; {price} total</div>
                         {/*<div className="text-xs  text-opacity-80 underline tz-text-gray">₦ 20,000 total</div>*/}
                     </div>
                 </div>

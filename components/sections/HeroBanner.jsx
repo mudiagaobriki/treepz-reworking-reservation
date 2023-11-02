@@ -5,17 +5,21 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Custom components
-import SearchBox1 from '@/components/items/SearchBox1'
+import VehicleSearchBox from '@/components/searchboxes/VehicleSearchBox'
+import AirportSearchBox from '@/components/searchboxes/AirportSearchBox'
+import IntercitySearchBox from '@/components/searchboxes/IntercitySearchBox'
 // import isMobile from '@/components/helpers/isMobile'
 
-const HeroBanner = ({bgImg}) => {
+const HeroBanner = ({bgImg, page}) => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
     return (
         <div className="mb-20">
             <div className={`flex items-center justify-center w-full h-[32.5rem] bg-cover bg-center bg-[url('/assets/images/airport-hero-section.png')]`}> 
-                <SearchBox1 />
+                {page == 'vehicle-rentals' && <VehicleSearchBox />}
+                {page == 'airport-transfers' && <AirportSearchBox />}
+                {page == 'intercity-travels' && <IntercitySearchBox />}
             </div>
                 
         </div>

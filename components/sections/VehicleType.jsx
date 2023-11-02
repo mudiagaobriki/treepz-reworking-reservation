@@ -4,33 +4,10 @@ import React, { useEffect } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
-// Third party components
-import { Modal } from 'flowbite';
-
 // Custom components
 import Button1 from '@/components/items/Button1';
 
 const VehicleType = () => {
-    // options with default values
-    const options = {
-      placement: 'bottom-right',
-      backdrop: 'dynamic',
-      backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
-      closable: true,
-    };
-
-    useEffect(() => {
-        // set the modal menu element
-        const $targetEl = document.getElementById('authentication-modal');
-
-        const modal = new Modal($targetEl, options);
-
-        // show the modal
-        modal.show();
-
-        // hide the modal
-        modal.hide();
-    });
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 

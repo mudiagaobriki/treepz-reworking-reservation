@@ -22,7 +22,7 @@ const Page = () => {
     return (
         <div>
             <NavBar bgColor="#FFF" />
-            <SearchBoxArea />
+            <SearchBoxArea page="market-place" />
             <div className="my-20"></div>
             <CarGridShow />
             <div className="my-20"></div>
