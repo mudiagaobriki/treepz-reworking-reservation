@@ -17,9 +17,6 @@ import BreadCrumb from '@/components/items/BreadCrumb';
 import Footer from '@/components/sections/Footer';
 import Login from '@/components/modals/Login';
 
-
-const DATA = [{key: 1, name: "Rent a car"}, {key: 2, name: "By destination"}, {key: 3, name: "Lagos"}];
-
 const Page = () => {
 
     return (

@@ -7,7 +7,7 @@ import Link from "next/link";
 import NavBar from '@/components/sections/NavBar';
 // import HomeBanner from '@/components/sections/HomeBanner';
 import BreadCrumb from '@/components/items/BreadCrumb';
-import SearchBox2 from '@/components/items/SearchBox2';
+import SearchBox2 from '@/components/searchboxes/SearchBox2';
 import FeaturedCars from '@/components/sections/FeaturedCars';
 import UniqueHost1 from '@/components/sections/UniqueHost1';
 import PlanTrip from '@/components/items/PlanTrip';

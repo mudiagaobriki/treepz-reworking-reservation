@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Custom components
+import Button1 from '@/components/items/Button1'
 import ButtonSm from '@/components/items/ButtonSm'
 // import isMobile from '@/components/helpers/isMobile'
 
@@ -22,7 +23,7 @@ const SheduleDetail = () => {
                         <Image src="/assets/images/calendar-event-line.png" alt="logo icon" width={20} height={20} />
                         <div className="flex items-center gap-3">
                             <div className="tz-text-dark-2">Sat, June 3 12:23 PM</div>
-                            <div className="w-4 h-[2px] tz-bg-gray"></div>
+                            <div className="w-4 h-[2px] tz-bg-gray-4"></div>
                             <div className="tz-text-dark-2">Sat, June 3 12:23 PM</div>
                         </div>
                     </div>
@@ -64,8 +65,43 @@ const SheduleDetail = () => {
                     <p className="text-xl font-medium tz-text-dark">₦44,000</p>
                 </div>
             </div>
-            <div></div>
-            <div></div>
+            <div className="w-full">
+                <h3 className="text-[1.75em] font-semibold tz-text-dark mb-12"></h3>
+                <div className="flex justify-between items-start mb-6">
+                    <div className="flex items-start gap-4">
+                        <Image src="/assets/images/wallet-fill.png" alt="wallet icon" width={32} height={32} />
+                        <div>
+                            <p className="mb-2 text-xl tz-text-dark">₦44,000</p>
+                            <p className="tz-text-gray">Wallet</p>
+                        </div>
+                    </div>
+                    <Image src="/assets/images/Radio.png" alt="radio icon" width={20} height={20} />
+                </div>
+                <div className="flex justify-between items-center py-2 mb-2">
+                    <div className="flex items-center gap-4">
+                        <Image src="/assets/images/flutterwave.png" alt="chevron icon" width={36} height={36} />
+                        <p className="text-xl tz-text-dark">Pay online (with flutterwave)</p>
+                    </div>
+                    <Image src="/assets/images/chevron-right-line.png" alt="radio icon" width={20} height={20} />
+                </div>
+                <div className="flex justify-between items-center py-2">
+                    <div className="flex items-center gap-4">
+                        <div className="p-2">
+                            <Image src="/assets/images/paystack.png" alt="chevron icon" width={18} height={18} />
+                        </div>
+                        <p className="text-xl tz-text-dark">Pay online (with paystack)</p>
+                    </div>
+                    <Image src="/assets/images/chevron-right-line.png" alt="radio icon" width={20} height={20} />
+                </div>
+            </div>
+            <div>
+                <p className="tz-text-gray mb-8">
+                    By selecting the button below, you agree to our 
+                    <span className="underline tz-text-dark"> guest booking policy, the cancellation policy,</span> and 
+                    <span className="underline tz-text-dark"> refund policy.</span>
+                </p>
+                <Button1 text="Proceed to pay" width="80" />
+            </div>
         </div>
         
     );
@@ -73,13 +109,5 @@ const SheduleDetail = () => {
 
 export default SheduleDetail;
 /*
-display: flex;
-padding: 8px 8px 8px 12px;
-justify-content: space-between;
-align-items: center;
-align-self: stretch;
 
-border-radius: 8px;
-border: 1px solid var(--neutral-main-60, #A0A3A6);
-background: var(--white-00, #FFF);
 */ 

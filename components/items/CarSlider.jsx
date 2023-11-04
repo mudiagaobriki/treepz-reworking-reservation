@@ -1,18 +1,46 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from "next/image";
 import Link from "next/link";
+
+import { Carousel } from 'flowbite';
 
 // Custom components
 // import isMobile from '@/components/helpers/isMobile'
 
 const CarSlider = () => {
 
-    // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
+    useEffect(() => {
+        const carouselElement = document.getElementById('controls-carousel');
+        const items = [
+            {
+                position: 0,
+                el: document.getElementById('carousel-item-1')
+            },
+            {
+                position: 1,
+                el: document.getElementById('carousel-item-2')
+            },
+            {
+                position: 2,
+                el: document.getElementById('carousel-item-3')
+            },
+        ];
+
+        const carousel = new Carousel(carouselElement, items);
+        // goes to the next (right) slide
+        carousel.next()
+        // goes to the previous (left) slide
+        carousel.prev()
+
+    });
+
+    
+    
 
     return (
-        <div className='flex flex-col flex-start p-4 gap-8 flex-shrink-0 rounded-3xl bg-white w-[40rem] tz-border-gray-2'>
+        <div className='flex flex-col flex-start p-4 gap-8 flex-shrink-0 rounded-3xl bg-white w-[39rem] tz-border-gray-2'>
             <div className="flex justify-between items-start self-stretch">
                 <div>
                     <h3 className="text-[1.75em] font-semibold tz-text-dark mb-4">Mercedes Maybach 2022</h3>
@@ -33,10 +61,49 @@ const CarSlider = () => {
                 </div>
             </div>
             <div className="rounded-2xl">
-                <Image src="/assets/images/toyota-prado.png" alt="" width={556} height={290} />
+                {/*<Image src="/assets/images/toyota-prado.png" alt="" width={600} height={300} />*/}
+
+                <div id="controls-carousel" class="relative w-full" data-carousel="static">
+                    {/*Carousel wrapper*/}
+                    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+
+                        <div class="hidden duration-700 ease-in-out" id="carousel-item-1" data-carousel-item="active">
+                            <Image src="/assets/images/toyota-prado.png" alt="" width={600} height={300} class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                        </div>
+
+                        <div class="hidden duration-700 ease-in-out" id="carousel-item-2" data-carousel-item>
+                            <Image src="/assets/images/toyota-prado.png" alt="" width={600} height={300} class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                        </div>
+
+                        <div class="hidden duration-700 ease-in-out" id="carousel-item-3" data-carousel-item>
+                            <Image src="/assets/images/toyota-prado.png" alt="" width={600} height={300} class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                        </div>
+                    </div>
+                    {/*Slider controls*/}
+                    <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                            <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                            </svg>
+                            <span class="sr-only">Previous</span>
+                        </span>
+                    </button>
+                    <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                            <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                            <span class="sr-only">Next</span>
+                        </span>
+                    </button>
+                </div>
+
             </div>
         </div>
     );
 };
 
 export default CarSlider;
+
+
+
