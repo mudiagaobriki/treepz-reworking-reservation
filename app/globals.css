@@ -76,14 +76,26 @@ body {
 .tz-text-gray-6 {
   color: var(--gray-500, #6B7280); 
 }
+.tz-text-gray-7 {
+  color: var(--gray-500, #8A8B8E); 
+}
 .tz-text-gray-30 {
   color: var(--primary-main-60, rgba(0, 0, 0, 0.30));
+}
+.tz-text-gray-300 {
+  color: var(--gray-300, #B9B9BB); 
 }
 .tz-text-gray-50 {
   color: rgba(0, 0, 0, 0.50);
 }
 .tz-text-gray-5 {
   color: var(--neutral-tints-70, #C8CCD0);
+}
+.tz-text-success {
+  color: var(--success-default, #3CC13B); 
+}
+.tz-text-danger {
+  color: var(--destructive-600, #CD3636); 
 }
 .tz-text-green {
   color: #00AC11;
@@ -139,8 +151,23 @@ body {
 .tz-border-cc {
   border: 1px solid var(--primary-tints-99, #CCC);
 }
+.tz-border-2b {
+  border: 1px solid var(--primary-tints-70, #2B2B2B); 
+}
 .tz-bg-light-2 {
   background: linear-gradient(180deg, #F7F7F7 0%, rgba(247, 247, 247, 0.00) 100%);
+}
+.tz-bg-success-light {
+  background: var(--success-light, #F3FEF3);
+}
+.tz-bg-success {
+  background: var(--success-default, #3CC13B);
+}
+.tz-bg-danger-light {
+  background: var(--destructive-100, #FDE9E9); 
+}
+.tz-bg-danger {
+  background: var(--destructive-600, #CD3636);
 }
 .tz-bg-green {
   background: rgba(0, 172, 17, 0.10);
@@ -169,11 +196,17 @@ body {
 .tz-bg-dark-1 {
   background: #101010;
 }
+.tz-bg-dark-2 {
+  background: var(--primary-shades-50, #16171D);
+}
 .tz-bg-light-1 {
   background: var(--neutral-main-60, #A0A3A6);
 }
 .tz-bg-gray-4 {
   background: var(--text-emphasis-medium, #4D5154);
+}
+.tz-bg-cc {
+  background: var(--primary-tints-99, #CCC);
 }
 .tz-px-30 {
   padding-left: 7.5rem;

@@ -41,7 +41,7 @@ const VehicleType = () => {
                 <div className="flex items-center gap-5">
                     <Image src="/assets/images/heart-2-line.png" alt="logo icon" width={32} height={32} />
                     <Image src="/assets/images/share-box-fill.png" alt="logo icon" width={32} height={32} />
-                    <Button1 text="Reserve" url="" width={"56"} modalId={"authentication-modal"} />
+                    <Button1 text="Reserve" url="" width={"56"} modalId={"signup-modal"} />
                 </div>
                 <div className="flex items-center gap-2 p-2 justify-end w-full">
                     <Image src="/assets/images/refund-fill.png" alt="logo icon" width={24} height={24} />

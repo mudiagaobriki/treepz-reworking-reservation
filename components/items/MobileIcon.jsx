@@ -9,7 +9,7 @@ import Link from "next/link";
 
 
 
-const Button1 = () => {
+const MobileIcon = () => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
@@ -25,4 +25,4 @@ const Button1 = () => {
     );
 };
 
-export default Button1;
+export default MobileIcon;

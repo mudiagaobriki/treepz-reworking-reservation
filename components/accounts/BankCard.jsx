@@ -4,13 +4,7 @@ import React, { useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
-import Button1 from '@/components/items/Button1';
-import AccountSideBar from '@/components/accounts/AccountSideBar';
-
-const SecuritySettings = () => {
-    const [oldVisible, setOldVisible] = useState(false);
-    const [newVisible, setNewVisible] = useState(false);
-    const [confirmVisible, setConfirmVisible] = useState(false);
+const BankCard = () => {
 
     return (
         <div className="w-80 h-52 px-4 pt-8 pb-5 rounded-lg tz-shadow tz-border-cc tz-bg-light-2">
@@ -35,4 +29,4 @@ const SecuritySettings = () => {
     );
 };
 
-export default SecuritySettings;
+export default BankCard;

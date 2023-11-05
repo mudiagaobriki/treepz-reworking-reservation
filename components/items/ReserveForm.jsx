@@ -64,7 +64,7 @@ const ReserveForm = () => {
                     <p className="text-xs font-light tz-text-red">The owner is available for pickup from 12:00 PM to 6:00 PM on Sundays</p>
                 </div>
                 <div className="w-full mb-6">
-                    <Button1 text="Reserve" submit={true}  modalId={"authentication-modal"} />
+                    <Button1 text="Reserve" submit={true}  modalId={"new-password-modal"} />
                 </div>
                 <div className="w-full tz-border-top-1">
                     <div className="flex items-center justify-between w-full mb-3 mt-5">

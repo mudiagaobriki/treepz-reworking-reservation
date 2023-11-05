@@ -68,15 +68,3 @@ const VehicleImage = () => {
 };
 
 export default VehicleImage;
-
-/*display: flex;
-width: 690px;
-height: 96px;
-flex-direction: column;
-justify-content: center;
-flex-shrink: 0;*/
-/*overflow: hidden;
-color: var(--text-emphasis-light, #6F7174);
-text-overflow: ellipsis;
-white-space: nowrap;
-*/

@@ -5,12 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Button1 from '@/components/items/Button1';
-import AccountSideBar from '@/components/accounts/AccountSideBar';
 
 const Notifications = () => {
-    const [oldVisible, setOldVisible] = useState(false);
-    const [newVisible, setNewVisible] = useState(false);
-    const [confirmVisible, setConfirmVisible] = useState(false);
 
     return (
         <div className="flex flex-col items-start gap-10 w-[37rem]">

@@ -15,7 +15,9 @@ import MapSection from '@/components/sections/MapSection';
 import LocationSection from '@/components/sections/LocationSection';
 import BreadCrumb from '@/components/items/BreadCrumb';
 import Footer from '@/components/sections/Footer';
+import Signup from '@/components/modals/Signup';
 import Login from '@/components/modals/Login';
+import NewPassword from '@/components/modals/NewPassword';
 
 const Page = () => {
 
@@ -38,7 +40,9 @@ const Page = () => {
             <LocationSection />
             <div className="pt-24 tz-bg-light"></div>
             <Footer />
-            <Login />
+            <Signup />
+            <NewPassword />
+            {/*<Login />*/}
         </div>
     );
 };
