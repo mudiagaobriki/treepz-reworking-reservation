@@ -1,9 +1,17 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import localFont from 'next/font/local'
+
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
+
+ 
+// Font files can be colocated inside of `app`
+const switzer = localFont({
+  src: './Switzer-Variable.woff2',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Treepz App',
@@ -17,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${switzer.className}`}>
         <main>{children}</main>
       </body>
     </html>

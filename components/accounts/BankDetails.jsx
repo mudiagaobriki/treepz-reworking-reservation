@@ -10,7 +10,7 @@ import Button1 from '@/components/items/Button1';
 import AccountSideBar from '@/components/accounts/AccountSideBar';
 import BankCard from '@/components/accounts/BankCard';
 import AddBankDetails from '@/components/modals/AddBankDetails';
-import BankSuccess from '@/components/modals/BankSuccess';
+import SuccessCard from '@/components/modals/SuccessCard';
 
 const BankDetails = () => {
 
@@ -49,7 +49,12 @@ const BankDetails = () => {
                 </div>
             </div>*/}
             <AddBankDetails />
-            <BankSuccess />
+            <SuccessCard 
+                title={"Bank details added successfully!"} 
+                description={"Your provide bank details has been added to your account."} 
+                btnText={"Understood!"} 
+                modalId={"bank-success-modal"}
+            />
         </div>
     );
 };

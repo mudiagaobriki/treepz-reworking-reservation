@@ -22,7 +22,9 @@ const BankCard = () => {
                 <div className="text-sm tz-text-gray text-left w-full">ADEPOJU AJALA INCREDIBLE</div>
                 <div className="flex items-center gap-3 w-full">
                     <div className="text-xl font-semibold tz-text-dark-1">2389874563</div>
-                    <div><Image src="/assets/images/account/edit-fill.png" alt="" width={20} height={20} /></div>
+                    <button onClick={() => navigator.clipboard.writeText('2389874563')}>
+                        <Image src="/assets/images/account/file-copy-fill.png" alt="" width={20} height={20} />
+                    </button>
                 </div>
             </div>
         </div>

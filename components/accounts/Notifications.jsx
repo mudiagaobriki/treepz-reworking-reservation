@@ -61,7 +61,7 @@ const Notifications = () => {
                 </div>
             </div>
             <div>
-                <Button1 text="Change password" width={"88"} />
+                <Button1 text="Change password" width={"width1"} />
             </div>
         </div>
     );

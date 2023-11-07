@@ -17,7 +17,10 @@ import BreadCrumb from '@/components/items/BreadCrumb';
 import Footer from '@/components/sections/Footer';
 import Signup from '@/components/modals/Signup';
 import Login from '@/components/modals/Login';
+import ForgotPassword from '@/components/modals/ForgotPassword';
 import NewPassword from '@/components/modals/NewPassword';
+import EmailOTP from '@/components/modals/EmailOTP';
+import SuccessCard from '@/components/modals/SuccessCard';
 
 const Page = () => {
 
@@ -41,8 +44,16 @@ const Page = () => {
             <div className="pt-24 tz-bg-light"></div>
             <Footer />
             <Signup />
+            <Login />
             <NewPassword />
-            {/*<Login />*/}
+            <ForgotPassword />
+            <EmailOTP numberOfDigits={5} />
+            <SuccessCard 
+                title={"Password reset successful!"} 
+                description={"Your request to reset your password is completed. Proceed to login with your new password."} 
+                btnText={"Log in"} 
+                modalId={"password-reset-success-modal"}
+            />
         </div>
     );
 };

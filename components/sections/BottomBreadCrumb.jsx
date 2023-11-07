@@ -14,7 +14,7 @@ const BottomBreadCrumb = () => {
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
     return (
-        <div className='flex flex-col items-start gap-8 px-32'>
+        <div className="flex flex-col items-start gap-8 px-32">
             <div className="w-full">
                 <div className="mb-4 text-sm font-medium tz-text-dark">Helpful resources</div>
                 <div className="h-[1px] self-stretch tz-bg-gray-3"></div>

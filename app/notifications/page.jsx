@@ -5,8 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import NavBar from '@/components/sections/NavBar';
-import SearchBoxArea from '@/components/sections/SearchBoxArea';
-import CarGridShow from '@/components/sections/CarGridShow';
+import Notifications from '@/components/sections/Notifications';
 import Footer from '@/components/sections/Footer';
 
 const Page = () => {
@@ -14,12 +13,12 @@ const Page = () => {
     return (
         <div>
             <NavBar bgColor="#FFF" />
-            <SearchBoxArea page="market-place" />
             <div className="my-20"></div>
-            <CarGridShow />
-            <div className="my-20"></div>
-            <Footer />
-            <div className="my-20"></div>
+            <Notifications />
+            <div className="my-96"></div>
+            <div className="pt-14 tz-border-top-3 tz-bg-light">
+                <Footer />
+            </div>
         </div>
     );
 };

@@ -51,7 +51,7 @@ const NewPassword = () => {
                                     </div>
                                 </div>
                                 <div className="w-full mb-5">
-                                    <Button1 text="Log in" width="full" submit={true} />
+                                    <Button1 text="Log in" submit={true} />
                                 </div>
                             </form>
                         </div>

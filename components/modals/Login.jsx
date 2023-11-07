@@ -60,7 +60,7 @@ const Login = () => {
                                     <Link href="" className="font-medium underline tz-text-dark-1">Recover</Link>
                                 </div>
                                 <div className="w-full mb-5">
-                                    <Button1 text="Log in" width="full" submit={true} />
+                                    <Button1 text="Log in" submit={true} />
                                 </div>
                                 <div className="text-center">
                                     <span className="tz-text-gray-30">Don’t have an account?&nbsp;</span>

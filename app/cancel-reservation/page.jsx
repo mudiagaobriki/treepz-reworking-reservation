@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import NavBar from '@/components/sections/NavBar';
-import SearchBoxArea from '@/components/sections/SearchBoxArea';
-import CarGridShow from '@/components/sections/CarGridShow';
+import CarSlider from '@/components/items/CarSlider';
+import CancelConfirmation from '@/components/items/CancelConfirmation';
 import Footer from '@/components/sections/Footer';
 
 const Page = () => {
@@ -14,10 +14,16 @@ const Page = () => {
     return (
         <div>
             <NavBar bgColor="#FFF" />
-            <SearchBoxArea page="market-place" />
             <div className="my-20"></div>
-            <CarGridShow />
-            <div className="my-20"></div>
+            <div className='flex items-start justify-between px-32 w-full'>
+                <div>
+                    <CarSlider />
+                </div>
+                <div>
+                    <CancelConfirmation />
+                </div>
+            </div>
+            <div className="my-48"></div>
             <Footer />
             <div className="my-20"></div>
         </div>
@@ -25,3 +31,17 @@ const Page = () => {
 };
 
 export default Page;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

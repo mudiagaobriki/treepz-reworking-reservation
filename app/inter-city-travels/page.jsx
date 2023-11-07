@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-// import Image from "next/image";
-// import Link from "next/link";
+import Image from "next/image";
+import Link from "next/link";
 
 import NavBar from '@/components/sections/NavBar';
 import HeroBanner from '@/components/sections/HeroBanner';

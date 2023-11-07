@@ -40,18 +40,15 @@ const Profile = () => {
             </div>
             <div className="flex flex-col items-start gap-5 self-stretch p-5 rounded-xl w-full tz-border-gray-2">
                 <p className="text-2xl font-medium tz-text-dark">Personal information</p>
-                <div className="flex items-start gap-6 self-stretch w-full">
-                    <div className="flex items-center px-3 py-2 rounded-lg bg-white w-full tz-border-light-3">
-                        <div className="flex flex-col items-start gap-1 w-full">
-                            <p className="text-xs tz-text-gray-2">First name</p>
-                            <input type="text" name="firstName" placeholder="Isidore" className="self-stretch border-0 focus:ring-0 p-0 placeholder-[#A0A3A6] tz-text-gray-2" />
-                        </div>
+
+                <div className="flex items-start gap-6 w-full">
+                    <div className="relative w-1/2">
+                        <input type="text" id="firstName" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                        <label for="firstName" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">First name</label>
                     </div>
-                    <div className="flex items-center px-3 py-2 rounded-lg bg-white w-full tz-border-light-3">
-                        <div className="flex flex-col items-start gap-1 w-full">
-                            <p className="text-xs tz-text-gray-2">Last name</p>
-                            <input type="text" name="lastName" placeholder="Kpotufe" className="self-stretch border-0 focus:ring-0 p-0 placeholder-[#A0A3A6] tz-text-gray-2" />
-                        </div>
+                    <div className="relative w-1/2">
+                        <input type="text" id="lastName" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                        <label for="lastName" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Last name</label>
                     </div>
                 </div>
             </div>
@@ -59,30 +56,26 @@ const Profile = () => {
                 <p className="text-2xl font-medium tz-text-dark">Contact information</p>
                 <div className="flex flex-col items-center gap-6 self-stretch w-full">
                     <div className="flex flex-col items-start gap-3 w-full">
-                        <div className="flex items-center px-3 py-2 rounded-lg bg-white w-full tz-border-light-3">
-                            <div className="flex flex-col items-start gap-1 relative w-full">
-                                <p className="text-xs tz-text-gray-2">Dropdown</p>
-                                <input type="text" name="firstName" placeholder="isidore@treepz.com" className="w-full border-0 focus:ring-0 p-0 placeholder-[#A0A3A6] tz-text-gray-2" />
-                                <button className="absolute inset-y-0 right-0 flex items-center p-0 pointer-cursor">
-                                    <Image src="/assets/images/account/checkbox-multiple-fill.png" alt="eye-icon" width={20} height={20} />
-                                </button>
-                            </div>
+                        <div className="relative w-full">
+                            <input type="email" id="emailAddress" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                            <label for="emailAddress" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Dropdown</label>
+                            <a href="#" className="absolute inset-y-0 right-3 flex items-center p-0 pointer-cursor">
+                                <Image src="/assets/images/account/checkbox-multiple-fill.png" alt="eye-icon" width={20} height={20} />
+                            </a>
                         </div>
                         <div className="flex items-center gap-2 w-full">
                             <Image src="/assets/images/account/information-line.png" alt="info icon" width={20} height={20} />
                             <p className="underline text-sm tz-text-gray-3">Change your email</p>
                         </div>
                     </div>
-                    <div className="flex items-center px-3 py-2 rounded-lg bg-white w-full tz-border-light-3">
-                        <div className="flex flex-col items-start gap-1 w-full">
-                            <p className="text-xs tz-text-gray-2">Phone number</p>
-                            <input type="text" name="firstName" placeholder="7045676545" className="self-stretch border-0 focus:ring-0 p-0 placeholder-[#A0A3A6] tz-text-gray-2" />
-                        </div>
+                    <div className="relative w-full">
+                        <input type="text" id="phoneNumber" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                        <label for="phoneNumber" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Phone number</label>
                     </div>
                 </div>
             </div>
             <div>
-                <Button1 text="Save changes" width={"88"} />
+                <Button1 text="Save changes" width={"width1"} />
             </div>
         </div>
     );

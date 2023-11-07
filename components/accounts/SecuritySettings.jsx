@@ -18,27 +18,30 @@ const SecuritySettings = () => {
                 <p className="text-2xl font-medium tz-text-dark">Change password</p>
                 <div className="flex flex-col items-start gap-6 self-stretch w-full">
                     <div className="relative w-full">
-                        <button onClick={() => setOldVisible(!oldVisible)} className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-cursor">
+                        <a href="#" onClick={() => setOldVisible(!oldVisible)} className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-cursor">
                             <Image src="/assets/images/account/eye-off-fill.png" alt="eye-icon" width={20} height={20} />
-                        </button>
-                        <input type={oldVisible ? "text" : "password"} name="password" id="password" placeholder="Old password" className="flex items-center px-3 py-4 rounded-lg block w-full bg-white outline-none focus:ring-[#A0A3A6] focus:border-[#A0A3A6] self-stretch placeholder-[#A0A3A6] tz-border-light-3 tz-text-gray-2" required />
+                        </a>
+                        <input type={oldVisible ? "text" : "password"} id="oldPassword" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                        <label for="oldPassword" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Enter password</label>
                     </div>
                     <div className="relative w-full">
-                        <button onClick={() => setNewVisible(!newVisible)} className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-cursor">
+                        <a href="#" onClick={() => setNewVisible(!newVisible)} className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-cursor">
                             <Image src="/assets/images/account/eye-off-fill.png" alt="eye-icon" width={20} height={20} />
-                        </button>
-                        <input type={newVisible ? "text" : "password"} name="password" id="password" placeholder="New password" className="flex items-center px-3 py-4 rounded-lg block w-full bg-white outline-none focus:ring-[#A0A3A6] focus:border-[#A0A3A6] self-stretch placeholder-[#A0A3A6] tz-border-light-3 tz-text-gray-2" required />
+                        </a>
+                        <input type={newVisible ? "text" : "password"} id="newPassword" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                        <label for="newPassword" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Enter password</label>
                     </div>
                     <div className="relative w-full">
-                        <button onClick={() => setConfirmVisible(!confirmVisible)} className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-cursor">
+                        <a href="#" onClick={() => setConfirmVisible(!confirmVisible)} className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-cursor">
                             <Image src="/assets/images/account/eye-off-fill.png" alt="eye-icon" width={20} height={20} />
-                        </button>
-                        <input type={confirmVisible ? "text" : "password"} name="password" id="password" placeholder="Confirm new password" className="flex items-center px-3 py-4 rounded-lg block w-full bg-white outline-none focus:ring-[#A0A3A6] focus:border-[#A0A3A6] self-stretch placeholder-[#A0A3A6] tz-border-light-3 tz-text-gray-2" required />
+                        </a>
+                        <input type={confirmVisible ? "text" : "password"} id="confirmPassword" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                        <label for="confirmPassword" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Enter password</label>
                     </div>
                 </div>
             </div>
             <div>
-                <Button1 text="Change password" width={"88"} />
+                <Button1 text="Change password" width={"width1"} />
             </div>
         </div>
     );

@@ -12,21 +12,6 @@ import ReserveForm from '@/components/items/ReserveForm';
 // import BlogCard2 from '@/components/items/BlogCard2';
 // import isMobile from '@/components/helpers/isMobile'
 
-const DATA = [
-    {
-        key: 1,
-        image: '/assets/images/heartOfAfrica2.png',
-        title: "Moving in the heart of Africa",
-        description: 'Moving in the heart of Africa can be an exciting and enriching experience.',
-    },
-    {
-        key: 2,
-        image: "/assets/images/heartOfAfrica3.png",
-        title: "Moving in the heart of Africa",
-        description: 'Moving in the heart of Africa can be an exciting and enriching experience.',
-    },
-]
-
 const BookingDetails = () => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";

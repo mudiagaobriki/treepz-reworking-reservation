@@ -160,14 +160,23 @@ body {
 .tz-bg-success-light {
   background: var(--success-light, #F3FEF3);
 }
+.tz-bg-success-light-1 {
+  background: var(--success-light, #E0F5E0);
+}
 .tz-bg-success {
   background: var(--success-default, #3CC13B);
 }
 .tz-bg-danger-light {
   background: var(--destructive-100, #FDE9E9); 
 }
+.tz-bg-danger-light-1 {
+  background: var(--error-light, #FEECEC);
+}
 .tz-bg-danger {
   background: var(--destructive-600, #CD3636);
+}
+.tz-bg-danger-1 {
+  background: var(--error-primary, #B00020); 
 }
 .tz-bg-green {
   background: rgba(0, 172, 17, 0.10);

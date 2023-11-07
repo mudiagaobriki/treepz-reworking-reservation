@@ -104,9 +104,7 @@ const Wallet = () => {
                     </tbody>
                 </table>
             </div>
-
             <FundWallet />
-
         </div>
     );
 };
