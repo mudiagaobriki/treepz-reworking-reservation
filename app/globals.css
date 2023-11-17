@@ -123,6 +123,9 @@ input[type="range"]::-ms-fill-upper {
 .tz-text-gray-7 {
   color: var(--gray-500, #8A8B8E); 
 }
+.tz-text-gray-8 {
+  color: var(--neutral-tints-90, #DEE0E3); 
+}
 .tz-text-gray-30 {
   color: var(--primary-main-60, rgba(0, 0, 0, 0.30));
 }

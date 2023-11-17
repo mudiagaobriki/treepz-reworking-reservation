@@ -12,7 +12,8 @@ const Button1 = ({text, width="width_full", url="", icon=false, img="/assets/ima
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
     const widths = {
         width_full: 'w-full',
-        width1: 'w-[21.5rem]'
+        width1: 'w-[21.5rem]',
+        width2: 'w-60'
     };
 
     return (

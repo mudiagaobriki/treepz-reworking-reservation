@@ -256,14 +256,3 @@ const FilterBar = () => {
 };
 
 export default FilterBar;
-/*
-
-
-display: flex;
-padding: 4px;
-align-items: flex-start;
-gap: 8px;
-border-radius: 1000px;
-border: 1px solid var(--neutral-tints-80, #D3D6D9);
-background: #FFF;
-*/

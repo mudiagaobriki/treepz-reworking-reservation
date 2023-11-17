@@ -41,7 +41,7 @@ const ExploreSection = () => {
 
     return (
         <div className="tz-px-30">
-            <div className="m-20">
+            <div className="flex justify-center w-full m-20">
                 <GuestHost />
             </div>
             {/*<div className="z-10">
