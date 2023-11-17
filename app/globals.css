@@ -159,6 +159,9 @@ input[type="range"]::-ms-fill-upper {
 .tz-text-brown {
   color: #C8811A;
 }
+.tz-text-brown-2 {
+  color: var(--secondary-shades-40, #A57F0C); 
+}
 .tz-text-red {
   color: var(--error-primary, #B00020); 
 }

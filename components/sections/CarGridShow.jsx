@@ -146,7 +146,6 @@ const CarGridShow = () => {
                                 <input type="range" name="" value={minValue} min={0} step={10} max={1000} onChange={handleMin} className="absolute w-full -top-1 h-1 bg-red-300 appearance-none accent-[#D3D6D9]" />
                                 <input type="range" name="" value={maxValue} min={0} step={10} max={1000} onChange={handleMax} className="absolute w-full -top-1 h-1 bg-red-300 appearance-none accent-[#D3D6D9] [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-12 [&::-webkit-slider-thumb]:w-12 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-purple-500" />
                             </div>
-                            
                         </div>
                         <div className="flex items-center justify-between self-stretch">
                             <div className="flex items-center justify-center px-3 py-1 bg-white rounded tz-border-light-3">
@@ -221,15 +220,15 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Duration</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Hourly"} url="" />
-                                <FilterButton text={"Half day"} url="" />
+                                <FilterButton text={"Hourly"} url="" onClick={} />
+                                <FilterButton text={"Half day"} url="" onClick={} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Full day"} url="" />
-                                <FilterButton text={"Weekly"} url="" />
+                                <FilterButton text={"Full day"} url="" onClick={} />
+                                <FilterButton text={"Weekly"} url="" onClick={} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Monthly"} url="" />
+                                <FilterButton text={"Monthly"} url="" onClick={} />
                             </div>
                         </div>
                     </div>
@@ -238,15 +237,15 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Vehicle type</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} />
-                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} />
+                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
+                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
+                            </div> 
+                            <div className="flex items-start gap-3 justify-start w-full">
+                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
+                                <FilterButton text={"Commercial"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} />
-                                <FilterButton text={"Commercial"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} />
-                            </div>
-                            <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} />
+                                <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClick={} />
                             </div>
                         </div>
                     </div>
@@ -279,15 +278,15 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Car make</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Toyota"} url="" />
-                                <FilterButton text={"Audi"} url="" />
+                                <FilterButton text={"Toyota"} url="" onClick={} />
+                                <FilterButton text={"Audi"} url="" onClick={} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Mercedes-Benz"} url="" />
-                                <FilterButton text={"Nissan"} url="" />
+                                <FilterButton text={"Mercedes-Benz"} url="" onClick={} />
+                                <FilterButton text={"Nissan"} url="" onClick={} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Monthly"} url="" />
+                                <FilterButton text={"Monthly"} url="" onClick={} />
                             </div>
                         </div>
                     </div>
@@ -296,15 +295,15 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Vehicle type</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Air-conditioning"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} />
+                                <FilterButton text={"Air-conditioning"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Bluetooth"} url="" icon={true} img={"/assets/images/bluetooth.png"} />
-                                <FilterButton text={"Baby sit"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} />
+                                <FilterButton text={"Bluetooth"} url="" icon={true} img={"/assets/images/bluetooth.png"} onClick={} />
+                                <FilterButton text={"Baby sit"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Wi-fi"} url="" icon={true} img={"/assets/images/wifi.png"} />
-                                <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} />
+                                <FilterButton text={"Wi-fi"} url="" icon={true} img={"/assets/images/wifi.png"} onClick={} />
+                                <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClick={} />
                             </div>
                         </div>
                     </div>
@@ -324,11 +323,11 @@ const CarGridShow = () => {
                 <div className="flex flex-col items-start gap-5">
                     <div className="text-3xl font-semibold tz-text-dark">200+ cars available</div>
                     <div className="flex items-start content-start self-stretch flex-wrap gap-4">
-                        <FilterButton text={"Most popular"} url="" bg={"tz-bg-dark-1"} />
-                        <FilterButton text={"Price"} url="" />
-                        <FilterButton text={"Star rating"} url="" />
-                        <FilterButton text={"Distance"} url="" />
-                        <FilterButton text={"Chauffeured"} url="" />
+                        <FilterButton text={"Most popular"} url="" bg={"tz-bg-dark-1"} onClick={} />
+                        <FilterButton text={"Price"} url="" onClick={} />
+                        <FilterButton text={"Star rating"} url="" onClick={} />
+                        <FilterButton text={"Distance"} url="" onClick={} />
+                        <FilterButton text={"Chauffeured"} url="" onClick={} />
                     </div>
                 </div>
                 <div className="w-full">
