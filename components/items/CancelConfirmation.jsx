@@ -32,12 +32,13 @@ const CancelConfirmation = () => {
                 <div className="text-xl font-medium tz-text-dark">Why are you cancelling this booking?</div>
                 <div className="relative w-full">
                     <select id="cancelReason" class="block w-full px-3 py-4 text-base border rounded-lg bg-white appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3">
-                        <option value="" selected>Reason for cancellation</option>
+                        <option value="">Reason for cancellation</option>
                         <option value="US">United States</option>
                         <option value="CA">Canada</option>
                         <option value="FR">France</option>
                         <option value="DE">Germany</option>
                     </select>
+                    {/*<label for="cancelReason" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Reason for cancellation</label>*/}
                 </div>
             </div>
             <div className="flex flex-col items-start gap-6 w-full">
@@ -77,7 +78,7 @@ const CancelConfirmation = () => {
                 <div className="h-[1px] self-stretch tz-bg-gray-3 my-5"></div>
                 <div className="flex items-center justify-between self-stretch w-full">
                     <div className="font-medium tz-text-dark">Total refund</div>
-                    <div className="font-medium tz-text-dark">of ₦60,000</div>
+                    <div className="font-medium tz-text-dark">₦60,000</div>
                 </div>
             </div>
             <div>

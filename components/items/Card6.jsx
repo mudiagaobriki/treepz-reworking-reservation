@@ -4,11 +4,6 @@ import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
-// Custom components
-// import isMobile from '@/components/helpers/isMobile'
-
-
-
 const Card6 = ({image, title, description, bgColor}) => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
@@ -28,12 +23,7 @@ const Card6 = ({image, title, description, bgColor}) => {
 
 export default Card6;
 /*
-border-radius: 8px;
 background: var(--tertiary-tints-99, #D8E2FB);
-
-border-radius: 8px;
 background: var(--secondary-tints-99, #FDF2D0);
-
-border-radius: 8px;
 background: var(--success-light, #E0F5E0);
 */

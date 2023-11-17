@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,6 +10,7 @@ import ButtonSm from '@/components/items/ButtonSm'
 // import isMobile from '@/components/helpers/isMobile'
 
 const SheduleDetail = () => {
+    const [isEnable, setIsEnable] = useState(false);
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
@@ -56,10 +57,15 @@ const SheduleDetail = () => {
                     </p>
                 </div>
                 <div className="h-[1px] self-stretch tz-bg-gray-3 my-5"></div>
-                <div className="flex justify-between items-center self-stretch w-full rounded-lg bg-white py-2 pr-2 pl-3 tz-border-light-4">
-                    <p className="tz-text-gray-2">Enter promo code <em>(optional)</em></p>
-                    <ButtonSm text="Apply code" />
-                </div>
+                <form action="" method="POST">
+                    <div className="relative w-full">
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-cursor ">
+                            <button disabled={!isEnable} type="submit" className={`flex py-2 px-6 justify-center items-center text-sm font-medium rounded-lg ${isEnable ? 'bg-[#F8B02B] hover:bg-[#F8B02B]/80' : 'bg-[#FBDF88]'} tz-text-dark-1`}>Apply code</button>
+                        </div>
+                        <input onChange={(e) => e.target.value.length > 0 ? setIsEnable(true) : setIsEnable(false)} type="text" id="promoCode" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                        <label for="promoCode" className="absolute text-base duration-100 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Enter promo code <em>(optional)</em></label>
+                    </div>
+                </form> 
                 <div className="flex justify-between w-full mt-2">
                     <p className="text-xl tz-text-dark">Total (after VAT)</p>
                     <p className="text-xl font-medium tz-text-dark">₦44,000</p>

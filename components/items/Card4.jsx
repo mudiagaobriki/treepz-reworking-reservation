@@ -7,8 +7,6 @@ import Link from "next/link";
 // Custom components
 // import isMobile from '@/components/helpers/isMobile'
 
-
-
 const Card4 = ({image, title, description}) => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
@@ -29,23 +27,3 @@ const Card4 = ({image, title, description}) => {
 };
 
 export default Card4;
-
-/*
-appstore&playstore
-display: flex;
-align-items: center;
-gap: 40px;
-
-
-
-guests&host btn
-display: flex;
-width: 320px;
-height: 56px;
-padding: 4px 8px;
-align-items: center;
-gap: 12px;
-border-radius: 1000px;
-background: var(--neutral-tints-95, linear-gradient(0deg, rgba(247, 247, 247, 0.40) 0%, rgba(247, 247, 247, 0.40) 100%), #E9EBEC);
-
-*/

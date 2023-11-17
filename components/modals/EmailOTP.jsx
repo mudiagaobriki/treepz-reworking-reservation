@@ -25,6 +25,12 @@ const EmailOTP = ({ numberOfDigits }) => {
         if (e.key === "Enter" && e.target.value && index < numberOfDigits -  1) {
             otpBoxReference.current[index + 1].focus()
         }
+        if (e.key === "ArrowLeft") {
+            otpBoxReference.current[index - 1].focus()
+        }
+        if (e.key === "ArrowRight") {
+            otpBoxReference.current[index + 1].focus()
+        }
     }
 
     useEffect(() => { 

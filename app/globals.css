@@ -37,6 +37,47 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 
+/*Chrome*/
+/*@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      width: 80px;
+      -webkit-appearance: none;
+      background-color: #9a905d;
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: #13bba4;
+      margin-top: -1px;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 80px;
+      -webkit-appearance: none;
+      height: 80px;
+      cursor: ew-resize;
+      background: #434343;
+      box-shadow: -80px 0 0 80px #43e5f7;
+    }
+
+}*/
+/** FF*/
+/*input[type="range"]::-moz-range-progress {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-moz-range-track {  
+  background-color: #9a905d;
+}*/
+/* IE*/
+/*input[type="range"]::-ms-fill-lower {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: #9a905d;
+}*/
+
 .tz-text-dark {
   color: #212529;
 }
@@ -57,6 +98,9 @@ body {
 }
 .tz-text-dark-6 {
   color: var(--gray-800, #1F2937); 
+}
+.tz-text-2b {
+  color: var(--primary-tints-70, #2B2B2B); 
 }
 .tz-text-gray {
   color: #6F7174;
@@ -90,6 +134,9 @@ body {
 }
 .tz-text-gray-5 {
   color: var(--neutral-tints-70, #C8CCD0);
+}
+.tz-text-range {
+  color: #D3D6D9;
 }
 .tz-text-success {
   color: var(--success-default, #3CC13B); 
@@ -126,6 +173,9 @@ body {
 }
 .tz-shadow-2 {
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+.tz-border-right {
+  border-right: 1px solid var(--neutral-tints-70, #C8CCD0);
 }
 .tz-border-light {
   border: 1px solid #E8E8E8;
@@ -201,6 +251,9 @@ body {
 }
 .tz-bg-orange-1 {
   background: var(--secondary-main-60, #F8B02B);
+}
+.tz-bg-orange-2 {
+  background: var(--warning-light, #FDF3D8);
 }
 .tz-bg-dark-1 {
   background: #101010;
@@ -286,6 +339,9 @@ body {
 .tz-border-bottom-2 {
   border-bottom: 1px solid var(--neutral-tints-90, #DEE0E3);
 }
+.tz-border-bottom-4 {
+  border-bottom: 1px solid var(--primary-tints-70, #2B2B2B);
+}
 .tz-border-gray-2 {
   border: 1px solid var(--neutral-tints-90, #DEE0E3);
 }
@@ -325,4 +381,7 @@ body {
 }
 .tz-text-fadeout {
   -webkit-mask-image: linear-gradient(to top left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+}
+.tz-bg-range {
+  background: var(--neutral-tints-95, linear-gradient(0deg, rgba(247, 247, 247, 0.40) 0%, rgba(247, 247, 247, 0.40) 100%), #E9EBEC);
 }
