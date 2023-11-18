@@ -794,7 +794,7 @@ const CarGridShow = () => {
                     </div>
                 </div>
                 <div className="w-full">
-                    {vehiclesData && <div className="flex justify-between items-center w-full">
+                    {vehiclesData && <div className="grid grid-cols-3 gap-6 w-full">
                         {
                             vehiclesData.map((item, index) => {
                                 return <div key={index}>
