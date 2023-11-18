@@ -152,15 +152,15 @@ const FilterBar = () => {
                     <div className="text-sm font-medium tz-text-dark">Duration</div>
                     <div className="flex flex-col items-center gap-3">
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Hourly"} url="" onClick={} />
-                            <FilterButton text={"Half day"} url="" onClick={} />
+                            <FilterButton text={"Hourly"} url="" onClcik={() => console.log('clicked')} />
+                            <FilterButton text={"Half day"} url="" onClcik={() => console.log('clicked')} />
                         </div>
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Full day"} url="" onClick={} />
-                            <FilterButton text={"Weekly"} url="" onClick={} />
+                            <FilterButton text={"Full day"} url="" onClcik={() => console.log('clicked')} />
+                            <FilterButton text={"Weekly"} url="" onClcik={() => console.log('clicked')} />
                         </div>
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Monthly"} url="" onClick={} />
+                            <FilterButton text={"Monthly"} url="" onClcik={() => console.log('clicked')} />
                         </div>
                     </div>
                 </div>
@@ -169,15 +169,15 @@ const FilterBar = () => {
                     <div className="text-sm font-medium tz-text-dark">Vehicle type</div>
                     <div className="flex flex-col items-center gap-3">
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
-                            <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
+                            <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                            <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                         </div>
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
-                            <FilterButton text={"Commercial"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
+                            <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                            <FilterButton text={"Commercial"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                         </div>
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClick={} />
+                            <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClcik={() => console.log('clicked')} />
                         </div>
                     </div>
                 </div>
@@ -210,15 +210,15 @@ const FilterBar = () => {
                     <div className="text-sm font-medium tz-text-dark">Car make</div>
                     <div className="flex flex-col items-center gap-3">
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Toyota"} url="" onClick={} />
-                            <FilterButton text={"Audi"} url="" onClick={} />
+                            <FilterButton text={"Toyota"} url="" onClcik={() => console.log('clicked')} />
+                            <FilterButton text={"Audi"} url="" onClcik={() => console.log('clicked')} />
                         </div>
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Mercedes-Benz"} url="" onClick={} />
-                            <FilterButton text={"Nissan"} url="" onClick={} />
+                            <FilterButton text={"Mercedes-Benz"} url="" onClcik={() => console.log('clicked')} />
+                            <FilterButton text={"Nissan"} url="" onClcik={() => console.log('clicked')} />
                         </div>
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Monthly"} url="" onClick={} />
+                            <FilterButton text={"Monthly"} url="" onClcik={() => console.log('clicked')} />
                         </div>
                     </div>
                 </div>
@@ -227,15 +227,15 @@ const FilterBar = () => {
                     <div className="text-sm font-medium tz-text-dark">Vehicle type</div>
                     <div className="flex flex-col items-center gap-3">
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Air-conditioning"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
+                            <FilterButton text={"Air-conditioning"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                         </div>
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Bluetooth"} url="" icon={true} img={"/assets/images/bluetooth.png"} onClick={} />
-                            <FilterButton text={"Baby sit"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={} />
+                            <FilterButton text={"Bluetooth"} url="" icon={true} img={"/assets/images/bluetooth.png"} onClcik={() => console.log('clicked')} />
+                            <FilterButton text={"Baby sit"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                         </div>
                         <div className="flex items-start gap-3 justify-start w-full">
-                            <FilterButton text={"Wi-fi"} url="" icon={true} img={"/assets/images/wifi.png"} onClick={} />
-                            <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClick={} />
+                            <FilterButton text={"Wi-fi"} url="" icon={true} img={"/assets/images/wifi.png"} onClcik={() => console.log('clicked')} />
+                            <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClcik={() => console.log('clicked')} />
                         </div>
                     </div>
                 </div>
