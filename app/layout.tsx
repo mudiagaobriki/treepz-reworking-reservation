@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 
 import './globals.css'
+import {ReduxProvider} from "@/redux/provider";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,7 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${switzer.className}`}>
-        <main>{children}</main>
+        <main>
+          <ReduxProvider>{children}</ReduxProvider>
+        </main>
       </body>
     </html>
   )

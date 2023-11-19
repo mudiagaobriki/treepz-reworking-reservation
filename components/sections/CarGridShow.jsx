@@ -8,6 +8,20 @@ import Link from "next/link";
 import FilterButton from '@/components/items/FilterButton';
 import FilterBar from '@/components/items/FilterBar';
 import CarCard from '@/components/items/CarCard';
+import {isMobile} from "react-device-detect";
+import {useRouter} from "next/navigation";
+import {fetchVehicleListing} from "../../services/dataservices/vehicleService";
+import {getMinMaxValues} from "../../services/functions/common";
+import {
+    filterAC, filterAmenities,
+    filterChauffeured,
+    filterFullDay, filterHalfDay,
+    filterHourly, filterMonthly, filterNumOfSeats,
+    filterPriceBetween,
+    filterSelfDriven, filterVehicleMake, filterVehicleType, filterWeekly
+} from "../../services/functions/filters";
+import {useDispatch, useSelector} from "react-redux";
+import {setFilterResult, setSelectedRide, setVehiclesListing} from "../../redux/features/marketplaceSlice";
 // import isMobile from '@/components/helpers/isMobile'
 
 const FEATURED_CARS = [
@@ -79,6 +93,446 @@ const CarGridShow = () => {
     const progressRef = useRef(null);
     const [minValue, setMinValue] = useState(250);
     const [maxValue, setMaxValue] = useState(750);
+    const [completeData, setCompleteData] = useState([]);
+    const [vehiclesData, setVehiclesData] = useState([]);
+    const [prevData, setPrevData] = useState([]); // handles data before a filter is applied
+    const [minPrice, setMinPrice] = useState(0)
+    const [maxPrice, setMaxPrice] = useState(0)
+    const [selfDrivenChecked, setSelfDrivenChecked] = useState(false)
+    const [chauffeuredChecked, setChauffeuredChecked] = useState(false)
+    const [fullDayChecked, setFullDayChecked] = useState(false)
+    const [hourlyChecked, setHourlyChecked] = useState(false)
+    const [halfDayChecked, setHalfDayChecked] = useState(false)
+    const [weeklyChecked, setWeeklyChecked] = useState(false)
+    const [monthlyChecked, setMonthlyChecked] = useState(false)
+    const [sedanChecked, setSedanChecked] = useState(false)
+    const [commercialChecked, setCommercialChecked] = useState(false)
+    const [suvChecked, setSuvChecked] = useState(false)
+    const [seats, setSeats] = useState(4)
+    const [seatsValue, setSeatsValue] = useState(4)
+    const [toyotaChecked, setToyotaChecked] = useState(false)
+    const [lexusChecked, setLexusChecked] = useState(false)
+    const [ac, setAc] = useState(false)
+    const [bluetooth, setBluetooth] = useState(false)
+    const [priceFiltered, setPriceFiltered] = useState(false)
+
+    const router = useRouter()
+    const dispatch = useDispatch()
+
+    const { vehicles, isLoading, isError } = fetchVehicleListing();
+    console.log({vehicles, isLoading, isError});
+
+    useEffect(() => {
+        const headingSize = isMobile? 24: 40;
+
+        // if (isLoading) return <Spinner/>
+        // add available filter
+        // add filter for intercity or rental or airport transfer
+
+        // restructure the fetched data to get the keys we need
+        let data = vehicles?.data;
+        data = data?.map(({id,currencySymbol,driveType,pricePerDay,vehicle,vehicleId,isAvailable,
+                              pricePerHour, pricePerMonth, pricePerWeek, halfDayPrice}) =>
+            ({id,currencySymbol,driveType,pricePerDay,vehicle,vehicleId,isAvailable,
+                pricePerHour, pricePerMonth, pricePerWeek, halfDayPrice}))
+
+        setCompleteData(data);
+        setVehiclesData(data);
+        dispatch(setVehiclesListing(data))
+        dispatch(setFilterResult(data))
+
+        console.log({data})
+    },[isLoading,router])
+
+    let results = useSelector(state => state.marketplace?.filterResult)
+    let listings = useSelector(state => state.marketplace?.vehiclesListing)
+    console.log("Selector results: ", results)
+
+    useEffect(() => {
+        if (vehiclesData?.length){
+            const minMax = getMinMaxValues(vehiclesData,"pricePerDay")
+            setMinPrice(minMax?.min)
+            setMaxPrice(minMax?.max)
+            console.log({minMax})
+        }
+
+    },[vehiclesData])
+
+    //sample amenities filtering
+    useEffect(() => {
+        if (vehiclesData?.length > 0){
+            const pw = filterPriceBetween(vehiclesData,24000,30000)
+            console.log({pw});
+        }
+
+    },[vehiclesData])
+
+    const handleSelfDrivenFilter = async () => {
+        if (chauffeuredChecked){
+            await handleChaufferedFilter();
+        }
+
+        console.log("Previous data on Self Driven Click: ", {prevData})
+
+        //apply the filter
+        if (!selfDrivenChecked){
+            const res = filterSelfDriven(listings)
+            dispatch(setFilterResult(res))
+        }
+        else{
+            setVehiclesData(prevData);
+        }
+
+        setSelfDrivenChecked(prevState => !prevState)
+    }
+
+    const handleFullDayFilter = async () => {
+        if (hourlyChecked){
+            await handleHourlyFilter();
+            // alert("Mudi")
+        }
+        if (halfDayChecked){
+            await handleHalfDayFilter();
+            // alert("Mudi")
+        }
+        if (weeklyChecked){
+            await handleWeeklyFilter()
+        }
+        if (monthlyChecked){
+            await handleMonthlyFilter();
+        }
+
+        if (!fullDayChecked){
+            const res = filterFullDay(listings)
+            dispatch(setFilterResult(res))
+        }
+        else{
+            setVehiclesData(prevData);
+        }
+
+        setFullDayChecked(prevState => !prevState)
+    }
+
+    const handleChaufferedFilter = async () => {
+        if (selfDrivenChecked){
+            await handleSelfDrivenFilter();
+            // alert("Mudi")
+        }
+
+        console.log("Previous data on Chauffeured Click: ", {prevData})
+
+        if (!chauffeuredChecked){
+            const res = filterChauffeured(listings)
+            dispatch(setFilterResult(res))
+        }
+        else{
+            setVehiclesData(prevData);
+        }
+
+        setChauffeuredChecked(prevState => !prevState)
+    }
+
+    const handleHourlyFilter = async () => {
+        if (fullDayChecked){
+            await handleFullDayFilter();
+            // alert("Mudi")
+        }
+        if (halfDayChecked){
+            await handleHalfDayFilter();
+            // alert("Mudi")
+        }
+        if (weeklyChecked){
+            await handleWeeklyFilter()
+        }
+        if (monthlyChecked){
+            await handleMonthlyFilter();
+        }
+
+
+        if (!hourlyChecked){
+            const res = filterHourly(listings)
+            dispatch(setFilterResult(res))
+        }
+        else{
+            setVehiclesData(prevData);
+        }
+
+        setHourlyChecked(prevState => !prevState)
+    }
+
+    const handleHalfDayFilter = async () => {
+        if (fullDayChecked){
+            await handleFullDayFilter();
+            // alert("Mudi")
+        }
+        if (hourlyChecked){
+            await handleHourlyFilter();
+        }
+        if (weeklyChecked){
+            await handleWeeklyFilter()
+        }
+        if (monthlyChecked){
+            await handleMonthlyFilter();
+        }
+
+        if (!halfDayChecked){
+            const res = filterHalfDay(listings)
+            dispatch(setFilterResult(res))
+        }
+        else{
+            setVehiclesData(prevData);
+        }
+
+        setHalfDayChecked(prevState => !prevState)
+    }
+
+    const handleWeeklyFilter = async () => {
+        if (fullDayChecked){
+            await handleFullDayFilter();
+            // alert("Mudi")
+        }
+        if (hourlyChecked){
+            await handleHourlyFilter();
+        }
+        if (halfDayChecked){
+            await handleHalfDayFilter();
+        }
+        if (monthlyChecked){
+            await handleMonthlyFilter();
+        }
+
+        if (!weeklyChecked){
+            const res = filterWeekly(listings)
+            dispatch(setFilterResult(res))
+        }
+        else{
+            setVehiclesData(prevData);
+        }
+
+        setWeeklyChecked(prevState => !prevState)
+    }
+
+    const handleMonthlyFilter = async () => {
+        if (fullDayChecked){
+            await handleFullDayFilter();
+            // alert("Mudi")
+        }
+        if (hourlyChecked){
+            await handleHourlyFilter();
+        }
+        if (halfDayChecked){
+            await handleHalfDayFilter();
+        }
+        if (weeklyChecked){
+            await handleWeeklyFilter();
+        }
+
+        if (!monthlyChecked){
+            // setPrevData(vehiclesData);
+            // // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
+            // setVehiclesData(prevState => filterMonthly(vehiclesData))
+            const res = filterMonthly(listings)
+            dispatch(setFilterResult(res))
+        }
+        else{
+            setVehiclesData(prevData);
+        }
+
+        setMonthlyChecked(prevState => !prevState)
+    }
+
+    const handleSedanClicked = async () => {
+        if (commercialChecked){
+            await handleCommercialClicked();
+            setPrevData(vehiclesData);
+            // alert("Mudi")
+        }
+        if (suvChecked){
+            await handleSuvClicked();
+            setPrevData(vehiclesData);
+            // alert("Mudi")
+        }
+
+        if (!sedanChecked){
+            // setPrevData(vehiclesData);
+            // console.log("From Sedan clicked: ", {prevData})
+            // // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
+            // if (prevData?.length > 0)
+            //     // setVehiclesData(prevState => filterVehicleType(prevData,"sedan"))
+            //     setVehiclesData(prevState => filterVehicleType(completeData,"sedan"))
+            // else{
+            //     // setVehiclesData(prevState => filterVehicleType(vehiclesData,"sedan"))
+            //     setVehiclesData(prevState => filterVehicleType(completeData,"sedan"))
+            // }
+            const res = filterVehicleType(listings,'sedan')
+            dispatch(setFilterResult(res))
+        }
+        else{
+            // setVehiclesData(prevData);
+            setVehiclesData(completeData);
+        }
+
+        setSedanChecked(prevState => !prevState)
+    }
+
+    const handleCommercialClicked = async () => {
+        if (sedanChecked){
+            await handleSedanClicked();
+            setVehiclesData(prevData)
+            // alert("Mudi")
+        }
+        if (suvChecked){
+            await handleSuvClicked();
+            setVehiclesData(prevData)
+            // alert("Mudi")
+        }
+
+        if (!commercialChecked){
+            const res = filterVehicleType(listings,'vehicle')
+            dispatch(setFilterResult(res))
+        }
+        else{
+            // setVehiclesData(prevData);
+            setVehiclesData(completeData);
+        }
+
+        setCommercialChecked(prevState => !prevState)
+    }
+
+    const handleSuvClicked = async () => {
+        if (sedanChecked){
+            await handleSedanClicked();
+            setPrevData(vehiclesData);
+            // alert("Mudi")
+        }
+        if (commercialChecked){
+            await handleCommercialClicked();
+            setPrevData(vehiclesData);
+            // alert("Mudi")
+        }
+
+        if (!suvChecked){
+            const res = filterVehicleType(listings,'suv')
+            dispatch(setFilterResult(res))
+        }
+        else{
+            // setVehiclesData(prevData);
+            setVehiclesData(completeData);
+        }
+
+        setSuvChecked(prevState => !prevState)
+    }
+
+    const handleOnSeatsReduced = (seats) => {
+        seats--
+        setPrevData(vehiclesData)
+        setVehiclesData(filterNumOfSeats(vehiclesData,seats))
+    }
+
+    const handleSeatsDecrease = () => {
+        setSeatsValue(seatsValue - 1);
+    };
+
+    const handleSeatsIncrease = () => {
+        setSeatsValue(seatsValue + 1);
+    };
+
+    const handleSeatsChange = (event) => {
+        setSeatsValue(event.target.value);
+    };
+
+    useEffect(() => {
+        // setPrevData(vehiclesData)
+        setVehiclesData(filterNumOfSeats(completeData,seatsValue))
+    },[seatsValue])
+
+    const handleToyotaClicked = () => {
+        if (lexusChecked){
+            handleLexusClicked()
+        }
+
+        // setVehiclesData(filterVehicleMake(completeData,"toyota"))
+        const res = filterVehicleMake(listings,'toyota')
+        dispatch(setFilterResult(res))
+        setToyotaChecked(prevState => !prevState)
+    }
+
+    const handleLexusClicked = () => {
+        if (toyotaChecked){
+            handleToyotaClicked()
+        }
+
+        const res = filterVehicleMake(listings,'lexus')
+        dispatch(setFilterResult(res))
+        setLexusChecked(prevState => !prevState)
+    }
+
+    const handleAcClicked = () => {
+
+        if (!ac){
+            setVehiclesData(filterAC(completeData))
+            setAc(prevState => !prevState)
+        }
+        else{
+            setVehiclesData(completeData)
+            setAc(prevState => !prevState)
+        }
+    }
+
+    const handleBluetoothClicked = () => {
+
+        if (!bluetooth){
+            setVehiclesData(filterAmenities(completeData,"bluetooth"))
+            setBluetooth(prevState => !prevState)
+        }
+        else{
+            setVehiclesData(completeData)
+            setBluetooth(prevState => !prevState)
+        }
+    }
+
+    const handleResetFilters = () => {
+        setAc(false)
+        setLexusChecked(false)
+        setToyotaChecked(false)
+        setSuvChecked(false)
+        setCommercialChecked(false)
+        setBluetooth(false)
+        setSeats(4)
+        setSeatsValue(4)
+        setSedanChecked(false)
+        setMonthlyChecked(false)
+        setHalfDayChecked(false)
+        setHourlyChecked(false)
+        setWeeklyChecked(false)
+        setFullDayChecked(false)
+        setSelfDrivenChecked(false)
+        setChauffeuredChecked(false)
+
+        setVehiclesData(completeData);
+    }
+
+    const sortByPricePerDay = (mainArray) => {
+        // Use the Array.sort() method to sort the array based on the "pricePerDay" property.
+        mainArray.sort((a, b) => a.pricePerDay - b.pricePerDay);
+
+        // If you want to sort in descending order, you can use b - a instead.
+        // mainArray.sort((a, b) => b.pricePerDay - a.pricePerDay);
+
+        if (priceFiltered){
+            setVehiclesData(completeData);
+        }
+
+        setPriceFiltered(prevState => !prevState)
+
+        return mainArray;
+    }
+
+    const cardClicked = async (item) => {
+        dispatch(setSelectedRide(item));
+        // localStorage.setItem("selected", JSON.stringify(item))
+        await router.push("/vehicle-details")
+    }
     
     const handleMin = (e) => {
         if (maxValue - minValue >= 100 && maxValue <= 1000) {
@@ -150,12 +604,12 @@ const CarGridShow = () => {
                         <div className="flex items-center justify-between self-stretch">
                             <div className="flex items-center justify-center px-3 py-1 bg-white rounded tz-border-light-3">
                                 <span className="text-xs tz-text-gray">NGN</span>
-                                <input type="number" name="" size="5" onChange={(e) => setMinValue(e.target.value)} value={minValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none h-4 px-1 border-0 focus:ring-0 tz-text-gray" />
+                                <input type="number" name="" size="5" onChange={(e) => setMinValue(e.target.value)} value={minValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none w-12 h-4 px-1 border-0 focus:ring-0 tz-text-gray" />
                             </div>
                             <div className="w-4 h-[2px] tz-bg-light-1"></div>
                             <div className="flex items-center justify-center px-3 py-1 bg-white rounded tz-border-light-3">
                                 <span className="text-xs tz-text-gray">NGN</span>
-                                <input type="number" name="" size="5" onChange={(e) => setMaxValue(e.target.value)} value={maxValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none h-4 px-1 border-0 focus:ring-0 tz-text-gray" />
+                                <input type="number" name="" size="5" onChange={(e) => setMaxValue(e.target.value)} value={maxValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none w-12 h-4 px-1 border-0 focus:ring-0 tz-text-gray" />
                             </div>
                         </div>
                     </div>
@@ -164,7 +618,7 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Popular filters</div>
                         <div className="flex flex-col items-start gap-3">
                             <label className="flex items-center gap-2" for="selfDriven">
-                                <input type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" id="selfDriven" /> 
+                                <input checked={selfDrivenChecked} onChange={handleSelfDrivenFilter} type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" id="selfDriven" />
                                 <span className="text-sm tz-text-gray-3">Self driven</span>
                             </label>
                             <label className="flex items-center gap-2" for="fullDay">
@@ -200,14 +654,14 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Hire mode</div>
                         <div className="flex flex-col items-start gap-2">
                             <div className="flex items-center gap-2">
-                                <input type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" /> 
+                                <input checked={selfDrivenChecked} onChange={handleSelfDrivenFilter} type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" />
                                 <div className="flex flex-col items-start">
                                     <span className="text-sm tz-text-gray-3">Self driven</span>
                                     <span className="text-[0.625em] tz-text-gray">You will drive yourself</span>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
-                                <input type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" /> 
+                                <input checked={chauffeuredChecked} onChange={handleChaufferedFilter} type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" />
                                 <div className="flex flex-col items-start">
                                     <span className="text-sm tz-text-gray-3">Chauffeured</span>
                                     <span className="text-[0.625em] tz-text-gray">A driver takes you around</span>
@@ -220,15 +674,15 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Duration</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Hourly"} url="" onClick={""} />
-                                <FilterButton text={"Half day"} url="" onClick={""} />
+                                <FilterButton text={"Hourly"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton text={"Half day"} url="" onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Full day"} url="" onClick={""} />
-                                <FilterButton text={"Weekly"} url="" onClick={""} />
+                                <FilterButton text={"Full day"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton text={"Weekly"} url="" onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Monthly"} url="" onClick={""} />
+                                <FilterButton text={"Monthly"} url="" onClcik={() => console.log('clicked')} />
                             </div>
                         </div>
                     </div>
@@ -237,15 +691,15 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Vehicle type</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={""} />
-                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={""} />
+                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                             </div> 
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={""} />
-                                <FilterButton text={"Commercial"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={""} />
+                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton text={"Commercial"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClick={""} />
+                                <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClcik={() => console.log('clicked')} />
                             </div>
                         </div>
                     </div>
@@ -278,15 +732,15 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Car make</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Toyota"} url="" onClick={""} />
-                                <FilterButton text={"Audi"} url="" onClick={""} />
+                                <FilterButton text={"Toyota"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton text={"Audi"} url="" onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Mercedes-Benz"} url="" onClick={""} />
-                                <FilterButton text={"Nissan"} url="" onClick={""} />
+                                <FilterButton text={"Mercedes-Benz"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton text={"Nissan"} url="" onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Monthly"} url="" onClick={""} />
+                                <FilterButton text={"Monthly"} url="" onClcik={() => console.log('clicked')} />
                             </div>
                         </div>
                     </div>
@@ -295,15 +749,15 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Vehicle type</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Air-conditioning"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={""} />
+                                <FilterButton text={"Air-conditioning"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Bluetooth"} url="" icon={true} img={"/assets/images/bluetooth.png"} onClick={""} />
-                                <FilterButton text={"Baby sit"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClick={""} />
+                                <FilterButton text={"Bluetooth"} url="" icon={true} img={"/assets/images/bluetooth.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton text={"Baby sit"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Wi-fi"} url="" icon={true} img={"/assets/images/wifi.png"} onClick={""} />
-                                <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClick={""} />
+                                <FilterButton text={"Wi-fi"} url="" icon={true} img={"/assets/images/wifi.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClcik={() => console.log('clicked')} />
                             </div>
                         </div>
                     </div>
@@ -321,40 +775,55 @@ const CarGridShow = () => {
             </div>
             <div className="flex flex-col items-start gap-10 w-full">
                 <div className="flex flex-col items-start gap-5">
-                    <div className="text-3xl font-semibold tz-text-dark">200+ cars available</div>
+                    <div className="text-3xl font-semibold tz-text-dark">{vehiclesData?.length} cars available</div>
                     <div className="flex items-start content-start self-stretch flex-wrap gap-4">
-                        <FilterButton text={"Most popular"} url="" bg={"tz-bg-dark-1"} onClick={""} />
-                        <FilterButton text={"Price"} url="" onClick={""} />
-                        <FilterButton text={"Star rating"} url="" onClick={""} />
-                        <FilterButton text={"Distance"} url="" onClick={""} />
-                        <FilterButton text={"Chauffeured"} url="" onClick={""} />
+                        <FilterButton text={"Most popular"} url="" bg={"tz-bg-dark-1"} onClcik={() => console.log('clicked')} />
+                        <FilterButton text={"Price"} url="" onClcik={() => console.log('clicked')} />
+                        <FilterButton text={"Star rating"} url="" onClcik={() => console.log('clicked')} />
+                        <FilterButton text={"Distance"} url="" onClcik={() => console.log('clicked')} />
+                        <FilterButton text={"Chauffeured"} url="" onClcik={() => console.log('clicked')} />
                     </div>
                 </div>
                 <div className="w-full">
-                    <div className="grid grid-cols-3 gap-6 w-full">
+                    {results && <div className="grid grid-cols-3 gap-6 w-full">
                         {
-                            FEATURED_CARS.map((item, index) => {
+                            results?.map((item, index) => {
                                 return <div key={index}>
                                     <CarCard
-                                        carName={item.carName}
-                                        carImage={item.image}
+                                        onClick={() => cardClicked(item)}
+                                        carImage={item?.vehicle?.vehicleImages[0]}
+                                        carName={item.vehicle?.vehicleMake?.name + " " + item?.vehicle?.vehicleModel?.name}
                                         location={item.location}
-                                        hasAC={item.hasAC}
+                                        hasAC={item.vehicle?.vehicleHasAirCondition}
                                         hasWifi={item.hasWifi}
                                         hasDisabledSeat={item.hasDisabledSeat}
-                                        isChauffeured={item.isChauffeured}
+                                        isChauffeured={item?.driveType === "chaffeured"}
                                         isPromoted={item.isPromoted}
                                         isSelfDrive={item.isSelfDrive}
                                         isRareFind={item.isRareFind}
                                         rating={item.rating}
-                                        numSeats={item.seats}
-                                        price={item.price}
+                                        numSeats={item?.vehicle?.vehicleSittingCapacity}
+                                        price={Number(item.pricePerDay).toLocaleString()}
                                         tripsCount={item.trips}
+                                        // carName={item.carName}
+                                        // carImage={item.image}
+                                        // location={item.location}
+                                        // hasAC={item.hasAC}
+                                        // hasWifi={item.hasWifi}
+                                        // hasDisabledSeat={item.hasDisabledSeat}
+                                        // isChauffeured={item.isChauffeured}
+                                        // isPromoted={item.isPromoted}
+                                        // isSelfDrive={item.isSelfDrive}
+                                        // isRareFind={item.isRareFind}
+                                        // rating={item.rating}
+                                        // numSeats={item.seats}
+                                        // price={item.price}
+                                        // tripsCount={item.trips}
                                     />
                                 </div>
                             })
                         }
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>

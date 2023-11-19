@@ -10,6 +10,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 // Custom components
 import Button1 from '@/components/items/Button1'
+import {useDispatch, useSelector} from "react-redux";
+import {setFilterResult, setVehiclesListing} from "../../redux/features/marketplaceSlice";
+import {fetchVehicleListing} from "../../services/dataservices/vehicleService";
 // import isMobile from '@/components/helpers/isMobile'
 
 const VehicleSearchBox = () => {
@@ -17,8 +20,26 @@ const VehicleSearchBox = () => {
   const [selectedPickTime, setSelectedPickTime] = useState(new Date());
   const [selectedDropDate, setSelectedDropDate] = useState(new Date());
   const [selectedDropTime, setSelectedDropTime] = useState(new Date());
+  const [toLocation, setToLocation] = useState('');
+  // const [listingsData, setToLocation] = useState('');
+
+  const dispatch = useDispatch();
+
+    // const { vehicles, isLoading, isError } = fetchVehicleListing();
+    // console.log({vehicles, isLoading, isError});
+    // let results = useSelector(state => state.marketplace?.filterResult)
+    let listings = useSelector(state => state.marketplace?.vehiclesListing)
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
+
+    const handleSearch = () => {
+        if (toLocation === ""){
+            dispatch(setFilterResult(listings))
+        }
+        const availableRides = listings?.filter(el => (el?.isAvailable === true));
+        const carsInLocation = listings?.filter(el => el?.locationKeywords?.includes(toLocation?.toLowerCase()))
+        dispatch(setFilterResult(carsInLocation));
+    }
 
     return (
         <div className="flex flex-col justify-center items-center -space-y-3">
@@ -43,7 +64,7 @@ const VehicleSearchBox = () => {
                             <Image src="/assets/images/map-pin.png" alt="" width={20} height={20} />
                             <div className="w-full">
                                 <p className="mb-1 text-xs tz-text-gray-2">Where are you going?</p>
-                                <input type="text" className="text-base self-stretch p-0 w-full outline-none border-0 focus:ring-0 placeholder-[#C8CCD0] tz-text-gray-5" placeholder="City, airport, address or hotel" />
+                                <input value={toLocation} onChange={e => setToLocation(e.target.value)} type="text" className="text-base self-stretch p-0 w-full outline-none border-0 focus:ring-0 placeholder-[#C8CCD0] tz-text-gray-5" placeholder="City, airport, address or hotel" />
                             </div>
                         </div>
                     </div>
