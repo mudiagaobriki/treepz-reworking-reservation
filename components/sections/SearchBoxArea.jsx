@@ -7,6 +7,7 @@ import Link from "next/link";
 // Custom components
 import VehicleSearchBox from '@/components/searchboxes/VehicleSearchBox'
 import AirportSearchBox from '@/components/searchboxes/AirportSearchBox'
+import IntercitySearchBox from "../searchboxes/IntercitySearchBox";
 // import isMobile from '@/components/helpers/isMobile'
 
 const SearchBoxArea = ({page}) => {

@@ -8,18 +8,20 @@ import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistStore, persis
 
 // import theme reducers
 import authReducer from './features/authSlice';
+import marketplaceReducer from "@/redux/features/marketplaceSlice";
 
 const persistConfig = {
     key: 'root',
     version: 1,
     storage,
-    whitelist: ['auth'],
+    whitelist: ['auth','marketplace'],
 };
 
 const persistedReducer = persistReducer(
     persistConfig,
     combineReducers({
         auth: authReducer,
+        marketplace: marketplaceReducer,
     })
 );
 const store = configureStore({

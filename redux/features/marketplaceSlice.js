@@ -3,16 +3,24 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   filters: [],
   vehiclesListing: [],
-  queryResult: [],
+  filterResult: [],
   topFilters: [],
+  selectedRide: {},
+  useLocation: null,
 };
 
 const marketplaceSlice = createSlice({
   name: 'marketplace',
   initialState,
   reducers: {
-    setApplyFilters(state, action) {
+    setAddFilters(state, action) {
       state.filters = {...state.filters, ...action.payload};
+    },
+    setSelectedRide(state, action) {
+      state.selectedRide = action.payload;
+    },
+    setUserLocation(state, action) {
+      state.userLocation = action.payload;
     },
     setRemoveFilter(state, action) {
       const indexToRemove = state.filters.index(action.payload)
@@ -35,13 +43,13 @@ const marketplaceSlice = createSlice({
     setVehiclesListing(state, action){
       state.vehiclesListing = action.payload;
     },
-    setQueryResult(state, action){
-      state.queryResult = action.payload;
+    setFilterResult(state, action){
+      state.filterResult = action.payload;
     },
   },
 });
 
-export const { setQueryResult, setApplyFilters,
+export const { setFilterResult, setSelectedRide, setAddFilters,
   setApplyTopFilters, setRemoveTopFilter, setResetFilters,
   setRemoveFilter, setVehiclesListing } = marketplaceSlice.actions;
 

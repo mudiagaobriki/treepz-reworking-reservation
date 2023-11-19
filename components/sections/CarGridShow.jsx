@@ -20,6 +20,8 @@ import {
     filterPriceBetween,
     filterSelfDriven, filterVehicleMake, filterVehicleType, filterWeekly
 } from "../../services/functions/filters";
+import {useDispatch, useSelector} from "react-redux";
+import {setFilterResult, setSelectedRide, setVehiclesListing} from "../../redux/features/marketplaceSlice";
 // import isMobile from '@/components/helpers/isMobile'
 
 const FEATURED_CARS = [
@@ -115,6 +117,7 @@ const CarGridShow = () => {
     const [priceFiltered, setPriceFiltered] = useState(false)
 
     const router = useRouter()
+    const dispatch = useDispatch()
 
     const { vehicles, isLoading, isError } = fetchVehicleListing();
     console.log({vehicles, isLoading, isError});
@@ -135,9 +138,15 @@ const CarGridShow = () => {
 
         setCompleteData(data);
         setVehiclesData(data);
+        dispatch(setVehiclesListing(data))
+        dispatch(setFilterResult(data))
 
         console.log({data})
     },[isLoading,router])
+
+    let results = useSelector(state => state.marketplace?.filterResult)
+    let listings = useSelector(state => state.marketplace?.vehiclesListing)
+    console.log("Selector results: ", results)
 
     useEffect(() => {
         if (vehiclesData?.length){
@@ -167,9 +176,8 @@ const CarGridShow = () => {
 
         //apply the filter
         if (!selfDrivenChecked){
-            setPrevData(vehiclesData);
-            setVehiclesData(prevState => filterSelfDriven(prevData))
-            // setChauffeuredChecked(false)
+            const res = filterSelfDriven(listings)
+            dispatch(setFilterResult(res))
         }
         else{
             setVehiclesData(prevData);
@@ -195,8 +203,8 @@ const CarGridShow = () => {
         }
 
         if (!fullDayChecked){
-            setPrevData(vehiclesData);
-            setVehiclesData(prevState => filterFullDay(vehiclesData))
+            const res = filterFullDay(listings)
+            dispatch(setFilterResult(res))
         }
         else{
             setVehiclesData(prevData);
@@ -214,9 +222,8 @@ const CarGridShow = () => {
         console.log("Previous data on Chauffeured Click: ", {prevData})
 
         if (!chauffeuredChecked){
-            if (!selfDrivenChecked) setPrevData(vehiclesData);
-            // setSelfDrivenChecked(false)
-            setVehiclesData(prevState => filterChauffeured(prevData))
+            const res = filterChauffeured(listings)
+            dispatch(setFilterResult(res))
         }
         else{
             setVehiclesData(prevData);
@@ -243,9 +250,8 @@ const CarGridShow = () => {
 
 
         if (!hourlyChecked){
-            setPrevData(vehiclesData);
-            // console.log("vehiclesData keys: ", filterHourly(vehiclesData))
-            setVehiclesData(prevState => filterHourly(vehiclesData))
+            const res = filterHourly(listings)
+            dispatch(setFilterResult(res))
         }
         else{
             setVehiclesData(prevData);
@@ -270,9 +276,8 @@ const CarGridShow = () => {
         }
 
         if (!halfDayChecked){
-            setPrevData(vehiclesData);
-            // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
-            setVehiclesData(prevState => filterHalfDay(vehiclesData))
+            const res = filterHalfDay(listings)
+            dispatch(setFilterResult(res))
         }
         else{
             setVehiclesData(prevData);
@@ -297,9 +302,8 @@ const CarGridShow = () => {
         }
 
         if (!weeklyChecked){
-            setPrevData(vehiclesData);
-            // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
-            setVehiclesData(prevState => filterWeekly(vehiclesData))
+            const res = filterWeekly(listings)
+            dispatch(setFilterResult(res))
         }
         else{
             setVehiclesData(prevData);
@@ -324,9 +328,11 @@ const CarGridShow = () => {
         }
 
         if (!monthlyChecked){
-            setPrevData(vehiclesData);
-            // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
-            setVehiclesData(prevState => filterMonthly(vehiclesData))
+            // setPrevData(vehiclesData);
+            // // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
+            // setVehiclesData(prevState => filterMonthly(vehiclesData))
+            const res = filterMonthly(listings)
+            dispatch(setFilterResult(res))
         }
         else{
             setVehiclesData(prevData);
@@ -348,16 +354,18 @@ const CarGridShow = () => {
         }
 
         if (!sedanChecked){
-            setPrevData(vehiclesData);
-            console.log("From Sedan clicked: ", {prevData})
-            // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
-            if (prevData?.length > 0)
-                // setVehiclesData(prevState => filterVehicleType(prevData,"sedan"))
-                setVehiclesData(prevState => filterVehicleType(completeData,"sedan"))
-            else{
-                // setVehiclesData(prevState => filterVehicleType(vehiclesData,"sedan"))
-                setVehiclesData(prevState => filterVehicleType(completeData,"sedan"))
-            }
+            // setPrevData(vehiclesData);
+            // console.log("From Sedan clicked: ", {prevData})
+            // // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
+            // if (prevData?.length > 0)
+            //     // setVehiclesData(prevState => filterVehicleType(prevData,"sedan"))
+            //     setVehiclesData(prevState => filterVehicleType(completeData,"sedan"))
+            // else{
+            //     // setVehiclesData(prevState => filterVehicleType(vehiclesData,"sedan"))
+            //     setVehiclesData(prevState => filterVehicleType(completeData,"sedan"))
+            // }
+            const res = filterVehicleType(listings,'sedan')
+            dispatch(setFilterResult(res))
         }
         else{
             // setVehiclesData(prevData);
@@ -380,16 +388,8 @@ const CarGridShow = () => {
         }
 
         if (!commercialChecked){
-            console.log("From commercial clicked: ", {prevData})
-            setPrevData(vehiclesData);
-            // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
-            if (prevData?.length > 0)
-                // setVehiclesData(prevState => filterVehicleType(prevData,"vehicle"))
-                setVehiclesData(prevState => filterVehicleType(completeData,"vehicle"))
-            else{
-                // setVehiclesData(prevState => filterVehicleType(vehiclesData,"vehicle"))
-                setVehiclesData(prevState => filterVehicleType(completeData,"vehicle"))
-            }
+            const res = filterVehicleType(listings,'vehicle')
+            dispatch(setFilterResult(res))
         }
         else{
             // setVehiclesData(prevData);
@@ -412,15 +412,8 @@ const CarGridShow = () => {
         }
 
         if (!suvChecked){
-            setPrevData(vehiclesData);
-            // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
-            if (prevData?.length > 0)
-                // setVehiclesData(prevState => filterVehicleType(prevData,"suv"))
-                setVehiclesData(prevState => filterVehicleType(completeData,"suv"))
-            else{
-                // setVehiclesData(prevState => filterVehicleType(vehiclesData,"suv"))
-                setVehiclesData(prevState => filterVehicleType(completeData,"suv"))
-            }
+            const res = filterVehicleType(listings,'suv')
+            dispatch(setFilterResult(res))
         }
         else{
             // setVehiclesData(prevData);
@@ -458,7 +451,9 @@ const CarGridShow = () => {
             handleLexusClicked()
         }
 
-        setVehiclesData(filterVehicleMake(completeData,"toyota"))
+        // setVehiclesData(filterVehicleMake(completeData,"toyota"))
+        const res = filterVehicleMake(listings,'toyota')
+        dispatch(setFilterResult(res))
         setToyotaChecked(prevState => !prevState)
     }
 
@@ -467,14 +462,12 @@ const CarGridShow = () => {
             handleToyotaClicked()
         }
 
-        setVehiclesData(filterVehicleMake(completeData,"lexus"))
+        const res = filterVehicleMake(listings,'lexus')
+        dispatch(setFilterResult(res))
         setLexusChecked(prevState => !prevState)
     }
 
     const handleAcClicked = () => {
-        // if (toyotaChecked){
-        //     handleToyotaClicked()
-        // }
 
         if (!ac){
             setVehiclesData(filterAC(completeData))
@@ -487,9 +480,6 @@ const CarGridShow = () => {
     }
 
     const handleBluetoothClicked = () => {
-        // if (toyotaChecked){
-        //     handleToyotaClicked()
-        // }
 
         if (!bluetooth){
             setVehiclesData(filterAmenities(completeData,"bluetooth"))
@@ -539,7 +529,8 @@ const CarGridShow = () => {
     }
 
     const cardClicked = async (item) => {
-        localStorage.setItem("selected", JSON.stringify(item))
+        dispatch(setSelectedRide(item));
+        // localStorage.setItem("selected", JSON.stringify(item))
         await router.push("/vehicle-details")
     }
     
@@ -613,12 +604,12 @@ const CarGridShow = () => {
                         <div className="flex items-center justify-between self-stretch">
                             <div className="flex items-center justify-center px-3 py-1 bg-white rounded tz-border-light-3">
                                 <span className="text-xs tz-text-gray">NGN</span>
-                                <input type="number" name="" size="5" onChange={(e) => setMinValue(e.target.value)} value={minValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none h-4 px-1 border-0 focus:ring-0 tz-text-gray" />
+                                <input type="number" name="" size="5" onChange={(e) => setMinValue(e.target.value)} value={minValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none w-12 h-4 px-1 border-0 focus:ring-0 tz-text-gray" />
                             </div>
                             <div className="w-4 h-[2px] tz-bg-light-1"></div>
                             <div className="flex items-center justify-center px-3 py-1 bg-white rounded tz-border-light-3">
                                 <span className="text-xs tz-text-gray">NGN</span>
-                                <input type="number" name="" size="5" onChange={(e) => setMaxValue(e.target.value)} value={maxValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none h-4 px-1 border-0 focus:ring-0 tz-text-gray" />
+                                <input type="number" name="" size="5" onChange={(e) => setMaxValue(e.target.value)} value={maxValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none w-12 h-4 px-1 border-0 focus:ring-0 tz-text-gray" />
                             </div>
                         </div>
                     </div>
@@ -627,7 +618,7 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Popular filters</div>
                         <div className="flex flex-col items-start gap-3">
                             <label className="flex items-center gap-2" for="selfDriven">
-                                <input type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" id="selfDriven" /> 
+                                <input checked={selfDrivenChecked} onChange={handleSelfDrivenFilter} type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" id="selfDriven" />
                                 <span className="text-sm tz-text-gray-3">Self driven</span>
                             </label>
                             <label className="flex items-center gap-2" for="fullDay">
@@ -663,14 +654,14 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Hire mode</div>
                         <div className="flex flex-col items-start gap-2">
                             <div className="flex items-center gap-2">
-                                <input type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" /> 
+                                <input checked={selfDrivenChecked} onChange={handleSelfDrivenFilter} type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" />
                                 <div className="flex flex-col items-start">
                                     <span className="text-sm tz-text-gray-3">Self driven</span>
                                     <span className="text-[0.625em] tz-text-gray">You will drive yourself</span>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
-                                <input type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" /> 
+                                <input checked={chauffeuredChecked} onChange={handleChaufferedFilter} type="checkbox" name="" className="w-5 h-5 accent-[#F8B02B] focus:ring-2 focus:ring-[#F8B02B] rounded tz-text-orange-1 tz-checbox-border" />
                                 <div className="flex flex-col items-start">
                                     <span className="text-sm tz-text-gray-3">Chauffeured</span>
                                     <span className="text-[0.625em] tz-text-gray">A driver takes you around</span>
@@ -784,7 +775,7 @@ const CarGridShow = () => {
             </div>
             <div className="flex flex-col items-start gap-10 w-full">
                 <div className="flex flex-col items-start gap-5">
-                    <div className="text-3xl font-semibold tz-text-dark">200+ cars available</div>
+                    <div className="text-3xl font-semibold tz-text-dark">{vehiclesData?.length} cars available</div>
                     <div className="flex items-start content-start self-stretch flex-wrap gap-4">
                         <FilterButton text={"Most popular"} url="" bg={"tz-bg-dark-1"} onClcik={() => console.log('clicked')} />
                         <FilterButton text={"Price"} url="" onClcik={() => console.log('clicked')} />
@@ -794,25 +785,40 @@ const CarGridShow = () => {
                     </div>
                 </div>
                 <div className="w-full">
-                    {vehiclesData && <div className="grid grid-cols-3 gap-6 w-full">
+                    {results && <div className="grid grid-cols-3 gap-6 w-full">
                         {
-                            vehiclesData.map((item, index) => {
+                            results?.map((item, index) => {
                                 return <div key={index}>
                                     <CarCard
-                                        carName={item.carName}
-                                        carImage={item.image}
+                                        onClick={() => cardClicked(item)}
+                                        carImage={item?.vehicle?.vehicleImages[0]}
+                                        carName={item.vehicle?.vehicleMake?.name + " " + item?.vehicle?.vehicleModel?.name}
                                         location={item.location}
-                                        hasAC={item.hasAC}
+                                        hasAC={item.vehicle?.vehicleHasAirCondition}
                                         hasWifi={item.hasWifi}
                                         hasDisabledSeat={item.hasDisabledSeat}
-                                        isChauffeured={item.isChauffeured}
+                                        isChauffeured={item?.driveType === "chaffeured"}
                                         isPromoted={item.isPromoted}
                                         isSelfDrive={item.isSelfDrive}
                                         isRareFind={item.isRareFind}
                                         rating={item.rating}
-                                        numSeats={item.seats}
-                                        price={item.price}
+                                        numSeats={item?.vehicle?.vehicleSittingCapacity}
+                                        price={Number(item.pricePerDay).toLocaleString()}
                                         tripsCount={item.trips}
+                                        // carName={item.carName}
+                                        // carImage={item.image}
+                                        // location={item.location}
+                                        // hasAC={item.hasAC}
+                                        // hasWifi={item.hasWifi}
+                                        // hasDisabledSeat={item.hasDisabledSeat}
+                                        // isChauffeured={item.isChauffeured}
+                                        // isPromoted={item.isPromoted}
+                                        // isSelfDrive={item.isSelfDrive}
+                                        // isRareFind={item.isRareFind}
+                                        // rating={item.rating}
+                                        // numSeats={item.seats}
+                                        // price={item.price}
+                                        // tripsCount={item.trips}
                                     />
                                 </div>
                             })
