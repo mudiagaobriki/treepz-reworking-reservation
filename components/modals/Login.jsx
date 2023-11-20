@@ -6,6 +6,10 @@ import Link from "next/link";
 
 // Custom components
 import Button1 from '@/components/items/Button1';
+import {BASE_URL} from "../../public/assets/constants/constants";
+import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import {setCurrentUser} from "../../redux/features/authSlice";
 // import isMobile from '@/components/helpers/isMobile'
 
 const Login = ({isOpen, closeModal, onRegister, onForgotPassword}) => {
@@ -13,6 +17,11 @@ const Login = ({isOpen, closeModal, onRegister, onForgotPassword}) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(isOpen);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const dispatch = useDispatch();
+
+    const {currentUser, token, isLogin} = useSelector(state => state.auth)
+    console.log({currentUser, token, isLogin})
 
     useEffect(() => {
         setIsVisible(isOpen);
@@ -23,10 +32,29 @@ const Login = ({isOpen, closeModal, onRegister, onForgotPassword}) => {
         }
     }, [isOpen]);
 
-    const handleLogin = () => {
-        console.log({
+    const handleLogin = async () => {
+        const credentials = {
             email, password
-        })
+        }
+        const url = `${BASE_URL}/auth/login`
+        try{
+            const res = await axios.post(url, credentials)
+
+            console.log({res})
+            if (res?.data?.data?.user){
+                const currentUser = res?.data?.data?.user;
+                console.log({currentUser})
+                const token = res?.data?.data?.jwt;
+                dispatch(setCurrentUser({user: currentUser, loginToken: token}))
+                setInterval(() => window.location.reload(), 3000)
+            }
+        }
+        catch (ex) {
+            console.log({ex})
+            alert("Invalid credentials. Please try again")
+        }
+        // console.log({url})
+        // console.log({res})
     }
 
     const handleSocialLogin = () => {
