@@ -3,11 +3,43 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Image from "next/image";
 import Link from "next/link";
+import {useDispatch, useSelector} from "react-redux";
+import Countdown from "react-countdown";
+import {BASE_URL} from "../../public/assets/constants/constants";
+import axios from "axios";
+import {setResetCode, setResetEmail} from "../../redux/features/authSlice";
 
-const EmailOTP = ({ numberOfDigits }) => {
+const EmailOTP = ({ numberOfDigits, isOpen, closeModal, onNextStep, onBackClicked }) => {
     const [otp, setOtp] = useState(new Array(numberOfDigits).fill(""));
-    const [otpError, setOtpError] = useState(true);;
+    const [otpError, setOtpError] = useState(true);
     const otpBoxReference = useRef([]);
+    const [isVisible, setIsVisible] = useState(isOpen);
+    const [timerValue, setTimerValue] = useState(59);
+
+    const dispatch = useDispatch();
+
+    const {resetEmail} = useSelector(state => state?.auth);
+
+    useEffect(() => {
+        setIsVisible(isOpen);
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        } else {
+            document.body.style.overflow = 'auto'; // Enable scrolling when modal is closed
+        }
+    }, [isOpen]);
+
+    useEffect(() => {
+        if (timerValue > 0){
+            const interval = setInterval(() => {
+                setTimerValue(prevState => prevState - 1);
+            }, 1000);
+
+            // if (timerValue <= 0) clearInterval(interval)
+
+            return () => clearInterval(interval);
+        }
+    }, [timerValue]);
 
     const handleChange = (value, index) => {
         let newArr = [...otp];
@@ -37,27 +69,63 @@ const EmailOTP = ({ numberOfDigits }) => {
         setOtpError(otp.join("").length === numberOfDigits);
     }, [otp]);
 
+    const handleResendCode = async () => {
+        const credentials = {
+            email: resetEmail,
+        }
+        console.log({credentials})
+        const url = `${BASE_URL}/auth/request-password-reset`
+        try{
+            const res = await axios.post(url, credentials)
+
+            console.log({res})
+            if (res?.status === 200){
+                setTimerValue(59)
+                // dispatch(setResetEmail(email))
+                // onNextStep()
+                // const currentUser = res?.data?.data?.user;
+                // console.log({currentUser})
+                // const token = res?.data?.data?.jwt;
+                // dispatch(setCurrentUser({user: currentUser, loginToken: token}))
+                // setInterval(() => window.location.reload(), 3000)
+            }
+        }
+        catch (ex) {
+            console.log({ex})
+            alert("Invalid credentials. Please try again")
+        }
+        // console.log({url})
+        // console.log({res})
+    }
+
+    const verifyOTP = async () => {
+        // call api to verify
+        // if successful
+        dispatch(setResetCode(otp))
+        onNextStep()
+    }
+
     return (
         <div>
             {/* Main modal */}
-            <div id="email-otp-modal" tabindex="-1" aria-hidden="true" className="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div id="email-otp-modal" tabindex="-1" aria-hidden="true" className={`fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50 ${isVisible ? 'block' : 'hidden'}`}>
                 <div className="relative w-full max-w-2xl max-h-full">
                     {/* Modal content */}
                     <div className="bg-white rounded-2xl shadow w-[37.5rem]">
                         <div className="flex justify-between items-center w-full px-8 py-3 tz-border-bottom-1">
                             <div className="flex items-center gap-3">
-                                <Link href="" className="flex items-center hover:bg-gray-200  rounded-lg p-1 tz-bg-light">
+                                <div onClick={onBackClicked} className="flex items-center hover:bg-gray-200  rounded-lg p-1 tz-bg-light">
                                     <Image src="/assets/images/arrow-left-line.png" alt="close-x" width={24} height={24} />
-                                </Link>
+                                </div>
                                 <h4 className="font-medium tz-text-dark-1">Confirm email address</h4>
                             </div>
-                            <button type="button" className="p-1 tz-bg-light bg-transparent hover:bg-gray-200 rounded-lg w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="email-otp-modal">
+                            <button onClick={closeModal} type="button" className="p-1 tz-bg-light bg-transparent hover:bg-gray-200 rounded-lg w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="email-otp-modal">
                                 <Image src="/assets/images/close-lg.png" alt="close-x" width={16} height={16} />
                                 <span className="sr-only">Close modal</span>
                             </button>
                         </div>
                         <div className="w-full pt-9 pb-12 px-8">
-                            <p className="mb-8 tz-text-gray-3">Enter the OTP we sent to <span className="font-medium tz-text-dark"> heresanexample@email.com:</span></p>
+                            <p className="mb-8 tz-text-gray-3">Enter the OTP we sent to <span className="font-medium tz-text-dark"> {resetEmail}:</span></p>
                             <form className="" action="#">
                                 <div className="flex items-start gap-3 w-full mb-3">
                                     {otp.map((digit, index)=>(
@@ -83,11 +151,12 @@ const EmailOTP = ({ numberOfDigits }) => {
                                     </div>
                                 </div>
                                 <div className="w-full mb-3">
-                                    <button 
+                                    <button
+                                        onClick={verifyOTP}
                                         disabled={!otpError} 
-                                        data-modal-target={"bank-success-modal"} 
-                                        data-modal-toggle={"bank-success-modal"} 
-                                        type="submit"
+                                        // data-modal-target={"bank-success-modal"}
+                                        // data-modal-toggle={"bank-success-modal"}
+                                        type="button"
                                         className={`flex py-3 px-6 justify-center items-center font-semibold w-full rounded-lg ${otpError ? 'bg-[#F8B02B] hover:bg-[#F8B02B]/80' : 'bg-[#FBDF88]'} tz-text-dark-1`}
                                     >
                                         Verify email address
@@ -95,17 +164,27 @@ const EmailOTP = ({ numberOfDigits }) => {
                                 </div>
                                 <div>
                                     <p className="text-center">
-                                        <span className="text-sm font-bold tz-text-dark">0:59</span> <br />
+                                        {/*<Countdown count={60} autoStart precision={1} onComplete={() => console.log("Countdown complete")}*/}
+                                        {/*           renderer={props => <p>Mudi{props.total}</p>}/>*/}
+                                        <span className="text-sm font-bold tz-text-dark">0:{timerValue.toLocaleString('en-US', {
+                                            minimumIntegerDigits: 2,
+                                            useGrouping: false
+                                        })}</span> <br />
                                         <span className="text-xs font-light tz-text-gray-3">
-                                            Didn’t receive it? <Link href="" className="font-semibold underline tz-text-gray-2"> Resend code</Link>
+                                            Didn’t receive it?
+                                            {
+                                                timerValue === 0? <span onClick={handleResendCode} className="cursor-pointer font-semibold underline tz-text-gray-1"> Resend code</span>:
+                                                    <span className="font-semibold underline tz-text-gray-2"> Resend code</span>
+                                            }
+
                                         </span>
                                     </p>
-                                    <p className="text-center">
-                                        <span className="text-sm font-bold tz-text-gray-2">0:00</span> <br />
-                                        <span className="text-xs font-light tz-text-gray-3">
-                                            Didn’t receive it? <Link href="" className="font-semibold underline tz-text-dark-1"> Resend code</Link>
-                                        </span>
-                                    </p>
+                                    {/*<p className="text-center">*/}
+                                    {/*    <span className="text-sm font-bold tz-text-gray-2">0:00</span> <br />*/}
+                                    {/*    <span className="text-xs font-light tz-text-gray-3">*/}
+                                    {/*        Didn’t receive it? <Link href="" className="font-semibold underline tz-text-dark-1"> Resend code</Link>*/}
+                                    {/*    </span>*/}
+                                    {/*</p>*/}
                                 </div>
                             </form>
                         </div>

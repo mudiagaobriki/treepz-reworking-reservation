@@ -27,6 +27,11 @@ import Button1 from "../../components/items/Button1";
 const Page = () => {
         const [userLocation, setUserLocation] = useState(null)
         const [showLoginModal, setShowLoginModal] = useState(false)
+        const [showSignupModal, setShowSignupModal] = useState(false)
+        const [showForgotModal, setShowForgotModal] = useState(false)
+        const [showOTPModal, setShowOTPModal] = useState(false)
+        const [showResetModal, setShowResetModal] = useState(false)
+        const [showSuccessCard, setShowSuccessCard] = useState(false)
 
         const dispatch = useDispatch()
 
@@ -55,6 +60,68 @@ const Page = () => {
 
         const handleCloseModal = () => {
                 setShowLoginModal(false)
+        }
+
+        const handleCloseSignupModal = () => {
+                setShowSignupModal(false)
+        }
+
+        const handleCloseForgotModal = () => {
+                setShowForgotModal(false)
+        }
+
+        const handleCloseOTPModal = () => {
+                setShowOTPModal(false)
+        }
+
+        const handleCloseResetModal = () => {
+                setShowResetModal(false)
+        }
+
+        const handleCloseSuccessCard = () => {
+                setShowSuccessCard(false)
+                setShowLoginModal(true)
+        }
+
+        const handleSignupLinkClicked = () => {
+                setShowLoginModal(false)
+                setShowSignupModal(true)
+        }
+
+        const handleLoginLinkClicked = () => {
+                setShowLoginModal(true)
+                setShowSignupModal(false)
+        }
+
+        const handleForgotLinkClicked = () => {
+                setShowLoginModal(false)
+                setShowForgotModal(true)
+        }
+
+        const handleBackToLogin = () => {
+                setShowForgotModal(false)
+                setShowSignupModal(false)
+                setShowLoginModal(true)
+        }
+
+        const handleBackToForgotPassword = () => {
+                setShowForgotModal(true)
+                setShowOTPModal(false)
+        }
+
+        const handleShowEmailOTP = () => {
+                setShowForgotModal(false)
+                setShowOTPModal(true)
+        }
+
+        const handleShowNewPassword = () => {
+                setShowOTPModal(false)
+                setShowResetModal(true)
+        }
+
+        const handleShowNSuccessCard = () => {
+                setShowResetModal(false)
+                setShowSuccessCard(true)
         }
 
     return (
@@ -112,16 +179,22 @@ const Page = () => {
             <LocationSection />
             <div className="pt-24 tz-bg-light"></div>
             <Footer />
-            <Signup />
-            <Login isOpen={showLoginModal} closeModal={handleCloseModal} />
-            <NewPassword />
-            <ForgotPassword />
-            <EmailOTP numberOfDigits={5} />
+            <Signup isOpen={showSignupModal} closeModal={handleCloseSignupModal} onLoginPressed={handleLoginLinkClicked} />
+            <Login isOpen={showLoginModal} closeModal={handleCloseModal} onRegister={handleSignupLinkClicked}
+                   onForgotPassword={handleForgotLinkClicked} />
+            <NewPassword isOpen={showResetModal} closeModal={handleCloseResetModal}
+                         onBackClicked={handleBackToForgotPassword} onNextStep={handleShowNSuccessCard} />
+            <ForgotPassword isOpen={showForgotModal} closeModal={handleCloseForgotModal} onBackClicked={handleBackToLogin}
+                            onNextStep={handleShowEmailOTP}/>
+            <EmailOTP numberOfDigits={5} isOpen={showOTPModal} closeModal={handleCloseOTPModal}
+                onBackClicked={handleBackToForgotPassword} onNextStep={handleShowNewPassword}/>
             <SuccessCard 
                 title={"Password reset successful!"} 
                 description={"Your request to reset your password is completed. Proceed to login with your new password."} 
                 btnText={"Log in"} 
                 modalId={"password-reset-success-modal"}
+                isOpen={showSuccessCard} closeModal={handleCloseSuccessCard}
+                onNextStep={handleShowNewPassword}
             />
         </div>
     );

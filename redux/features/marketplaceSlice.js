@@ -7,6 +7,7 @@ const initialState = {
   topFilters: [],
   selectedRide: {},
   useLocation: null,
+  type: 'vehicle-rentals'
 };
 
 const marketplaceSlice = createSlice({
@@ -20,6 +21,9 @@ const marketplaceSlice = createSlice({
       state.selectedRide = action.payload;
     },
     setUserLocation(state, action) {
+      state.userLocation = action.payload;
+    },
+    setRentalType(state, action) {
       state.userLocation = action.payload;
     },
     setRemoveFilter(state, action) {
@@ -51,7 +55,7 @@ const marketplaceSlice = createSlice({
 
 export const { setFilterResult, setSelectedRide, setAddFilters,
   setApplyTopFilters, setRemoveTopFilter, setResetFilters,
-  setRemoveFilter, setVehiclesListing } = marketplaceSlice.actions;
+  setRemoveFilter, setVehiclesListing, setRentalType, setUserLocation } = marketplaceSlice.actions;
 
 
 const marketplaceReducer = marketplaceSlice.reducer;

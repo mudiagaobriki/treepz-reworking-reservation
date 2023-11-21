@@ -4,6 +4,8 @@ const initialState = {
   isLogin: false,
   currentUser: {},
   token: null,
+  resetEmail: "",
+  resetCode: "",
 };
 
 const authSlice = createSlice({
@@ -25,11 +27,18 @@ const authSlice = createSlice({
     },
     setStatus: (state, action) => {
       state.status = action.payload;
-    }
+    },
+    setResetEmail: (state, action) => {
+      state.resetEmail = action.payload
+    },
+    setResetCode: (state, action) => {
+      state.resetCode = action.payload
+    },
   },
 });
 
-export const { setCurrentUser, setSignOut, setStatus } = authSlice.actions;
+export const { setCurrentUser, setSignOut, setStatus,
+  setResetEmail, setResetCode, } = authSlice.actions;
 
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectAuthStatus = (state) => state.auth.status;

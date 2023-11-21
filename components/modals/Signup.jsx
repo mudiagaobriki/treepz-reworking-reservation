@@ -1,30 +1,76 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
 // Custom components
 import Button1 from '@/components/items/Button1';
+import {BASE_URL} from "../../public/assets/constants/constants";
+import axios from "axios";
+import {setCurrentUser} from "../../redux/features/authSlice";
 // import isMobile from '@/components/helpers/isMobile'
 
-const Signup = () => {
-    const [isVisible, setIsVisible] = useState(false);
+const Signup = ({isOpen, closeModal, onLoginPressed}) => {
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(isOpen);
     const [agreed, setAgreed] = useState(false);
     const [confirmed, setConfirmed] = useState(false);
-    
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [referralCode, setReferralCode] = useState("");
+
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
+
+    useEffect(() => {
+        setIsVisible(isOpen);
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        } else {
+            document.body.style.overflow = 'auto'; // Enable scrolling when modal is closed
+        }
+    }, [isOpen]);
+
+    const handleSignup = async () => {
+        const credentials = {
+            email, password, passwordConfirm: password, firstName, lastName,
+            phoneNumber, accountType: "USER", referrerCode: referralCode,
+        }
+        console.log({credentials})
+        const url = `${BASE_URL}/auth/signup`
+        try{
+            const res = await axios.post(url, credentials)
+
+            console.log({res})
+            // if (res?.data?.data?.user){
+            //     const currentUser = res?.data?.data?.user;
+            //     console.log({currentUser})
+            //     const token = res?.data?.data?.jwt;
+            //     dispatch(setCurrentUser({user: currentUser, loginToken: token}))
+            //     setInterval(() => window.location.reload(), 3000)
+            // }
+        }
+        catch (ex) {
+            console.log({ex})
+            alert("An error occurred while signing up. Please try again")
+        }
+        // console.log({url})
+        // console.log({res})
+    }
 
     return (
         <div>
             {/* Main modal */}
-            <div id="signup-modal" tabindex="-1" aria-hidden="true" className="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div id="signup-modal" tabindex="-1" aria-hidden="true" className={`fixed overflow-y-auto top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50 ${isVisible ? 'block' : 'hidden'}`}>
                 <div className="relative w-full max-w-2xl max-h-full">
                     {/* Modal content */}
                     <div className="bg-white rounded-2xl shadow w-[37.5rem]">
                         <div className="flex justify-between items-center w-full px-8 py-3 tz-border-bottom-1">
-                            <h4 className="font-medium tz-text-dark-1">Log in</h4>
-                            <button type="button" className="p-1 tz-bg-light bg-transparent hover:bg-gray-200 rounded-lg w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="signup-modal">
+                            <h4 className="font-medium tz-text-dark-1">Sign up</h4>
+                            <button onClick={closeModal} type="button" className="p-1 tz-bg-light bg-transparent hover:bg-gray-200 rounded-lg w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="signup-modal">
                                 <Image src="/assets/images/close-lg.png" alt="close-x" width={16} height={16} />
                                 <span className="sr-only">Close modal</span>
                             </button>
@@ -48,12 +94,12 @@ const Signup = () => {
                                     <div className="flex flex-col items-start gap-3 w-full">
                                         <div className="flex items-start gap-6 w-full">
                                             <div className="relative w-1/2">
-                                                <input type="text" id="firstName" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
-                                                <label for="firstName" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">First name</label>
+                                                <input value={firstName} onChange={el => setFirstName(el?.target.value)} type="text" id="firstName" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                                                <label htmlFor="firstName" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">First name</label>
                                             </div>
                                             <div className="relative w-1/2">
-                                                <input type="text" id="lastName" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
-                                                <label for="lastName" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Last name</label>
+                                                <input value={lastName} onChange={el => setLastName(el?.target.value)} type="text" id="lastName" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                                                <label htmlFor="lastName" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Last name</label>
                                             </div>
                                         </div>
                                         <div className="flex items-start gap-2">
@@ -63,44 +109,45 @@ const Signup = () => {
                                     </div>
                                     
                                     <div className="relative w-full">
-                                        <input type="text" id="phoneNumber" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
-                                        <label for="phoneNumber" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Phone number</label>
+                                        <input value={phoneNumber} onChange={el => setPhoneNumber(el?.target.value)} type="text" id="phoneNumber" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                                        <label htmlFor="phoneNumber" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Phone number</label>
                                     </div>
                                     <div className="relative w-full">
-                                        <input type="email" id="emailAddress" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
-                                        <label for="emailAddress" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Email address</label>
+                                        <input value={email} onChange={el => setEmail(el?.target.value)} type="email" id="emailAddress" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                                        <label htmlFor="emailAddress" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Email address</label>
                                     </div>
                                     <div className="relative w-full">
-                                        <a href="#" onClick={() => setIsVisible(!isVisible)} className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-cursor">
+                                        <a href="#" onClick={() => setIsPasswordVisible(!isPasswordVisible)} className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-cursor">
                                             <Image src="/assets/images/eye-line.png" alt="eye-icon" width={20} height={20} />
                                         </a>
-                                        <input type={isVisible ? "text" : "password"} id="password" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
-                                        <label for="password" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Enter password</label>
+                                        <input value={password} onChange={el => setPassword(el?.target.value)} type={isPasswordVisible ? "text" : "password"} id="password" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                                        <label htmlFor="password" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Enter password</label>
                                     </div>
                                     <div className="relative w-full">
-                                        <input type="text" id="referralCode" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
-                                        <label for="referralCode" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Referral code (optional)</label>
+                                        <input value={referralCode} onChange={el => setReferralCode(el?.target.value)} type="text" id="referralCode" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
+                                        <label htmlFor="referralCode" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Referral code (optional)</label>
                                     </div>
                                 </div>
                                 <div className="flex flex-col items-start gap-5 mb-8 w-full">
-                                    <div class="flex items-center">
+                                    <div className="flex items-center">
                                         <input onChange={(e) => setAgreed(e.target.checked)} id="terms_conditions" type="checkbox" value="" class="w-6 h-6 text-[#101010] bg-gray-100 border-gray-300 rounded focus:ring-0" />
-                                        <label for="terms_conditions" class="ml-3 text-sm tz-text-gray-300 text-center">
+                                        <label htmlFor="terms_conditions" className="ml-3 text-sm tz-text-gray-300 text-center">
                                             I agree to the 
-                                            <Link href="/terms-conditions" class="underline font-medium tz-text-dark-1"> Terms of use & Privacy policy</Link>.
+                                            <Link href="/terms-conditions" className="underline font-medium tz-text-dark-1"> Terms of use & Privacy policy</Link>.
                                         </label>
                                     </div>
-                                    <div class="flex items-center">
+                                    <div className="flex items-center">
                                         <input onChange={(e) => setConfirmed(e.target.checked)} id="confirmation" type="checkbox" value="" class="w-6 h-6 text-[#101010] bg-gray-100 border-gray-300 rounded focus:ring-0" />
-                                        <label for="confirmation" class="ml-3 text-sm tz-text-dark">I consent to receiving Newsletters & marketing updates</label>
+                                        <label htmlFor="confirmation" className="ml-3 text-sm tz-text-dark">I consent to receiving Newsletters & marketing updates</label>
                                     </div>
                                 </div>
                                 <div className="w-full mb-6">
-                                    <button 
+                                    <button
+                                        onClick={handleSignup}
                                         disabled={!agreed || !confirmed} 
-                                        data-modal-target={"bank-success-modal"} 
-                                        data-modal-toggle={"bank-success-modal"} 
-                                        type="submit"
+                                        // data-modal-target={"bank-success-modal"}
+                                        // data-modal-toggle={"bank-success-modal"}
+                                        type="button"
                                         className={`flex py-3 px-6 justify-center items-center font-semibold w-full rounded-lg ${agreed && confirmed ? 'bg-[#F8B02B] hover:bg-[#F8B02B]/80' : 'bg-[#FBDF88]'} tz-text-dark-1`}
                                     >
                                         Create account
@@ -108,7 +155,7 @@ const Signup = () => {
                                 </div>
                                 <div className="text-center">
                                     <span className="tz-text-gray-30">Already have an account?&nbsp;</span>
-                                    <Link href="" className="font-medium underline tz-text-dark-1">Log in</Link>
+                                    <span onClick={onLoginPressed} className="cursor-pointer font-medium underline tz-text-dark-1">Log in</span>
                                 </div>
                             </form>
                         </div>

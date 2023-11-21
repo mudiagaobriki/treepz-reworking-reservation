@@ -14,14 +14,14 @@ import {setCurrentUser} from "../../redux/features/authSlice";
 
 const Login = ({isOpen, closeModal, onRegister, onForgotPassword}) => {
     const [isVisible, setIsVisible] = useState(isOpen);
-    const [isPasswordVisible, setIsPasswordVisible] = useState(isOpen);
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
 
-    const {currentUser, token, isLogin} = useSelector(state => state.auth)
-    console.log({currentUser, token, isLogin})
+    // const {currentUser, token, isLogin} = useSelector(state => state.auth)
+    // console.log({currentUser, token, isLogin})
 
     useEffect(() => {
         setIsVisible(isOpen);
@@ -108,14 +108,14 @@ const Login = ({isOpen, closeModal, onRegister, onForgotPassword}) => {
                                 </div>
                                 <div className="mb-12 text-right">
                                     <span className="tz-text-gray-30">Forgot password?&nbsp;</span>
-                                    <span onClick={onForgotPassword} className="font-medium underline tz-text-dark-1">Recover</span>
+                                    <span onClick={onForgotPassword} className="cursor-pointer font-medium underline tz-text-dark-1">Recover</span>
                                 </div>
                                 <div className="w-full mb-5">
                                     <Button1 onClick={handleLogin} text="Log in" submit={true} />
                                 </div>
                                 <div className="text-center">
                                     <span className="tz-text-gray-30">Don’t have an account?&nbsp;</span>
-                                    <span onClick={onRegister} className="font-medium underline tz-text-dark-1">Register</span>
+                                    <span onClick={onRegister} className="cursor-pointer font-medium underline tz-text-dark-1">Register</span>
                                 </div>
                             </form>
                         </div>
