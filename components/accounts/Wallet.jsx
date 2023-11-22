@@ -1,14 +1,87 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
 import { Modal } from 'flowbite';
 
 import FundWallet from '@/components/modals/FundWallet';
+import {useSelector} from "react-redux";
+import {BASE_URL} from "../../public/assets/constants/constants";
+import axios from "axios";
 
 const Wallet = () => {
+    const [showFundModal, setShowFundModal] = useState(false)
+    const [userTransactions, setUserTransactions] = useState([])
+    const [userWallet, setUserWallet] = useState(null)
+
+    const {currentUser, token, isLogin} = useSelector(state => state.auth)
+    const bearerToken = token?.token;
+    // console.log({currentUser, token, isLogin})
+
+    const handleFundClicked = () => {
+        console.log("Clicked")
+        setShowFundModal(true)
+    }
+
+    const handleCloseFundModal = () => {
+        setShowFundModal(false)
+    }
+
+    useEffect(() => {
+        FetchUserTransactions()
+            .then(res => {
+                setUserTransactions(res)
+            })
+    }, []);
+
+    useEffect(() => {
+        FetchUserWallet()
+            .then(res => {
+                setUserWallet(res)
+            })
+    }, []);
+
+    const FetchUserTransactions = async () => {
+        const url = `${BASE_URL}/billing/wallet/transaction/user?page=0&limit=10&order=desc`
+
+        try {
+            const headers = {
+                Authorization: `Bearer ${bearerToken}`,
+            }
+            const res = await axios.get(url, {headers})
+            // console.log({res})
+
+            if (res?.status === 200) {
+                console.log("User transactions: ", res?.data?.data)
+                return res?.data?.data
+            }
+        } catch (ex) {
+            console.log({ex})
+            alert("Invalid credentials. Please try again")
+        }
+    }
+
+    const FetchUserWallet = async () => {
+        const url = `${BASE_URL}/billing/wallet`
+
+        try {
+            const headers = {
+                Authorization: `Bearer ${bearerToken}`,
+            }
+            const res = await axios.get(url, {headers})
+            // console.log({res})
+
+            if (res?.status === 200) {
+                console.log("User wallet: ", res?.data?.data)
+                return res?.data?.data
+            }
+        } catch (ex) {
+            console.log({ex})
+            alert("Invalid credentials. Please try again")
+        }
+    }
 
     return (
         <div className="w-full px-32">
@@ -24,28 +97,28 @@ const Wallet = () => {
                     </div>
                     <div className="inline-flex flex-col items-start gap-1 mb-8">
                         <div className="text-xs tz-text-gray">Wallet balance</div>
-                        <div className="text-3xl font-bold text-white">₦ 20</div>
+                        <div className="text-3xl font-bold text-white">{`${userWallet?.currencySymbol ?? ""} ${userWallet?.balance ?? ""}`}</div>
                     </div>
                     <div className="flex justify-between items-center w-full">
-                        <p className="text-base font-medium text-white">DARA SOBALOJU</p>
+                        <p className="text-base font-medium text-white uppercase">{`${currentUser?.firstName} ${currentUser?.lastName}`}</p>
                         <div className="flex items-center p-2 rounded-full tz-bg-orange">
                             <Image src="/assets/images/account/wallet-3-fill.png" alt="" width={20} height={20} className="flex-shrink-0" />
                         </div>
                     </div>
                 </div>  
                 <div className="flex items-start gap-10">
-                    <button data-modal-target="fund-wallet-modal" data-modal-toggle="fund-wallet-modal" className="flex flex-col items-center gap-2 w-20 px-0 py-2">
+                    <button type="button" onClick={handleFundClicked} className="flex flex-col items-center gap-2 w-20 px-0 py-2">
                         <div className="flex items-center p-2 rounded-full tz-bg-orange-1">
                             <Image src="/assets/images/account/add-fill.png" alt="" width={32} height={32} className="flex-shrink-0" />
                         </div>
                         <p className="text-base font-medium tz-text-dark">Fund</p>
                     </button>
-                    <Link href="" className="flex flex-col items-center gap-2 w-20 px-0 py-2">
+                    <div  className="flex flex-col items-center gap-2 w-20 px-0 py-2">
                         <div className="flex items-center p-2 rounded-full tz-bg-orange-1">
                             <Image src="/assets/images/account/send-plane-fill.png" alt="" width={32} height={32} className="flex-shrink-0" />
                         </div>
                         <p className="text-base font-medium tz-text-dark">Withdraw</p>
-                    </Link>
+                    </div>
                 </div>
             </div>
             <div className="h-[1px] self-stretch tz-bg-cc my-14"></div>
@@ -66,45 +139,44 @@ const Wallet = () => {
                 <p className="w-full mb-14 text-center self-stretch whitespace-nowrap tz-text-gray">Explore our marketplace to find a car for your next adventure</p>
             </div>*/}
 
-            <div class="relative overflow-x-auto">
-                <table class="w-full text-sm text-left tz-text-gray-3">
-                    <thead class="text-base font-medium tz-text-dark">
-                        <tr class="bg-white border-b">
-                            <th scope="col" class="px-6 py-3">Reference no</th>
-                            <th scope="col" class="px-6 py-3">Amount</th>
-                            <th scope="col" class="px-6 py-3">Transaction type</th>
-                            <th scope="col" class="px-6 py-3">Date and time</th>
-                            <th scope="col" class="px-6 py-3">Status</th>
+            <div className="relative overflow-x-auto">
+                <table className="w-full text-sm text-left tz-text-gray-3">
+                    <thead className="text-base font-medium tz-text-dark">
+                        <tr className="bg-white border-b">
+                            <th scope="col" className="px-6 py-3">Reference no</th>
+                            <th scope="col" className="px-6 py-3">Amount</th>
+                            <th scope="col" className="px-6 py-3">Transaction type</th>
+                            <th scope="col" className="px-6 py-3">Date and time</th>
+                            <th scope="col" className="px-6 py-3">Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="bg-white border-b">
-                            <td class="px-6 pb-4 pt-10 tz-text-gray-3 truncate">Mercedes Maybach 2023</td>
-                            <td class="px-6 pb-4 pt-10 tz-text-gray-3">₦1,000,000</td>
-                            <td class="px-6 pb-4 pt-10 tz-text-gray-3">Ride booking</td>
-                            <td class="px-6 pb-4 pt-10 tz-text-gray-3">12/05/2023; 04:44 AM</td>
-                            <td class="px-6 pb-4 pt-10">
-                                <span className="flex items-center gap-1 px-2 py-1 rounded-full w-fit tz-bg-success-light">
-                                    <span className="w-2 h-2 rounded-full tz-bg-success"></span><span className="text-sm text-center tz-text-success">Credit</span>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr class="bg-white border-b">
-                            <td class="px-6 pb-4 pt-10 tz-text-gray-3 truncate">flw_2023_1234/6776</td>
-                            <td class="px-6 pb-4 pt-10 tz-text-gray-3">₦1,000,000</td>
-                            <td class="px-6 pb-4 pt-10 tz-text-gray-3">Referral bonus</td>
-                            <td class="px-6 pb-4 pt-10 tz-text-gray-3">12/05/2023; 04:44 AM</td>
-                            <td class="px-6 pb-4 pt-10">
-                                <span className="flex items-center gap-1 px-2 py-1 rounded-full w-fit tz-bg-danger-light">
-                                    <span className="w-2 h-2 rounded-full tz-bg-danger"></span>
-                                    <span className="text-sm text-center tz-text-danger">Debit</span>
-                                </span>
-                            </td>
-                        </tr>
+                    {
+                        userTransactions?.map((item, index) => {
+                            return <tr key={index} className="bg-white border-b">
+                                <td className="px-6 pb-4 pt-10 tz-text-gray-3 truncate">{item?.reference}</td>
+                                <td className="px-6 pb-4 pt-10 tz-text-gray-3">₦{Number(item?.amount).toLocaleString()}</td>
+                                <td className="px-6 pb-4 pt-10 tz-text-gray-3 capitalize">{item?.method}</td>
+                                <td className="px-6 pb-4 pt-10 tz-text-gray-3">{new Date(item?.createdAt)?.toUTCString()}</td>
+                                <td className="px-6 pb-4 pt-10">
+                                    {
+                                        item?.type === "credit"?
+                                            <span className="flex items-center gap-1 px-2 py-1 rounded-full w-fit tz-bg-success-light">
+                                                <span className="w-2 h-2 rounded-full tz-bg-success"></span><span className="text-sm text-center tz-text-success">Credit</span>
+                                            </span>:
+                                            <span className="flex items-center gap-1 px-2 py-1 rounded-full w-fit tz-bg-danger-light">
+                                                <span className="w-2 h-2 rounded-full tz-bg-danger"></span>
+                                                <span className="text-sm text-center tz-text-danger">Debit</span>
+                                            </span>
+                                    }
+                                </td>
+                            </tr>
+                        })
+                    }
                     </tbody>
                 </table>
             </div>
-            <FundWallet />
+            <FundWallet isOpen={showFundModal} closeModal={handleCloseFundModal} />
         </div>
     );
 };

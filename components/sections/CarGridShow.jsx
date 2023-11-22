@@ -791,7 +791,7 @@ const CarGridShow = () => {
                                 return <div key={index}>
                                     <CarCard
                                         onClick={() => cardClicked(item)}
-                                        carImage={item?.vehicle?.vehicleImages[0]}
+                                        carImage={item?.vehicle?.vehicleImages}
                                         carName={item.vehicle?.vehicleMake?.name + " " + item?.vehicle?.vehicleModel?.name}
                                         location={item.location}
                                         hasAC={item.vehicle?.vehicleHasAirCondition}

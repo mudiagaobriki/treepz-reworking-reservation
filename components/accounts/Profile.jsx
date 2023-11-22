@@ -106,7 +106,7 @@ const Profile = () => {
                     <div className="rounded-full">
                         <Image src={selectedImage} alt="profile photo" width={100} height={100} className="rounded-full" />
                     </div>
-                    <div class="flex flex-row items-center">
+                    <div className="flex flex-row items-center">
                         <input type="file" id="custom-input" accept="images/*" onChange={handleImageChange} hidden />
                         <label htmlFor="custom-input" className="flex items-center justify-center px-3 py-2 rounded-lg hover:bg-[#101010] hover:text-white tz-border-dark-1">
                             Change picture

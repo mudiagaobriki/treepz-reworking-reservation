@@ -93,7 +93,7 @@ const CarCard2 = ({carImage, carName, price, location="", rating=4.9, tripsCount
                         </div>
                     </div>
                     <div className={`flex h-5 py-1 px-2 items-center gap-1 rounded-3xl ${bgColor}`}>
-                        <span className={`text-xs font-semibold ${color}`}>{status}</span>
+                        <span className={`text-xs capitalize font-semibold ${color}`}>{status}</span>
                     </div>
                 </div>
                 <div className="flex items-center justify-between self-stretch">
