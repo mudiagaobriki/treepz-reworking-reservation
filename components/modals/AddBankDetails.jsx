@@ -34,32 +34,32 @@ const AddBankDetails = () => {
                                     <div className="flex flex-col items-start gap-5 w-full">
                                         <div className="relative w-full">
                                             <input type="text" id="bankCountry" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
-                                            <label for="bankCountry" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Bank country</label>
+                                            <label htmlFor="bankCountry" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Bank country</label>
                                         </div>
                                         <div className="relative w-full">
                                             <input type="text" id="bankName" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
-                                            <label for="bankName" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Bank name</label>
+                                            <label htmlFor="bankName" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Bank name</label>
                                         </div>
                                         <div className="relative w-full">
                                             <input type="text" id="accountNumber" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
-                                            <label for="accountNumber" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Account number</label>
+                                            <label htmlFor="accountNumber" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Account number</label>
                                         </div>
                                         <div className="relative w-full">
                                             <input type="text" id="accountName" className="block rounded-lg px-3 pt-6 pb-2 w-full text-base bg-white  border appearance-none focus:outline-none focus:ring-0 focus:border-[#A0A3A6] peer tz-text-gray-2 tz-border-light-3" placeholder=" " />
-                                            <label for="accountName" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Account name</label>
+                                            <label htmlFor="accountName" className="absolute text-base duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-3 peer-focus:text-[#A0A3A6] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 tz-text-gray-2">Account name</label>
                                         </div>
                                     </div>
                                     <div className="flex flex-col items-start gap-5 mb-20 w-full">
-                                        <div class="flex items-center">
+                                        <div className="flex items-center">
                                             <input onChange={(e) => setAgreed(e.target.checked)} id="terms_conditions" type="checkbox" value="" class="w-6 h-6 text-[#101010] bg-gray-100 border-gray-300 rounded focus:ring-0" />
-                                            <label for="terms_conditions" class="ml-3 text-sm tz-text-gray-300 text-center">
+                                            <label htmlFor="terms_conditions" className="ml-3 text-sm tz-text-gray-300 text-center">
                                                 I agree to the 
-                                                <Link href="/terms-conditions" class="underline font-medium tz-text-dark-1"> Terms and conditions</Link>.
+                                                <Link href="/terms-conditions" className="underline font-medium tz-text-dark-1"> Terms and conditions</Link>.
                                             </label>
                                         </div>
-                                        <div class="flex items-center">
+                                        <div className="flex items-center">
                                             <input onChange={(e) => setConfirmed(e.target.checked)} id="confirmation" type="checkbox" value="" class="w-6 h-6 text-[#101010] bg-gray-100 border-gray-300 rounded focus:ring-0" />
-                                            <label for="confirmation" class="ml-3 text-sm tz-text-dark">I confirm the bank account details above</label>
+                                            <label htmlFor="confirmation" className="ml-3 text-sm tz-text-dark">I confirm the bank account details above</label>
                                         </div>
                                     </div>
                                 </div>
