@@ -21,7 +21,12 @@ import {
     filterSelfDriven, filterVehicleMake, filterVehicleType, filterWeekly
 } from "../../services/functions/filters";
 import {useDispatch, useSelector} from "react-redux";
-import {setFilterResult, setSelectedRide, setVehiclesListing} from "../../redux/features/marketplaceSlice";
+import {
+    setAllVehicleListings,
+    setFilterResult,
+    setSelectedRide,
+    setVehiclesListing
+} from "../../redux/features/marketplaceSlice";
 // import isMobile from '@/components/helpers/isMobile'
 
 const FEATURED_CARS = [
@@ -131,6 +136,7 @@ const CarGridShow = () => {
 
         // restructure the fetched data to get the keys we need
         let data = vehicles?.data;
+        dispatch(setAllVehicleListings(data));
         data = data?.map(({id,currencySymbol,driveType,pricePerDay,vehicle,vehicleId,isAvailable,
                               pricePerHour, pricePerMonth, pricePerWeek, halfDayPrice}) =>
             ({id,currencySymbol,driveType,pricePerDay,vehicle,vehicleId,isAvailable,

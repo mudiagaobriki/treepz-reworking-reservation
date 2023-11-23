@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,16 +8,25 @@ import Link from "next/link";
 import VehicleSearchBox from '@/components/searchboxes/VehicleSearchBox'
 import AirportSearchBox from '@/components/searchboxes/AirportSearchBox'
 import IntercitySearchBox from "../searchboxes/IntercitySearchBox";
+import {useSelector} from "react-redux";
 // import isMobile from '@/components/helpers/isMobile'
 
 const SearchBoxArea = ({page}) => {
+    const [data, setData] = useState([])
+
+    let listings = useSelector(state => state.marketplace?.allVehicleListings)
+    console.log({listings})
+
+    useEffect(() => {
+        setData(listings)
+    }, [listings]);
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
     return (
         <div className="mb-20">
             <div className={`flex items-center justify-center py-6 w-full bg-white tz-border-top-2 tz-border-bottom-1`}> 
-                {page == 'market-place' && <VehicleSearchBox />} 
+                {page == 'market-place' && <VehicleSearchBox data={data} />}
                 {page == 'airport-transfers' && <AirportSearchBox />}
                 {page == 'intercity-travels' && <IntercitySearchBox />}
             </div>

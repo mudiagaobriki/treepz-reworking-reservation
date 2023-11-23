@@ -18,7 +18,7 @@ const Wallet = () => {
 
     const {currentUser, token, isLogin} = useSelector(state => state.auth)
     const bearerToken = token?.token;
-    // console.log({currentUser, token, isLogin})
+    console.log({currentUser, token, isLogin})
 
     const handleFundClicked = () => {
         console.log("Clicked")

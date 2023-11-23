@@ -156,6 +156,7 @@ const Page = () => {
                                 </div>
                         </div>
                         <div className="flex flex-col items-start gap-4">
+                                <Link href="/account/profile">Profile Pages</Link>
                                 <div className="flex items-center gap-5">
                                         <Image src="/assets/images/heart-2-line.png" alt="logo icon" width={32} height={32} />
                                         <Image src="/assets/images/share-box-fill.png" alt="logo icon" width={32} height={32} />

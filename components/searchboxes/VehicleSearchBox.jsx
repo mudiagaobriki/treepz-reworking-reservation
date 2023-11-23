@@ -15,7 +15,7 @@ import {setFilterResult, setVehiclesListing} from "../../redux/features/marketpl
 import {fetchVehicleListing} from "../../services/dataservices/vehicleService";
 // import isMobile from '@/components/helpers/isMobile'
 
-const VehicleSearchBox = () => {
+const VehicleSearchBox = ({data}) => {
   const [selectedPickDate, setSelectedPickDate] = useState(new Date());
   const [selectedPickTime, setSelectedPickTime] = useState(new Date());
   const [selectedDropDate, setSelectedDropDate] = useState(new Date());
@@ -25,19 +25,14 @@ const VehicleSearchBox = () => {
 
   const dispatch = useDispatch();
 
-    // const { vehicles, isLoading, isError } = fetchVehicleListing();
-    // console.log({vehicles, isLoading, isError});
-    // let results = useSelector(state => state.marketplace?.filterResult)
-    let listings = useSelector(state => state.marketplace?.vehiclesListing)
-
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
     const handleSearch = () => {
         if (toLocation === ""){
-            dispatch(setFilterResult(listings))
+            dispatch(setFilterResult(data))
         }
-        const availableRides = listings?.filter(el => (el?.isAvailable === true));
-        const carsInLocation = listings?.filter(el => el?.locationKeywords?.includes(toLocation?.toLowerCase()))
+        const availableRides = data?.filter(el => (el?.isAvailable === true));
+        const carsInLocation = data?.filter(el => el?.locationKeywords?.includes(toLocation?.toLowerCase()))
         dispatch(setFilterResult(carsInLocation));
     }
 

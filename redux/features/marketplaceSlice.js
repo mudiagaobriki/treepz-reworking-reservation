@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   filters: [],
+  allVehicleListings: [],
   vehiclesListing: [],
   filterResult: [],
   topFilters: [],
@@ -25,6 +26,9 @@ const marketplaceSlice = createSlice({
     },
     setRentalType(state, action) {
       state.userLocation = action.payload;
+    },
+    setAllVehicleListings(state, action) {
+      state.allVehicleListings = action.payload;
     },
     setRemoveFilter(state, action) {
       const indexToRemove = state.filters.index(action.payload)
@@ -55,7 +59,7 @@ const marketplaceSlice = createSlice({
 
 export const { setFilterResult, setSelectedRide, setAddFilters,
   setApplyTopFilters, setRemoveTopFilter, setResetFilters,
-  setRemoveFilter, setVehiclesListing, setRentalType, setUserLocation } = marketplaceSlice.actions;
+  setRemoveFilter, setAllVehicleListings, setVehiclesListing, setRentalType, setUserLocation } = marketplaceSlice.actions;
 
 
 const marketplaceReducer = marketplaceSlice.reducer;

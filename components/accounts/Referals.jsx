@@ -121,6 +121,7 @@ const Referals = () => {
             // console.log({"Profile": res})
 
             if (res?.status === 200) {
+                console.log({"Profile": res?.data?.data})
                 return res?.data?.data
             }
         } catch (ex) {
