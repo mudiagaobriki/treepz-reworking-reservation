@@ -15,24 +15,26 @@ const CarCard = ({onClick, carImage, carName, price, location="", rating=4.9, tr
     const attendedImg = () => isChauffeured ? chauffeured : selfDrive
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
+    console.log({carImage})
 
     return (
         <div onClick={onClick} className='flex flex-col flex-start w-80 rounded-xl tz-shadow tz-border-light'>
             <div className="self-stretch">
-                {/*<Image src={carImage} alt="car image" width={288} height={208} />*/}
+                {/*<Image src={carImage[0]} alt="car images" width={320} height={208} className="absolute block h-full w-full self-stretch -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />*/}
 
                 <div id="controls-carousel" className="relative w-full" data-carousel="slide">
 
                     {/*Carousel wrapper*/}
                     <div className="relative h-52 w-80 overflow-hidden rounded-t-lg px-3">
                         <div className="hidden duration-700 ease-in-out" data-carousel-item="active">
-                            <Image src={carImage} alt="car image" width={320} height={208} className="absolute block h-full w-full self-stretch -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />
+                            {/*<Image src={carImage[0]} alt="car image" width={320} height={208} className="absolute block h-full w-full self-stretch -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />*/}
+                            {/*<Image src={carImage[0]} alt="car image" width={320} height={208} className="absolute block h-full w-full self-stretch -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />*/}
                         </div>
                         <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                            <Image src={carImage} alt="car image" width={320} height={208} className="absolute block h-full w-full self-stretch -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />
+                            <Image src={carImage[1]} alt="car image" width={320} height={208} className="absolute block h-full w-full self-stretch -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />
                         </div>
                         <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                            <Image src={carImage} alt="car image" width={320} height={208} className="absolute block h-full w-full self-stretch -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />
+                            <Image src={carImage[2]} alt="car image" width={320} height={208} className="absolute block h-full w-full self-stretch -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />
                         </div>
                     </div>
                     <div className="inline-flex items-center justify-between w-full absolute px-3 pt-4 top-0 left-0 right-0 z-30">
