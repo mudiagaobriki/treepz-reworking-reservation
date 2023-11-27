@@ -15,7 +15,7 @@ const CarCard = ({onClick, carImage, carName, price, location="", rating=4.9, tr
     const attendedImg = () => isChauffeured ? chauffeured : selfDrive
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
-    console.log({carImage})
+    // console.log({carImage})
 
     return (
         <div onClick={onClick} className='flex flex-col flex-start w-80 rounded-xl tz-shadow tz-border-light'>

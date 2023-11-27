@@ -95,7 +95,7 @@ export function findObjectsWithAmenity(data, keyToMatch, valueToMatch) {
     for (const item of data) {
         if (item.vehicle && item.vehicle.vehicleAmenities && Array.isArray(item.vehicle.vehicleAmenities)) {
             for (const amenity of item.vehicle.vehicleAmenities) {
-                if (amenity[keyToMatch] === valueToMatch) {
+                if (amenity[keyToMatch]?.toLowerCase() === valueToMatch?.toLowerCase()) {
                     matchingObjects.push(item);
                     break; // Add the object only once
                 }
