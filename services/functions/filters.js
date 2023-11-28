@@ -220,7 +220,7 @@ export const multipleFilter = (cardsData,filter) => {
         result = findCommonObjects(output,result)
         result = Array.from(new Set(result))
     }
-    if (filter?.hasOwnProperty('vehicleMake')){
+    if (filter?.hasOwnProperty('vehicleMake') && filter?.vehicleMake?.length > 0){
         let output = []
         // console.log('pre-make result: ', result)
         filter?.vehicleMake?.forEach((item,index) => {

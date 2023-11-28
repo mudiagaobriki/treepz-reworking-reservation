@@ -5231,8 +5231,8 @@ const CarGridShow = () => {
     },[vehiclesData])
 
     useEffect(() => {
-        setResultsCount(listings?.length)
-    }, [listings]);
+        setResultsCount(results?.length)
+    }, [results]);
 
     // useEffect(() => {
     //     if (vehiclesData?.length){
@@ -6302,8 +6302,16 @@ const CarGridShow = () => {
                         <FilterButton text={"Most popular"} url="" bg={"tz-bg-dark-1"} onClcik={() => console.log('clicked')} />
                         <FilterButton selected={priceFiltered} onPress={handlePriceSorting} text={"Price"} url="" onClcik={() => console.log('clicked')} />
                         <FilterButton text={"Star rating"} url="" onClcik={() => console.log('clicked')} />
-                        <FilterButton text={"Distance"} url="" onClcik={() => console.log('clicked')} />
-                        <FilterButton text={"Chauffeured"} url="" onClcik={() => console.log('clicked')} />
+                        {/*<FilterButton text={"Distance"} url="" onClcik={() => console.log('clicked')} />*/}
+                        <FilterButton selected={chauffeuredChecked} onPress={handleChaufferedFilter} text={"Chauffeured"} url="" onClcik={() => console.log('clicked')} />
+                        <FilterButton selected={sedanChecked} onPress={handleSedanClicked} text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                        <FilterButton selected={suvChecked} onPress={handleSuvClicked} text={"SUV"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                        <FilterButton selected={busChecked} onPress={handleBusClicked} text={"Bus"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                        {/*<FilterButton selected={yatchChecked} onPress={handleYatchClicked} text={"Yatch"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />*/}
+                        <FilterButton selected={toyotaChecked} onPress={handleToyotaClicked} text={"Toyota"} url="" onClcik={() => console.log('clicked')} />
+                        <FilterButton selected={hondaChecked} onPress={handleHondaClicked} text={"Honda"} url="" onClcik={() => console.log('clicked')} />
+                        <FilterButton selected={lexusChecked} onPress={handleLexusClicked} text={"Lexus"} url="" onClcik={() => console.log('clicked')} />
+                        <FilterButton selected={acuraChecked} onPress={handleAcuraClicked} text={"Acura"} url="" onClcik={() => console.log('clicked')} />
                     </div>
                 </div>
                 <div className="w-full">
