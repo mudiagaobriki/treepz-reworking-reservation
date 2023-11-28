@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,28 +9,27 @@ import Link from "next/link";
 
 
 
-const FilterButton = ({text, url, onClick, bg="bg-white", icon=false, img="", imgLight=""}) => {
+const Button1 = ({text, url, onPress, bg="bg-white", icon=false, img="", selected=false}) => {
+
+    const currentBg = selected? "bg-[#101010]": "bg-white"
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
-    const [isHover, setIsHover] = useState(false);
 
     return (
         <div>
-            <Link 
-                href={url} 
-                onMouseEnter={() => setIsHover(true)}
-                onMouseLeave={() => setIsHover(false)}
-                onClick={onClick}
+            <button
+                onClick={onPress}
+                // href={url}
                 className={`
-                    flex py-2 px-4 justify-center items-center font-semibold ${bg} 
+                    flex py-2 px-4 justify-center items-center font-semibold ${currentBg} 
                     text-xs font-medium rounded-3xl ${icon && 'gap-1'} tz-border-gray-1 
-                    ${bg === 'bg-white' ? 'tz-text-gray-3' : 'text-white'} hover:bg-[#101010] hover:text-white`}
+                    ${currentBg === 'bg-white' ? 'tz-text-gray-3' : 'text-white'} hover:bg-[#101010] hover:text-white`}
             >
-                {icon && <Image src={isHover ? imgLight : img} alt="" width={16} height={16} />}
+                {icon && <Image src={img} alt="" width={16} height={16} />}
                 {text}
-            </Link>
+            </button>
         </div>
     );
 };
 
-export default FilterButton;
+export default Button1;

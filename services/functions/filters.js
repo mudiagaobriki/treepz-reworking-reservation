@@ -36,7 +36,8 @@ export function filterMonthly(cardsData){
 }
 
 export function filterNumOfSeats(cardsData, num){
-    return cardsData.filter(el => el?.vehicle?.vehicleSittingCapacity === num);
+    console.log({seatsFilterData: cardsData})
+    return cardsData?.filter(el => el?.vehicle?.vehicleSittingCapacity === num);
 }
 
 export function filterVehicleMode(cardsData, mode){
@@ -231,12 +232,15 @@ export const multipleFilter = (cardsData,filter) => {
         result = findCommonObjects(output,result)
     }
     if (filter?.hasOwnProperty('seats')){
-        result = filterNumOfSeats(result, filter?.seats)
+        // console.log("In here")
+        console.log({result})
+        result = result?.filter(el => el?.vehicle?.vehicleSittingCapacity === filter?.seats);
+        // result = filterNumOfSeats(k, filter?.seats)
     }
     if (filter?.hasOwnProperty('priceBetween')){ // object of prices (low and high
         result = filterPriceBetween(result, filter?.priceBetween?.low, filter?.priceBetween?.high)
     }
-    if (filter?.hasOwnProperty('amenities')){ // array of amenities
+    if (filter?.hasOwnProperty('amenities') && filter?.amenities?.length > 0){ // array of amenities
         // filters?.amenities?.forEach((item, index) => {
         //     if ('amenities' !== 'ac')
         //         result = filterAmenities(result, item)

@@ -5162,13 +5162,20 @@ const CarGridShow = () => {
     const [sedanChecked, setSedanChecked] = useState(false)
     const [luxuriousChecked, setLuxuriousChecked] = useState(false)
     const [commercialChecked, setCommercialChecked] = useState(false)
+    const [yatchChecked, setYatchChecked] = useState(false)
     const [suvChecked, setSuvChecked] = useState(false)
+    const [busChecked, setBusChecked] = useState(false)
     const [seats, setSeats] = useState(4)
     const [seatsValue, setSeatsValue] = useState(4)
     const [toyotaChecked, setToyotaChecked] = useState(false)
     const [lexusChecked, setLexusChecked] = useState(false)
+    const [hondaChecked, setHondaChecked] = useState(false)
+    const [acuraChecked, setAcuraChecked] = useState(false)
+    const [royceChecked, setRoyceChecked] = useState(false)
     const [ac, setAc] = useState(false)
     const [bluetooth, setBluetooth] = useState(false)
+    const [babySit, setBabySit] = useState(false)
+    const [wifi, setWifi] = useState(false)
     const [priceFiltered, setPriceFiltered] = useState(false)
     const [resultsCount, setResultsCount] = useState(0)
     const [filters, setFilters] = useState({})
@@ -5281,29 +5288,6 @@ const CarGridShow = () => {
     }
 
     const handleFullDayFilter = async () => {
-        // if (hourlyChecked){
-        //     await handleHourlyFilter();
-        //     // alert("Mudi")
-        // }
-        // if (halfDayChecked){
-        //     await handleHalfDayFilter();
-        //     // alert("Mudi")
-        // }
-        // if (weeklyChecked){
-        //     await handleWeeklyFilter()
-        // }
-        // if (monthlyChecked){
-        //     await handleMonthlyFilter();
-        // }
-        //
-        // if (!fullDayChecked){
-        //     const res = filterFullDay(listings)
-        //     dispatch(setFilterResult(res))
-        // }
-        // else{
-        //     setVehiclesData(prevData);
-        // }
-
         let f = filters
         if (!fullDayChecked){
             if (f?.duration){
@@ -5408,194 +5392,260 @@ const CarGridShow = () => {
     }
 
     const handleHourlyFilter = async () => {
-        if (fullDayChecked){
-            await handleFullDayFilter();
-            // alert("Mudi")
-        }
-        if (halfDayChecked){
-            await handleHalfDayFilter();
-            // alert("Mudi")
-        }
-        if (weeklyChecked){
-            await handleWeeklyFilter()
-        }
-        if (monthlyChecked){
-            await handleMonthlyFilter();
-        }
-
-
+        let f = filters
         if (!hourlyChecked){
-            const res = filterHourly(listings)
-            dispatch(setFilterResult(res))
+            if (f?.duration){
+                f?.duration?.push('hourly')
+            }
+            else{
+                f['duration'] = ['hourly']
+            }
+            console.log({f})
+            setFilters(f)
         }
         else{
-            setVehiclesData(prevData);
+            if (f?.duration?.includes('hourly')){
+                console.log("It includes")
+                let indexOf = f?.duration?.indexOf('hourly')
+                f?.duration?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
         }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
 
         setHourlyChecked(prevState => !prevState)
     }
 
     const handleHalfDayFilter = async () => {
-        if (fullDayChecked){
-            await handleFullDayFilter();
-            // alert("Mudi")
-        }
-        if (hourlyChecked){
-            await handleHourlyFilter();
-        }
-        if (weeklyChecked){
-            await handleWeeklyFilter()
-        }
-        if (monthlyChecked){
-            await handleMonthlyFilter();
-        }
-
+        let f = filters
         if (!halfDayChecked){
-            const res = filterHalfDay(listings)
-            dispatch(setFilterResult(res))
+            if (f?.duration){
+                f?.duration?.push('halfDay')
+            }
+            else{
+                f['duration'] = ['halfDay']
+            }
+            console.log({f})
+            setFilters(f)
         }
         else{
-            setVehiclesData(prevData);
+            if (f?.duration?.includes('halfDay')){
+                console.log("It includes")
+                let indexOf = f?.duration?.indexOf('halfDay')
+                f?.duration?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
         }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
 
         setHalfDayChecked(prevState => !prevState)
     }
 
     const handleWeeklyFilter = async () => {
-        if (fullDayChecked){
-            await handleFullDayFilter();
-            // alert("Mudi")
-        }
-        if (hourlyChecked){
-            await handleHourlyFilter();
-        }
-        if (halfDayChecked){
-            await handleHalfDayFilter();
-        }
-        if (monthlyChecked){
-            await handleMonthlyFilter();
-        }
-
+        let f = filters
         if (!weeklyChecked){
-            const res = filterWeekly(listings)
-            dispatch(setFilterResult(res))
+            if (f?.duration){
+                f?.duration?.push('weekly')
+            }
+            else{
+                f['duration'] = ['weekly']
+            }
+            console.log({f})
+            setFilters(f)
         }
         else{
-            setVehiclesData(prevData);
+            if (f?.duration?.includes('weekly')){
+                console.log("It includes")
+                let indexOf = f?.duration?.indexOf('weekly')
+                f?.duration?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
         }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
 
         setWeeklyChecked(prevState => !prevState)
     }
 
     const handleMonthlyFilter = async () => {
-        if (fullDayChecked){
-            await handleFullDayFilter();
-            // alert("Mudi")
-        }
-        if (hourlyChecked){
-            await handleHourlyFilter();
-        }
-        if (halfDayChecked){
-            await handleHalfDayFilter();
-        }
-        if (weeklyChecked){
-            await handleWeeklyFilter();
-        }
-
+        let f = filters
         if (!monthlyChecked){
-            // setPrevData(vehiclesData);
-            // // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
-            // setVehiclesData(prevState => filterMonthly(vehiclesData))
-            const res = filterMonthly(listings)
-            dispatch(setFilterResult(res))
+            if (f?.duration){
+                f?.duration?.push('monthly')
+            }
+            else{
+                f['duration'] = ['monthly']
+            }
+            console.log({f})
+            setFilters(f)
         }
         else{
-            setVehiclesData(prevData);
+            if (f?.duration?.includes('monthly')){
+                console.log("It includes")
+                let indexOf = f?.duration?.indexOf('monthly')
+                f?.duration?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
         }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
 
         setMonthlyChecked(prevState => !prevState)
     }
 
     const handleSedanClicked = async () => {
-        if (commercialChecked){
-            await handleCommercialClicked();
-            setPrevData(vehiclesData);
-            // alert("Mudi")
-        }
-        if (suvChecked){
-            await handleSuvClicked();
-            setPrevData(vehiclesData);
-            // alert("Mudi")
-        }
-
+        let f = filters
         if (!sedanChecked){
-            // setPrevData(vehiclesData);
-            // console.log("From Sedan clicked: ", {prevData})
-            // // console.log("vehiclesData keys: ", filterHalfDay(vehiclesData))
-            // if (prevData?.length > 0)
-            //     // setVehiclesData(prevState => filterVehicleType(prevData,"sedan"))
-            //     setVehiclesData(prevState => filterVehicleType(completeData,"sedan"))
-            // else{
-            //     // setVehiclesData(prevState => filterVehicleType(vehiclesData,"sedan"))
-            //     setVehiclesData(prevState => filterVehicleType(completeData,"sedan"))
-            // }
-            const res = filterVehicleType(listings,'sedan')
-            dispatch(setFilterResult(res))
+            if (f?.vehicleType){
+                f?.vehicleType?.push('sedan')
+            }
+            else{
+                f['vehicleType'] = ['sedan']
+            }
+            console.log({f})
+            setFilters(f)
         }
         else{
-            // setVehiclesData(prevData);
-            setVehiclesData(completeData);
+            if (f?.vehicleType?.includes('sedan')){
+                console.log("It includes")
+                let indexOf = f?.vehicleType?.indexOf('sedan')
+                f?.vehicleType?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
         }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
 
         setSedanChecked(prevState => !prevState)
     }
 
-    const handleCommercialClicked = async () => {
-        if (sedanChecked){
-            await handleSedanClicked();
-            setVehiclesData(prevData)
-            // alert("Mudi")
-        }
-        if (suvChecked){
-            await handleSuvClicked();
-            setVehiclesData(prevData)
-            // alert("Mudi")
-        }
-
-        if (!commercialChecked){
-            const res = filterVehicleType(listings,'vehicle')
-            dispatch(setFilterResult(res))
+    const handleBusClicked = async () => {
+        let f = filters
+        if (!busChecked){
+            if (f?.vehicleType){
+                f?.vehicleType?.push('bus')
+            }
+            else{
+                f['vehicleType'] = ['bus']
+            }
+            console.log({f})
+            setFilters(f)
         }
         else{
-            // setVehiclesData(prevData);
-            setVehiclesData(completeData);
+            if (f?.vehicleType?.includes('bus')){
+                console.log("It includes")
+                let indexOf = f?.vehicleType?.indexOf('bus')
+                f?.vehicleType?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
         }
+        console.log("final f: ", f)
 
-        setCommercialChecked(prevState => !prevState)
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+
+        setBusChecked(prevState => !prevState)
     }
 
     const handleSuvClicked = async () => {
-        if (sedanChecked){
-            await handleSedanClicked();
-            setPrevData(vehiclesData);
-            // alert("Mudi")
-        }
-        if (commercialChecked){
-            await handleCommercialClicked();
-            setPrevData(vehiclesData);
-            // alert("Mudi")
-        }
-
+        let f = filters
         if (!suvChecked){
-            const res = filterVehicleType(listings,'suv')
-            dispatch(setFilterResult(res))
+            if (f?.vehicleType){
+                f?.vehicleType?.push('suv')
+            }
+            else{
+                f['vehicleType'] = ['suv']
+            }
+            console.log({f})
+            setFilters(f)
         }
         else{
-            // setVehiclesData(prevData);
-            setVehiclesData(completeData);
+            if (f?.vehicleType?.includes('suv')){
+                console.log("It includes")
+                let indexOf = f?.vehicleType?.indexOf('suv')
+                f?.vehicleType?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
         }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
 
         setSuvChecked(prevState => !prevState)
+    }
+
+
+    const handleYatchClicked = async () => {
+        let f = filters
+        if (!yatchChecked){
+            if (f?.vehicleType){
+                f?.vehicleType?.push('yatch')
+            }
+            else{
+                f['vehicleType'] = ['yatch']
+            }
+            console.log({f})
+            setFilters(f)
+        }
+        else{
+            if (f?.vehicleType?.includes('yatch')){
+                console.log("It includes")
+                let indexOf = f?.vehicleType?.indexOf('yatch')
+                f?.vehicleType?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
+        }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+
+        setYatchChecked(prevState => !prevState)
     }
 
     const handleOnSeatsReduced = (seats) => {
@@ -5605,16 +5655,49 @@ const CarGridShow = () => {
     }
 
     const handleSeatsDecrease = () => {
+        handleSeatsChange(seatsValue - 1)
         setSeatsValue(seatsValue - 1);
+
     };
 
     const handleSeatsIncrease = () => {
+        handleSeatsChange(seatsValue + 1)
         setSeatsValue(seatsValue + 1);
     };
 
-    const handleSeatsChange = (event) => {
-        setSeatsValue(event.target.value);
+    const handleSeatsChange = (val) => {
+        setSeatsValue(val);
+
+        let f = filters
+        f['seats'] = val;
+        // if (!seatsValue){
+        //     if (f?.vehicleType){
+        //         f?.vehicleType?.push('seats')
+        //     }
+        //     else{
+        //         f['vehicleType'] = ['yatch']
+        //     }
+        //     console.log({f})
+        //     setFilters(f)
+        // }
+        // else{
+        //     if (f?.vehicleType?.includes('yatch')){
+        //         console.log("It includes")
+        //         let indexOf = f?.vehicleType?.indexOf('yatch')
+        //         f?.vehicleType?.splice(indexOf,1)
+        //         console.log("Inner f: ",f)
+        //         console.log({indexOf})
+        //     }
+        //     // console.log({f})
+        //     setFilters(f)
+        // }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
     };
+
 
     useEffect(() => {
         // setPrevData(vehiclesData)
@@ -5622,49 +5705,304 @@ const CarGridShow = () => {
     },[seatsValue])
 
     const handleToyotaClicked = () => {
-        if (lexusChecked){
-            handleLexusClicked()
+        let f = filters
+        if (!toyotaChecked){
+            if (f?.vehicleMake){
+                f?.vehicleMake?.push('toyota')
+            }
+            else{
+                f['vehicleMake'] = ['toyota']
+            }
+            console.log({f})
+            setFilters(f)
         }
+        else{
+            if (f?.vehicleMake?.includes('toyota')){
+                console.log("It includes")
+                let indexOf = f?.vehicleMake?.indexOf('toyota')
+                f?.vehicleMake?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
+        }
+        console.log("final f: ", f)
 
-        // setVehiclesData(filterVehicleMake(completeData,"toyota"))
-        const res = filterVehicleMake(listings,'toyota')
-        dispatch(setFilterResult(res))
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+        
         setToyotaChecked(prevState => !prevState)
     }
 
     const handleLexusClicked = () => {
-        if (toyotaChecked){
-            handleToyotaClicked()
+        let f = filters
+        if (!lexusChecked){
+            if (f?.vehicleMake){
+                f?.vehicleMake?.push('lexus')
+            }
+            else{
+                f['vehicleMake'] = ['lexus']
+            }
+            console.log({f})
+            setFilters(f)
         }
+        else{
+            if (f?.vehicleMake?.includes('lexus')){
+                console.log("It includes")
+                let indexOf = f?.vehicleMake?.indexOf('lexus')
+                f?.vehicleMake?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
+        }
+        console.log("final f: ", f)
 
-        const res = filterVehicleMake(listings,'lexus')
-        dispatch(setFilterResult(res))
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+        
         setLexusChecked(prevState => !prevState)
     }
 
-    const handleAcClicked = () => {
-
-        if (!ac){
-            setVehiclesData(filterAC(completeData))
-            setAc(prevState => !prevState)
+    const handleHondaClicked = () => {
+        let f = filters
+        if (!hondaChecked){
+            if (f?.vehicleMake){
+                f?.vehicleMake?.push('honda')
+            }
+            else{
+                f['vehicleMake'] = ['honda']
+            }
+            console.log({f})
+            setFilters(f)
         }
         else{
-            setVehiclesData(completeData)
-            setAc(prevState => !prevState)
+            if (f?.vehicleMake?.includes('honda')){
+                console.log("It includes")
+                let indexOf = f?.vehicleMake?.indexOf('honda')
+                f?.vehicleMake?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
         }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+
+        setHondaChecked(prevState => !prevState)
+    }
+
+    const handleAcuraClicked = () => {
+        let f = filters
+        if (!acuraChecked){
+            if (f?.vehicleMake){
+                f?.vehicleMake?.push('acura')
+            }
+            else{
+                f['vehicleMake'] = ['acura']
+            }
+            console.log({f})
+            setFilters(f)
+        }
+        else{
+            if (f?.vehicleMake?.includes('acura')){
+                console.log("It includes")
+                let indexOf = f?.vehicleMake?.indexOf('acura')
+                f?.vehicleMake?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
+        }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+
+        setAcuraChecked(prevState => !prevState)
+    }
+
+    const handleRoyceClicked = () => {
+        let f = filters
+        if (!royceChecked){
+            if (f?.vehicleMake){
+                f?.vehicleMake?.push('royce')
+            }
+            else{
+                f['vehicleMake'] = ['royce']
+            }
+            console.log({f})
+            setFilters(f)
+        }
+        else{
+            if (f?.vehicleMake?.includes('royce')){
+                console.log("It includes")
+                let indexOf = f?.vehicleMake?.indexOf('royce')
+                f?.vehicleMake?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
+        }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+
+        setRoyceChecked(prevState => !prevState)
+    }
+
+    const handleAcClicked = () => {
+        let f = filters
+        if (!ac){
+            if (f?.amenities){
+                f?.amenities?.push('ac')
+            }
+            else{
+                f['amenities'] = ['ac']
+            }
+            console.log({f})
+            setFilters(f)
+        }
+        else{
+            if (f?.amenities?.includes('ac')){
+                console.log("It includes")
+                let indexOf = f?.amenities?.indexOf('ac')
+                f?.amenities?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
+        }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+
+        setAc(!ac)
     }
 
     const handleBluetoothClicked = () => {
-
+        let f = filters
         if (!bluetooth){
-            setVehiclesData(filterAmenities(completeData,"bluetooth"))
-            setBluetooth(prevState => !prevState)
+            if (f?.amenities){
+                f?.amenities?.push('bluetooth')
+            }
+            else{
+                f['amenities'] = ['bluetooth']
+            }
+            console.log({f})
+            setFilters(f)
         }
         else{
-            setVehiclesData(completeData)
-            setBluetooth(prevState => !prevState)
+            if (f?.amenities?.includes('bluetooth')){
+                console.log("It includes")
+                let indexOf = f?.amenities?.indexOf('bluetooth')
+                f?.amenities?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
         }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+
+        setBluetooth(!bluetooth)
     }
+
+    const handleBabySitClicked = () => {
+        let f = filters
+        if (!babySit){
+            if (f?.amenities){
+                f?.amenities?.push('baby-sit')
+            }
+            else{
+                f['amenities'] = ['baby-sit']
+            }
+            console.log({f})
+            setFilters(f)
+        }
+        else{
+            if (f?.amenities?.includes('baby-sit')){
+                console.log("It includes")
+                let indexOf = f?.amenities?.indexOf('baby-sit')
+                f?.amenities?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
+        }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+
+        setBabySit(!babySit)
+    }
+
+    const handleWifiClicked = () => {
+        let f = filters
+        if (!babySit){
+            if (f?.amenities){
+                f?.amenities?.push('wifi')
+            }
+            else{
+                f['amenities'] = ['wifi']
+            }
+            console.log({f})
+            setFilters(f)
+        }
+        else{
+            if (f?.amenities?.includes('wifi')){
+                console.log("It includes")
+                let indexOf = f?.amenities?.indexOf('wifi')
+                f?.amenities?.splice(indexOf,1)
+                console.log("Inner f: ",f)
+                console.log({indexOf})
+            }
+            // console.log({f})
+            setFilters(f)
+        }
+        console.log("final f: ", f)
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+
+        setWifi(!wifi)
+    }
+
+    // const handleBluetoothClicked = () => {
+    //
+    //     if (!bluetooth){
+    //         setVehiclesData(filterAmenities(completeData,"bluetooth"))
+    //         setBluetooth(prevState => !prevState)
+    //     }
+    //     else{
+    //         setVehiclesData(completeData)
+    //         setBluetooth(prevState => !prevState)
+    //     }
+    // }
 
     const handleResetFilters = () => {
         setAc(false)
@@ -5688,19 +6026,21 @@ const CarGridShow = () => {
     }
 
     const sortByPricePerDay = (mainArray) => {
+        // Create a copy of the array to avoid modifying the original const array
+        const sortedArray = [...mainArray];
+
         // Use the Array.sort() method to sort the array based on the "pricePerDay" property.
-        mainArray.sort((a, b) => a.pricePerDay - b.pricePerDay);
+        sortedArray.sort((a, b) => a.pricePerDay - b.pricePerDay);
 
-        // If you want to sort in descending order, you can use b - a instead.
-        // mainArray.sort((a, b) => b.pricePerDay - a.pricePerDay);
-
-        if (priceFiltered){
-            setVehiclesData(completeData);
+        if (!priceFiltered) {
+            dispatch(setFilterResult(sortedArray));
+        } else {
+            dispatch(setFilterResult(listings));
         }
 
-        setPriceFiltered(prevState => !prevState)
+        setPriceFiltered(prevState => !prevState);
 
-        return mainArray;
+        return sortedArray;
     }
 
     const cardClicked = async (item) => {
@@ -5734,6 +6074,11 @@ const CarGridShow = () => {
             }
         }
     };
+
+    const handlePriceSorting = () => {
+        const res = sortByPricePerDay(listings)
+        // dispatch(setFilterResult(res))
+    }
 
     // useEffect(() => {
     //     progressRef.current.style.left = (minValue / 1000) * 10 + "%";
@@ -5850,15 +6195,15 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Duration</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Hourly"} url="" onClcik={() => console.log('clicked')} />
-                                <FilterButton text={"Half day"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={hourlyChecked} onPress={handleHourlyFilter} text={"Hourly"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={halfDayChecked} onPress={handleHalfDayFilter} text={"Half day"} url=""  />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Full day"} url="" onClcik={() => console.log('clicked')} />
-                                <FilterButton text={"Weekly"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={fullDayChecked} onPress={handleFullDayFilter} text={"Full day"} url="" />
+                                <FilterButton selected={weeklyChecked} onPress={handleWeeklyFilter} text={"Weekly"} url="" />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Monthly"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={monthlyChecked} onPress={handleMonthlyFilter} text={"Monthly"} />
                             </div>
                         </div>
                     </div>
@@ -5867,12 +6212,12 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Vehicle type</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
-                                <FilterButton text={"SUV"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={sedanChecked} onPress={handleSedanClicked} text={"Sedan"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={suvChecked} onPress={handleSuvClicked} text={"SUV"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                             </div> 
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Bus"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
-                                <FilterButton text={"Yatch"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={busChecked} onPress={handleBusClicked} text={"Bus"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={yatchChecked} onPress={handleYatchClicked} text={"Yatch"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
                                 <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClcik={() => console.log('clicked')} />
@@ -5885,19 +6230,20 @@ const CarGridShow = () => {
                         <div className="flex justify-between items-start w-full">
                             <div className="text-sm tz-text-gray-3">Number of seats</div>
                             <div className="flex justify-between items-center w-[4.5em] p-1 bg-white rounded-[2rem] tz-border-gray-1">
-                                <button onClick={() => seat.current.stepDown()} id="increment">
+                                <button onClick={handleSeatsDecrease} id="increment">
                                     <Image src="/assets/images/subtract-fill.png" alt="" width={16} height={16} />
                                 </button>
                                 <input
+                                    onChange={el => handleSeatsChange(el?.target?.value)}
                                     type="number"
-                                    value="4"
                                     min="1"
                                     size="2"
                                     name="numOfSeat"
+                                    value={seatsValue}
                                     ref={seat}
                                     class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs font-medium outline-none w-8 h-4 text-center border-0 focus:ring-0 tz-text-dark" 
                                 />
-                                <button onClick={() => seat.current.stepUp()} id="decrement">
+                                <button onClick={handleSeatsIncrease} id="decrement">
                                     <Image src="/assets/images/add-line.png" alt="" width={16} height={16} />
                                 </button>
                             </div>
@@ -5908,15 +6254,15 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Car make</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Toyota"} url="" onClcik={() => console.log('clicked')} />
-                                <FilterButton text={"Honda"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={toyotaChecked} onPress={handleToyotaClicked} text={"Toyota"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={hondaChecked} onPress={handleHondaClicked} text={"Honda"} url="" onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Lexus"} url="" onClcik={() => console.log('clicked')} />
-                                <FilterButton text={"Acura"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={lexusChecked} onPress={handleLexusClicked} text={"Lexus"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={acuraChecked} onPress={handleAcuraClicked} text={"Acura"} url="" onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Rolls-Royce"} url="" onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={royceChecked} onPress={handleRoyceClicked} text={"Rolls-Royce"} url="" onClcik={() => console.log('clicked')} />
                             </div>
                         </div>
                     </div>
@@ -5925,14 +6271,14 @@ const CarGridShow = () => {
                         <div className="text-sm font-medium tz-text-dark">Vehicle type</div>
                         <div className="flex flex-col items-center gap-3">
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Air-conditioning"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={ac} onPress={handleAcClicked} text={"Air-conditioning"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Bluetooth"} url="" icon={true} img={"/assets/images/bluetooth.png"} onClcik={() => console.log('clicked')} />
-                                <FilterButton text={"Baby sit"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={bluetooth} onPress={handleBluetoothClicked} text={"Bluetooth"} url="" icon={true} img={"/assets/images/bluetooth.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={babySit} onPress={handleBabySitClicked} text={"Baby sit"} url="" icon={true} img={"/assets/images/car.png"} imgLight={"/assets/images/car-light.png"} onClcik={() => console.log('clicked')} />
                             </div>
                             <div className="flex items-start gap-3 justify-start w-full">
-                                <FilterButton text={"Wi-fi"} url="" icon={true} img={"/assets/images/wifi.png"} onClcik={() => console.log('clicked')} />
+                                <FilterButton selected={wifi} onPress={handleWifiClicked} text={"Wi-fi"} url="" icon={true} img={"/assets/images/wifi.png"} onClcik={() => console.log('clicked')} />
                                 <FilterButton text={"Show more"} url="" icon={true} img={"/assets/images/more-2-fill.png"} onClcik={() => console.log('clicked')} />
                             </div>
                         </div>
@@ -5954,7 +6300,7 @@ const CarGridShow = () => {
                     <div className="text-3xl font-semibold tz-text-dark">{resultsCount} cars available</div>
                     <div className="flex items-start content-start self-stretch flex-wrap gap-4">
                         <FilterButton text={"Most popular"} url="" bg={"tz-bg-dark-1"} onClcik={() => console.log('clicked')} />
-                        <FilterButton text={"Price"} url="" onClcik={() => console.log('clicked')} />
+                        <FilterButton selected={priceFiltered} onPress={handlePriceSorting} text={"Price"} url="" onClcik={() => console.log('clicked')} />
                         <FilterButton text={"Star rating"} url="" onClcik={() => console.log('clicked')} />
                         <FilterButton text={"Distance"} url="" onClcik={() => console.log('clicked')} />
                         <FilterButton text={"Chauffeured"} url="" onClcik={() => console.log('clicked')} />
