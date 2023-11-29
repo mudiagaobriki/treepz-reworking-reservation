@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
@@ -40,23 +40,27 @@ const DATA = [
     },
 ]
 
-const VehicleFeatures = () => {
+const VehicleFeatures = ({ amenities = [] }) => {
+    const [data, setData] = useState([]);
 
-    // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
+    useEffect(() => {
+        setData(amenities);
+    }, [amenities]);
 
     return (
         <div className="w-2/3 pt-8 tz-border-top-3">
             <h3 className="text-2xl font-medium tz-text-dark mb-5">Features</h3>
             <div className="grid grid-cols-2 gap-y-5 mb-5">
                 {
-                    DATA.map((item, index) => {
-                        return <div key={item?.key}>
-                                <div className="flex items-center gap-3">
-                                    <Image src={item?.image} alt="caravan icon" width={28} height={28} />
-                                    <span className="tz-text-dark">{item?.title}</span>
-                                </div>
+                    data.map((item, index) => (
+                        <div key={index}>
+                            <div className="flex items-center gap-3">
+                                {/* Assuming item?.iconUrl is a valid URL */}
+                                <Image src={item?.iconUrl} alt="caravan icon" width={28} height={28} />
+                                <span className="tz-text-dark">{item?.name}</span>
                             </div>
-                    })
+                        </div>
+                    ))
                 }
             </div>
             <div className="flex items-center justify-end gap-2 w-full">
@@ -67,4 +71,4 @@ const VehicleFeatures = () => {
     );
 };
 
-export default VehicleFeatures;
+export default VehicleFeatures

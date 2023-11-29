@@ -7,7 +7,7 @@ import Link from "next/link";
 // Custom components
 import Button1 from '@/components/items/Button1';
 
-const VehicleImage = () => {
+const VehicleImage = ({description}) => {
 
     // let mobPad = isMobile ? "px-5 py-2" : "px-20 py-3";
 
@@ -47,14 +47,8 @@ const VehicleImage = () => {
                     <h3 className="text-2xl font-medium tz-text-dark mb-5">Description</h3>
                     <div className="flex flex-col justify-center w-full h-24 flex-shrink-0">
                         <p className="tz-text-gray overflow-hidden overflow-ellipsis w-full tz-text-fadeout">
-                        Mercedes Maybach 2023 boasts a plethora of advanced features and amenities, ensuring the utmost comfort and convenience for both driver and passengers. 
-                        Indulge in the sumptuous leather-appointed seats, enveloping you in pure luxury. Revel in the latest in-car connectivity options, with Bluetooth mobile connectivity, aux inputs, 
-                        and USB ports to effortlessly integrate your devices. Experience the thrill of driving with the S drive function, allowing you to unleash the full potential of this remarkable vehicle. 
-                        The sport mode offers an exhilarating performance, complemented by the precision-engineered handling and powerful engine, ensuring an unforgettable ride. The Mercedes Maybach 2023 is equipped 
-                        with an array of state-of-the-art safety features, providing peace of mind on every journey. From advanced driver-assistance systems to innovative braking technologies, this vehicle prioritizes your 
-                        safety and the safety of those around you. This luxury masterpiece is available on our marketplace, ready to elevate your driving experience to new heights. Whether you're attending a special event, 
-                        embarking on a weekend getaway, or simply seeking to make a statement, the Mercedes Maybach 2023 is the epitome of refined luxury. Don't miss out on the opportunity to own this automotive masterpiece. 
-                        Contact us now with any questions or to schedule a viewing. Embrace the extraordinary with the Mercedes Maybach 2023.</p>
+                            {description}
+                        </p>
                     </div>
                 </div>
                 <div className="flex items-center justify-end gap-2 w-full">

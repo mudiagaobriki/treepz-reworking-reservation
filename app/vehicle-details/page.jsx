@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 // Third party components
 import { Modal } from 'flowbite';
@@ -32,13 +33,20 @@ const Page = () => {
         const [showOTPModal, setShowOTPModal] = useState(false)
         const [showResetModal, setShowResetModal] = useState(false)
         const [showSuccessCard, setShowSuccessCard] = useState(false)
+        const [carImages, setCarImages] = useState([])
+        const [hasReservationError, setHasReservationError] = useState(false)
 
         const dispatch = useDispatch()
+        const router = useRouter();
 
         const selectedRide = useSelector(state => state.marketplace.selectedRide)
         console.log({selectedRide})
         const vehicleName = selectedRide?.vehicle?.vehicleMake?.name + " " + selectedRide?.vehicle?.vehicleModel?.name
         const vehicleYear = selectedRide?.vehicle?.vehicleYear
+
+        useEffect(() => {
+                setCarImages(selectedRide?.vehicle?.vehicleImages)
+        },[selectedRide])
 
         // get user location
         useEffect(() => {
@@ -127,7 +135,7 @@ const Page = () => {
     return (
         <div>
             <NavBar bgColor="#FFF" />
-            <div className="px-32 flex items-center gap-2 mt-14 mb-10 font-semibold tz-text-orange-1">
+            <div style={{cursor: 'pointer'}} onClick={() => router.back()} className="px-32 flex items-center gap-2 mt-14 mb-10 font-semibold tz-text-orange-1">
                 <Image src="/assets/images/arrow-go-back-fill.png" alt="rating-star" width={24} height={24} /> Go back
             </div>
                 <div className="flex justify-between items-start w-full px-32">
@@ -169,9 +177,10 @@ const Page = () => {
                         </div>
                 </div>
             <div className="my-20"></div>
-            <VehicleImage />
+            <VehicleImage images={carImages} />
             <div className="my-20"></div>
-            <BookingDetails />
+                {selectedRide && <BookingDetails description={selectedRide?.vehicle?.vehicleGuideLine}
+                            amenities={selectedRide?.vehicle?.vehicleAmenities}/>}
             <div className="my-20"></div>
             <MapSection />
             <div className="mt-24 pt-16 pb-10 tz-bg-light">
