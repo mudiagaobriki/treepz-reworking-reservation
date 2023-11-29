@@ -23,13 +23,15 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {
     setAllVehicleListings,
-    setFilterResult,
+    setFilterResult, setMaxPrice, setMinPrice,
     setSelectedRide,
     setVehiclesListing
 } from "../../redux/features/marketplaceSlice";
 // import isMobile from '@/components/helpers/isMobile'
+// import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';
-import {RangeSlider} from "flowbite-react";
+import RangeSlider from "../items/RangeSlider";
+// import {RangeSlider} from "flowbite-react";
 
 const FEATURED_CARS = [
     {
@@ -5145,8 +5147,6 @@ const FEATURED_CARS = [
 const CarGridShow = () => {
     const seat = useRef();
     const progressRef = useRef(null);
-    const [minValue, setMinValue] = useState(250);
-    const [maxValue, setMaxValue] = useState(750);
     const [completeData, setCompleteData] = useState([]);
     const [vehiclesData, setVehiclesData] = useState([]);
     const [prevData, setPrevData] = useState([]); // handles data before a filter is applied
@@ -5185,6 +5185,18 @@ const CarGridShow = () => {
 
     const { vehicles, isLoading, isError } = fetchVehicleListing();
     console.log({vehicles, isLoading, isError});
+    const {minPrice, maxPrice} = useSelector(state=>state.marketplace);
+    console.log({minPrice, maxPrice})
+
+    const [minValue, setMinValue] = useState(minPrice);
+    const [maxValue, setMaxValue] = useState(maxPrice);
+
+    useEffect(() => {
+        if (minValue === 0 || maxValue === 0){
+            setMinValue(minPrice)
+            setMaxValue(maxPrice)
+        }
+    }, [minPrice, maxPrice]);
 
     useEffect(() => {
         // add condition to make it load only if vehicle data is empty
@@ -5221,14 +5233,17 @@ const CarGridShow = () => {
     // console.log("Selector results: ", results)
 
     useEffect(() => {
-        if (vehiclesData?.length){
-            const minMax = getMinMaxValues(vehiclesData,"pricePerDay")
+        if (results?.length){
+            const minMax = getMinMaxValues(results,"pricePerDay")
             setMinValue(minMax?.min)
             setMaxValue(minMax?.max)
             // console.log({minMax})
+            dispatch(setMinPrice(minMax?.min))
+            dispatch(setMaxPrice(minMax?.max))
+            console.log({minMax})
         }
 
-    },[vehiclesData])
+    },[isLoading])
 
     useEffect(() => {
         setResultsCount(results?.length)
@@ -6021,8 +6036,14 @@ const CarGridShow = () => {
         setFullDayChecked(false)
         setSelfDrivenChecked(false)
         setChauffeuredChecked(false)
+        setHondaChecked(false)
+        setRoyceChecked(false)
+        setAcuraChecked(false)
+        setYatchChecked(false)
+        setBusChecked(false)
 
-        setVehiclesData(completeData);
+        dispatch(setFilterResult(listings));
+
     }
 
     const sortByPricePerDay = (mainArray) => {
@@ -6080,6 +6101,21 @@ const CarGridShow = () => {
         // dispatch(setFilterResult(res))
     }
 
+    const handlePriceFiltering = (values) => {
+        console.log({lowValue: values?.lowerValue})
+        console.log({highValue: values?.upperValue})
+        const f = filters;
+        f['priceBetween'] = {
+            low: values?.lowerValue,
+            high: values?.upperValue
+        }
+        setFilterResult(f);
+
+        const filteredData = multipleFilter(listings,f)
+        // console.log({filteredData})
+        dispatch(setFilterResult(filteredData))
+    }
+
     // useEffect(() => {
     //     progressRef.current.style.left = (minValue / 1000) * 10 + "%";
     //     progressRef.current.style.right = 10 - (maxValue / 1000) * 10 + "%";
@@ -6092,9 +6128,9 @@ const CarGridShow = () => {
             <div className="w-72 self-stretch rounded-xl bg-white px-4 tz-shadow tz-border-gray-1">
                 <div className="flex justify-between items-center w-full py-2 mb-8 tz-border-bottom-1 tz-bg-gradient">
                     <div className="font-medium tz-text-dark">Filter</div>
-                    <Link href="" className="flex items-center gap-1 tz-text-orange-1">
+                    <span onClick={handleResetFilters} style={{cursor: 'pointer'}} className="flex items-center gap-1 tz-text-orange-1">
                         <Image src="/assets/images/refresh-line.png" alt="" width={16} height={16} /> Refresh
-                    </Link>
+                    </span>
                 </div>
                 <div className="flex flex-col items-start gap-5 w-64 w-full">
                     <div className="w-full">
@@ -6111,28 +6147,40 @@ const CarGridShow = () => {
                                 </label>
                             </div>
                         </div>
-                        <div className="mb-4">Price range</div>
+                        <div className="mb-0">Price range</div>
                         <div className="mb-4">
                             {/*<div className="slider relative h-1 rounded-md tz-bg-gray-2">*/}
                             {/*    /!*<div className="progress absolute h-1 rounded tz-bg-range" ref={progressRef}></div>*!/*/}
                             {/*</div>*/}
                             <div className="input-range relative">
-                                <RangeSlider min={minValue} max={maxValue} step={1000} defaultValue={[minValue,maxValue]} />
+                                {!isLoading && <RangeSlider
+                                    min={minValue}
+                                    max={maxValue}
+                                    step={1000}
+                                    onChange={handlePriceFiltering}
+                                />}
+                                {/*<RangeSlider min={minValue} max={maxValue}*/}
+                                {/*    thumbsDisabled={[true,false]}*/}
+                                {/*    rangeSlideDisabled={true}*/}
+                                {/*    defaultValue={[minValue,maxValue]}*/}
+                                {/*    step={1000}*/}
+                                {/*    />*/}
+                                {/*<RangeSlider min={minValue} max={maxValue} step={1000} defaultValue={[minValue,maxValue]} />*/}
                                 {/*<input type="range" name="" value={minValue} min={0} step={1000} max={maxValue} onChange={handleMin} className="absolute w-full -top-1 h-1 bg-red-300 appearance-none accent-[#D3D6D9]" />*/}
                                 {/*<input type="range" name="" value={maxValue} min={0} step={1000} max={maxValue} onChange={handleMax} className="absolute w-full -top-1 h-1 bg-red-300 appearance-none accent-[#D3D6D9] [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-12 [&::-webkit-slider-thumb]:w-12 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-purple-500" />*/}
                             </div>
                         </div>
-                        <div className="flex items-center justify-between self-stretch">
-                            <div className="flex items-center justify-center px-3 py-1 bg-white rounded tz-border-light-3">
-                                <span className="text-xs tz-text-gray">NGN</span>
-                                <input type="number" name="" size="5" onChange={(e) => setMinValue(e.target.value)} value={minValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none w-12 h-4 px-1 border-0 focus:ring-0 tz-text-gray" />
-                            </div>
-                            <div className="w-4 h-[2px] tz-bg-light-1"></div>
-                            <div className="flex items-center justify-center px-3 py-1 bg-white rounded tz-border-light-3">
-                                <span className="text-xs tz-text-gray">NGN</span>
-                                <input type="number" name="" size="5" onChange={(e) => setMaxValue(e.target.value)} value={maxValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none w-12 h-4 px-1 border-0 focus:ring-0 tz-text-gray" />
-                            </div>
-                        </div>
+                        {/*<div className="flex items-center justify-between self-stretch">*/}
+                        {/*    <div className="flex items-center justify-center px-3 py-1 bg-white rounded tz-border-light-3">*/}
+                        {/*        <span className="text-xs tz-text-gray">NGN</span>*/}
+                        {/*        <input type="number" name="" size="5" onChange={(e) => setMinValue(e.target.value)} value={minValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none w-12 h-4 px-1 border-0 focus:ring-0 tz-text-gray" />*/}
+                        {/*    </div>*/}
+                        {/*    <div className="w-4 h-[2px] tz-bg-light-1"></div>*/}
+                        {/*    <div className="flex items-center justify-center px-3 py-1 bg-white rounded tz-border-light-3">*/}
+                        {/*        <span className="text-xs tz-text-gray">NGN</span>*/}
+                        {/*        <input type="number" name="" size="5" onChange={(e) => setMaxValue(e.target.value)} value={maxValue} className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-xs outline-none w-12 h-4 px-1 border-0 focus:ring-0 tz-text-gray" />*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                     </div>
 
                     <div className="flex flex-col items-start gap-4 pt-5 w-full tz-border-top-1">
@@ -6285,19 +6333,20 @@ const CarGridShow = () => {
                     </div>
 
                     <div className="flex justify-center w-full mb-5">
-                        <Link 
-                            href="" 
+                        <button
+                            onClick={handleResetFilters}
+                            type='button'
                             className="flex py-2 px-6 justify-center items-center text-sm font-medium w-48 rounded-lg hover:bg-opacity-80 tz-text-dark-1 tz-bg-orange-1"
                         >
                             Reset all filters
-                        </Link>
+                        </button>
                     </div>
 
                 </div>
             </div>
             <div className="flex flex-col items-start gap-10 w-full">
                 <div className="flex flex-col items-start gap-5">
-                    <div className="text-3xl font-semibold tz-text-dark">{resultsCount} cars available</div>
+                    <div className="text-3xl font-semibold tz-text-dark">{resultsCount} car{resultsCount === 1? '': 's'} available</div>
                     <div className="flex items-start content-start self-stretch flex-wrap gap-4">
                         <FilterButton text={"Most popular"} url="" bg={"tz-bg-dark-1"} onClcik={() => console.log('clicked')} />
                         <FilterButton selected={priceFiltered} onPress={handlePriceSorting} text={"Price"} url="" onClcik={() => console.log('clicked')} />
@@ -6318,7 +6367,7 @@ const CarGridShow = () => {
                     {results && <div className="grid grid-cols-3 gap-6 w-full">
                         {
                             results?.map((item, index) => {
-                                return <div key={index}>
+                                return <div key={index} style={{cursor: 'pointer'}}>
                                     <CarCard
                                         onClick={() => cardClicked(item)}
                                         carImage={item?.vehicle?.vehicleImages}
