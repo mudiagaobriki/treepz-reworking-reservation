@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
@@ -24,6 +24,9 @@ import EmailOTP from '@/components/modals/EmailOTP';
 import SuccessCard from '@/components/modals/SuccessCard';
 import {useDispatch, useSelector} from "react-redux";
 import Button1 from "../../components/items/Button1";
+import {BASE_URL} from "../../public/assets/constants/constants";
+import axios from "axios";
+import {setCurrentUser} from "../../redux/features/authSlice";
 
 const Page = () => {
         const [userLocation, setUserLocation] = useState(null)
@@ -40,9 +43,13 @@ const Page = () => {
         const router = useRouter();
 
         const selectedRide = useSelector(state => state.marketplace.selectedRide)
+        const {currentUser, token} = useSelector(state => state.auth);
+        console.log({currentUser, token})
         console.log({selectedRide})
         const vehicleName = selectedRide?.vehicle?.vehicleMake?.name + " " + selectedRide?.vehicle?.vehicleModel?.name
         const vehicleYear = selectedRide?.vehicle?.vehicleYear
+
+        const bookingRef = useRef(null)
 
         useEffect(() => {
                 setCarImages(selectedRide?.vehicle?.vehicleImages)
@@ -62,8 +69,28 @@ const Page = () => {
         },[])
 
         const handleReserveClicked = () => {
-                setShowLoginModal(true)
+                if (!currentUser){
+                        setShowLoginModal(true)
+                }
+                else{
+                        alert('Fill the ride details on the reservation form below')
+                }
                 // alert("Clicked")
+        }
+
+        const actualHandleReserveClicked = async (pd,pt,dd,dt,lc) => {
+                // console.log({pd,pt,dd,dt,lc})
+                await InitiateBooking(pt,dt,lc,selectedRide?.id)
+        }
+
+        const onReserveRide = async (pd,pt,dd,dt,lc) => {
+                // get date difference
+                let diff = new Date(dd) - new Date(pd)
+                diff = diff / (1000*3600)
+
+                console.log(diff)
+                await InitiateBooking(pd,dd,lc,selectedRide?.vehicle?.id)
+
         }
 
         const handleCloseModal = () => {
@@ -132,6 +159,41 @@ const Page = () => {
                 setShowSuccessCard(true)
         }
 
+        const InitiateBooking = async (pt,dt,lc, vid) => {
+                const credentials = {
+                        listedVehicleId: vid,
+                        pickUpTime: pt,
+                        dropOffTime: dt,
+                        rentalType: 'daily',
+                        pickUpLocation: lc,
+                }
+
+                console.log({credentials})
+                // console.log({profileImage: profileImageUrl})
+                const url = `${BASE_URL}/order`
+
+                try {
+                        const headers = {
+                                Authorization: `Bearer ${token?.token}`,
+                        }
+
+                        const res = await axios.post(url, credentials, {headers})
+
+                        console.log({res})
+                        if (res?.status === 200) {
+                                // const currentUser = res?.data?.data?.user;
+                                // console.log({currentUser})
+                                // const token = res?.data?.data?.jwt;
+                                // dispatch(setCurrentUser({user: {...currentUser, firstName, lastName, phoneNumber }, loginToken: token}))
+                                // setInterval(() => window.location.reload(), 2000)
+                                // setShowSuccessModal(true)
+                        }
+                } catch (ex) {
+                        console.log({ex})
+                        alert("Invalid credentials. Please try again")
+                }
+        }
+
     return (
         <div>
             <NavBar bgColor="#FFF" />
@@ -180,7 +242,8 @@ const Page = () => {
             <VehicleImage images={carImages} />
             <div className="my-20"></div>
                 {selectedRide && <BookingDetails description={selectedRide?.vehicle?.vehicleGuideLine}
-                            amenities={selectedRide?.vehicle?.vehicleAmenities}/>}
+                            amenities={selectedRide?.vehicle?.vehicleAmenities}
+                onReserve={actualHandleReserveClicked} ride={selectedRide}/>}
             <div className="my-20"></div>
             <MapSection />
             <div className="mt-24 pt-16 pb-10 tz-bg-light">
